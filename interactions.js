@@ -299,6 +299,42 @@
     }
   }
 
+  function initFaqAccordion() {
+    var items = document.querySelectorAll('.faq__item');
+    if (!items.length) return;
+
+    items.forEach(function (item) {
+      var btn = item.querySelector('.faq__question');
+      var answer = item.querySelector('.faq__answer');
+      if (!btn || !answer) return;
+
+      btn.addEventListener('click', function () {
+        var isOpen = item.classList.contains('faq__item--open');
+
+        items.forEach(function (other) {
+          if (other !== item && other.classList.contains('faq__item--open')) {
+            other.classList.remove('faq__item--open');
+            other.querySelector('.faq__question').setAttribute('aria-expanded', 'false');
+            other.querySelector('.faq__answer').style.maxHeight = '0';
+            other.querySelector('.faq__answer').setAttribute('aria-hidden', 'true');
+          }
+        });
+
+        if (isOpen) {
+          item.classList.remove('faq__item--open');
+          btn.setAttribute('aria-expanded', 'false');
+          answer.style.maxHeight = '0';
+          answer.setAttribute('aria-hidden', 'true');
+        } else {
+          item.classList.add('faq__item--open');
+          btn.setAttribute('aria-expanded', 'true');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+          answer.setAttribute('aria-hidden', 'false');
+        }
+      });
+    });
+  }
+
   function run() {
     initRevealObservers();
     initStaggerReveal();
@@ -307,6 +343,7 @@
     initArrowScrollProgress();
     initSystemlogikDiagram();
     initBurgerMenu();
+    initFaqAccordion();
   }
 
   init();

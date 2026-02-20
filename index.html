@@ -1207,6 +1207,7 @@
       left: 0;
       right: 0;
       height: 220px;
+      z-index: 1;
       pointer-events: none;
       z-index: 4;
     }
@@ -1279,7 +1280,7 @@
     .apps .container {
       max-width: var(--max-width-content);
       position: relative;
-      z-index: 2;
+      z-index: 5;
     }
 
     .apps__title {
@@ -2682,6 +2683,107 @@
       border-radius: 50%;
       background: var(--accent-purple-light);
     }
+
+    /* ----- FAQ ----- */
+    .faq {
+      padding: var(--space-section-vertical) 0;
+      background: var(--bg-base);
+    }
+
+    .faq__title {
+      font-family: var(--font-family-display);
+      font-size: var(--font-size-display-l);
+      line-height: var(--font-size-display-l-line-height);
+      font-weight: var(--font-size-display-l-weight);
+      color: var(--color-ink-deep);
+      margin: 0 0 1.2em;
+      max-width: var(--max-width-text);
+    }
+
+    .faq__list {
+      max-width: 740px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid rgba(37,23,42,0.08);
+    }
+
+    .faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-family-body);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-ink-deep);
+      text-align: left;
+      line-height: 1.4;
+      gap: 16px;
+      transition: color 0.2s ease;
+    }
+
+    .faq__question:hover {
+      color: var(--accent-purple-light);
+    }
+
+    .faq__icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(163,160,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease;
+    }
+
+    .faq__icon svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--color-ink-deep);
+      stroke-width: 2;
+      fill: none;
+      transition: stroke 0.3s ease;
+    }
+
+    .faq__item.faq__item--open .faq__icon {
+      transform: rotate(45deg);
+      background: rgba(163,160,255,0.2);
+    }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .faq__item.faq__item--open .faq__answer {
+      opacity: 1;
+    }
+
+    .faq__answer-inner {
+      padding: 0 0 24px;
+      font-family: var(--font-family-body);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--color-ink);
+      max-width: 640px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .faq__icon { transition: none; }
+      .faq__answer { transition: none; }
+    }
   </style>
 </head>
 <body class="page">
@@ -2716,6 +2818,7 @@
         <li class="nav-overlay__item"><a href="#vorher-nachher" class="nav-overlay__link">Vorher / Nachher</a></li>
         <li class="nav-overlay__item"><a href="#apps" class="nav-overlay__link">Module</a></li>
         <li class="nav-overlay__item"><a href="#kundenstimmen" class="nav-overlay__link">Kundenstimmen</a></li>
+        <li class="nav-overlay__item"><a href="#faq" class="nav-overlay__link">FAQ</a></li>
         <li class="nav-overlay__item"><a href="#einstiegsgespraech" class="nav-overlay__link">Gespräch</a></li>
       </ul>
       <a href="#einstiegsgespraech" class="nav-overlay__cta">Einstiegsgespräch vereinbaren</a>
@@ -3243,6 +3346,69 @@
           Jetzt Termin wählen
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq" aria-labelledby="faq-title">
+    <div class="container">
+      <h2 id="faq-title" class="faq__title reveal reveal--headline">Häufige Fragen.</h2>
+      <ul class="faq__list">
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Was genau ist ASANTIAL?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">ASANTIAL ist ein digitales Betriebssystem für Employer Branding. Es gibt HR-Verantwortlichen im Mittelstand eine strukturierte Arbeitsumgebung – mit Analyse-Apps, Strategie-Werkzeugen und einer durchgängigen Entscheidungslogik. Kein Projektformat mit Enddatum, sondern eine dauerhafte Grundlage.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Für wen ist ASANTIAL gedacht?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Für HR-Verantwortliche in mittelständischen Unternehmen mit 50–500 Mitarbeitenden, die Employer Branding nicht als Einzelprojekt, sondern als Daueraufgabe verstehen. ASANTIAL ist besonders relevant, wenn Sie Struktur brauchen – nicht das nächste kreative Konzept.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Was passiert im Einstiegsgespräch?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Wir sprechen ca. 30 Minuten über Ihre aktuelle Situation im Employer Branding. Keine Produktdemo, kein Pitch – sondern eine ehrliche Einschätzung, ob ASANTIAL zu Ihrer Lage passt. Danach entscheiden Sie, ob ein nächster Schritt sinnvoll ist.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Ist ASANTIAL DSGVO-konform?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Ja. ASANTIAL ist vollständig DSGVO-konform. Alle Daten werden in der EU verarbeitet und gespeichert. Datenschutz ist kein Add-on, sondern Grundlage der Plattform.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Brauche ich technisches Vorwissen?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Nein. ASANTIAL ist für HR-Verantwortliche gebaut, nicht für IT. Die Oberfläche ist so gestaltet, dass Sie sofort arbeitsfähig sind – ohne Schulung, ohne Implementierungsprojekt.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Was unterscheidet ASANTIAL von Agenturen oder Beratern?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Agenturen liefern Konzepte und Kampagnen. Berater liefern Empfehlungen. ASANTIAL liefert die Struktur, mit der Sie beides selbst steuern können – dauerhaft, nicht projektweise. Die Entscheidungshoheit bleibt bei Ihnen.</div>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 
