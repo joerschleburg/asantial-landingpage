@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0ece7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile {
+  position: relative;
+  width: 620px;
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 12px rgba(37,23,42,0.06),
+    0 24px 60px rgba(37,23,42,0.15);
+  transform: rotate(2deg);
+  animation: float 8s ease-in-out infinite;
+}
+
+.tile::before {
+  content:"";
+  position:absolute;
+  width:280px; height:220px;
+  left:-40px; bottom:-40px;
+  border-radius:50%;
+  background: radial-gradient(ellipse, rgba(212,196,238,0.4) 0%, rgba(163,160,255,0.2) 50%, transparent 75%);
+  filter:blur(40px);
+  pointer-events:none;
+  z-index:0;
+  animation: blobmove 10s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: rotate(2deg) translateY(0px); }
+  50%     { transform: rotate(2deg) translateY(-12px); }
+}
+@keyframes blobmove {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(15px,-10px) scale(1.1); }
+  70%     { transform: translate(-10px,15px) scale(0.93); }
+}
+
+.ui {
+  display: flex;
+  height: 420px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 160px; flex-shrink: 0;
+  background: #eae6e1;
+  border-right: 1px solid rgba(37,23,42,0.07);
+  display: flex; flex-direction: column;
+}
+.logo { padding: 16px 14px 12px; border-bottom: 1px solid rgba(37,23,42,0.07); }
+.logo-name { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #25172a; }
+.logo-sub { font-size: 8px; color: rgba(37,23,42,0.38); margin-top: 1px; }
+.nav-head { padding: 10px 14px 5px; font-size: 10px; font-weight: 600; color: rgba(37,23,42,0.4); }
+.nav { padding: 3px 7px; flex:1; }
+.nav-item {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 7px; border-radius: 7px; margin-bottom: 1px;
+  font-size: 11px; color: rgba(37,23,42,0.5);
+}
+.nav-item.active { background: rgba(37,23,42,0.09); color: #25172a; font-weight: 500; }
+.sidebar-user {
+  padding: 10px 14px; border-top: 1px solid rgba(37,23,42,0.07);
+  display: flex; align-items: center; gap: 7px;
+}
+.avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, #8a6aa4, #a3a0ff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.sidebar-user span { font-size: 10px; color: #25172a; font-weight: 500; }
+
+/* Main */
+.main { flex:1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar {
+  padding: 0 16px; height: 40px;
+  border-bottom: 1px solid rgba(37,23,42,0.06);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.topbar-title { font-size: 12px; font-weight: 600; color: #25172a; }
+.topbar-actions { display: flex; gap: 5px; }
+.topbar-btn {
+  padding: 4px 10px; border-radius: 6px; font-size: 10px;
+  border: 1px solid rgba(37,23,42,0.12); cursor: pointer;
+  color: rgba(37,23,42,0.6); font-family: inherit; background: transparent;
+}
+.topbar-btn.primary { background: #25172a; color: #fff; border-color: transparent; }
+
+/* Content area */
+.content {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  padding: 14px;
+  overflow: hidden;
+}
+
+/* Instagram post preview */
+.ig-post {
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(37,23,42,0.08);
+  box-shadow: 0 4px 20px rgba(37,23,42,0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.ig-post-image {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+  background: linear-gradient(135deg, #1a1025 0%, #2f2060 40%, #4a35a0 70%, #a3a0ff 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 14px;
+  flex-shrink: 0;
+}
+
+/* Decorative elements on post image */
+.ig-post-image::before {
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(163,160,255,0.5) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 70%, rgba(245,197,67,0.25) 0%, transparent 60%);
+}
+
+.ig-tag {
+  position: relative; z-index: 1;
+  font-size: 8px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: rgba(163,160,255,0.9);
+  margin-bottom: 6px;
+}
+
+.ig-headline {
+  position: relative; z-index: 1;
+  font-size: 13px; font-weight: 800;
+  color: #ffffff; line-height: 1.25;
+}
+
+.ig-sub {
+  position: relative; z-index: 1;
+  font-size: 9px; color: rgba(255,255,255,0.55);
+  margin-top: 4px; line-height: 1.4;
+}
+
+.ig-footer {
+  background: #fff;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ig-handle { font-size: 9px; font-weight: 600; color: #25172a; }
+.ig-icons { display: flex; gap: 8px; font-size: 12px; color: rgba(37,23,42,0.4); }
+
+/* Right panel */
+.panel { flex:1; display: flex; flex-direction: column; gap: 10px; }
+
+.panel-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(37,23,42,0.35);
+}
+
+/* Copy variants */
+.variants { display: flex; flex-direction: column; gap: 6px; }
+
+.variant {
+  background: #f8f6f3;
+  border-radius: 9px;
+  padding: 9px 11px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.variant.selected {
+  border-color: rgba(163,160,255,0.4);
+  background: rgba(163,160,255,0.06);
+}
+.variant-num {
+  font-size: 8px; font-weight: 700; color: rgba(37,23,42,0.3);
+  margin-bottom: 3px; letter-spacing: 0.06em;
+}
+.variant-text { font-size: 10px; color: #25172a; line-height: 1.5; }
+
+.variant.selected .variant-num { color: #a3a0ff; }
+
+/* Hashtags */
+.hashtags {
+  display: flex; flex-wrap: wrap; gap: 4px;
+  margin-top: 2px;
+}
+.hashtag {
+  font-size: 9px; padding: 2px 7px; border-radius: 20px;
+  background: rgba(163,160,255,0.1); color: #7b77e0; font-weight: 500;
+}
+
+/* Action buttons */
+.actions { display: flex; gap: 6px; margin-top: auto; }
+.action-btn {
+  flex: 1; padding: 7px; border-radius: 8px; font-size: 10px;
+  font-family: inherit; cursor: pointer; font-weight: 500;
+  border: 1px solid rgba(37,23,42,0.12); color: rgba(37,23,42,0.6);
+  background: transparent;
+}
+.action-btn.primary {
+  background: #25172a; color: #fff; border-color: transparent;
+}
+
+/* Stats row */
+.stats {
+  display: flex; gap: 10px;
+}
+.stat {
+  flex: 1; background: #f8f6f3; border-radius: 8px; padding: 7px 9px;
+  text-align: center;
+}
+.stat-num { font-size: 13px; font-weight: 700; color: #25172a; }
+.stat-label { font-size: 8px; color: rgba(37,23,42,0.4); margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<div class="tile">
+  <div class="ui">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-name">ASANTIAL</div>
+        <div class="logo-sub">by VonVorteil</div>
+      </div>
+      <div class="nav-head">KI Apps</div>
+      <div class="nav">
+        <div class="nav-item"><span>⊞</span> App-Bibliothek</div>
+        <div class="nav-item"><span>≡</span> Projektmanager</div>
+        <div class="nav-item active"><span>◈</span> Content & Kanäle</div>
+        <div class="nav-item"><span>↗</span> Roadmap</div>
+      </div>
+      <div class="sidebar-user">
+        <div class="avatar">JS</div>
+        <span>Jörg Schleburg</span>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="topbar">
+        <span class="topbar-title">Content & Kanäle – Instagram</span>
+        <div class="topbar-actions">
+          <button class="topbar-btn">Vorschau</button>
+          <button class="topbar-btn primary">Planen ↗</button>
+        </div>
+      </div>
+
+      <div class="content">
+
+        <!-- Instagram Post Preview -->
+        <div class="ig-post">
+          <div class="ig-post-image">
+            <div class="ig-tag">Employer Branding</div>
+            <div class="ig-headline">Warum kluge Leute bei uns bleiben.</div>
+            <div class="ig-sub">Nicht der Obstkorb. Die Entscheidungsfreiheit.</div>
+          </div>
+          <div class="ig-footer">
+            <span class="ig-handle">@vonvorteil_eb</span>
+            <div class="ig-icons">
+              <span>♡</span>
+              <span>◻</span>
+              <span>↗</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="panel">
+          <div class="panel-label">Caption-Varianten</div>
+
+          <div class="variants">
+            <div class="variant selected">
+              <div class="variant-num">V1 · Direkt</div>
+              <div class="variant-text">Gute Mitarbeitende bleiben nicht wegen Boni. Sie bleiben, weil ihre Arbeit Wirkung hat – und sie das auch erklären können.</div>
+            </div>
+            <div class="variant">
+              <div class="variant-num">V2 · Frage</div>
+              <div class="variant-text">Was hält Menschen wirklich in einem Unternehmen? Spoiler: Es ist selten das, was im Stellenanzeigen steht.</div>
+            </div>
+          </div>
+
+          <div class="hashtags">
+            <span class="hashtag">#EmployerBranding</span>
+            <span class="hashtag">#Mittelstand</span>
+            <span class="hashtag">#Karriere</span>
+            <span class="hashtag">#HR</span>
+            <span class="hashtag">#Arbeitskultur</span>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">4.2k</div>
+              <div class="stat-label">Ø Reichweite</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">6.8%</div>
+              <div class="stat-label">Engagement</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Di 10h</div>
+              <div class="stat-label">Bester Slot</div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="action-btn">Variante neu</button>
+            <button class="action-btn primary">Jetzt planen</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

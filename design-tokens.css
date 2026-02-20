@@ -1,0 +1,182 @@
+/**
+ * ASANTIAL – Design Tokens
+ * Übersetzt aus asantial-design-tokens.xml
+ * Alle Farben, Typografie, Abstände, Komponenten
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+/* ---------------------------------------------------------------------------
+   Global: Font-Smoothing
+   --------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------------------------------------------------
+   CSS Custom Properties – :root
+   --------------------------------------------------------------------------- */
+:root {
+
+  /* ----- 1. Primärfarben ----- */
+  --color-ink: #25172a;
+  --color-ink-deep: #181229;
+  --color-indigo: #2f2f91;
+
+  /* ----- 2. Hintergrundfarben ----- */
+  --bg-base: #fcfaf9;
+  --bg-warm: #fffbf4;
+  --bg-soft: #f7f1f0;
+  --bg-creme: #e9e3dd;
+  --bg-white-pure: #ffffff;
+
+  /* ----- 3. Akzentfarben ----- */
+  --accent-purple-light: #a3a0ff;
+  --accent-lavender: #d4c4ee;
+  --accent-blue-soft: #dee3f8;
+  --accent-blue-sky: #bfd9f5;
+  --accent-purple-mid: #8a6aa4;
+
+  /* ----- 4. Warm-Töne (sparsam) ----- */
+  --warm-gold: #f5c543;
+  --warm-gold-light: #ffda75;
+  --warm-sand: #e1e0c1;
+
+  /* ----- 5. Transparenz ----- */
+  --ink-80: #25172acc;
+  --ink-60: #25172a99;
+  --ink-40: #25172a66;
+  --ink-20: #25172a33;
+  --ink-10: #25172a1a;
+  --ink-5: #25172a0d;
+  --white-80: #ffffffcc;
+  --white-60: #ffffff99;
+
+  /* ----- 6. Gradienten ----- */
+  --gradient-hero-aura: radial-gradient(
+    ellipse 80% 60% at 50% 80%,
+    rgba(163, 160, 255, 0.35) 0%,
+    rgba(191, 217, 245, 0.25) 40%,
+    rgba(252, 250, 249, 0) 70%
+  );
+  --gradient-icon-blob-purple: radial-gradient(
+    circle,
+    rgba(163, 160, 255, 0.6) 0%,
+    rgba(212, 196, 238, 0.3) 50%,
+    rgba(252, 250, 249, 0) 70%
+  );
+  --gradient-icon-blob-blue: radial-gradient(
+    circle,
+    rgba(191, 217, 245, 0.7) 0%,
+    rgba(222, 227, 248, 0.4) 50%,
+    rgba(252, 250, 249, 0) 70%
+  );
+  --gradient-section-cool: linear-gradient(
+    135deg,
+    rgba(222, 227, 248, 0.8) 0%,
+    rgba(191, 185, 242, 0.5) 30%,
+    rgba(163, 160, 255, 0.3) 60%,
+    rgba(191, 217, 245, 0.6) 100%
+  );
+  --gradient-card-bg: linear-gradient(
+    145deg,
+    rgba(212, 196, 238, 0.6) 0%,
+    rgba(163, 160, 255, 0.4) 35%,
+    rgba(191, 217, 245, 0.5) 70%,
+    rgba(222, 227, 248, 0.3) 100%
+  );
+  --gradient-process-line: linear-gradient(
+    180deg,
+    rgba(138, 106, 164, 0.4) 0%,
+    rgba(163, 160, 255, 0.6) 50%,
+    rgba(191, 217, 245, 0.4) 100%
+  );
+  --gradient-button-hover: linear-gradient(135deg, #25172a 0%, #2f2f91 100%);
+
+  /* ----- 7. Typografie – Schriften ----- */
+  --font-family-display: 'Fraunces', Georgia, serif;
+  --font-family-body: 'Inter', 'Helvetica Neue', sans-serif;
+
+  /* ----- Typografie – Größen + Line-Height + Weight ----- */
+  --font-size-display-xl: 72px;
+  --font-size-display-xl-line-height: 1.1;
+  --font-size-display-xl-weight: 700;
+
+  --font-size-display-l: 56px;
+  --font-size-display-l-line-height: 1.15;
+  --font-size-display-l-weight: 700;
+
+  --font-size-display-m: 40px;
+  --font-size-display-m-line-height: 1.2;
+  --font-size-display-m-weight: 700;
+
+  --font-size-heading: 28px;
+  --font-size-heading-line-height: 1.3;
+  --font-size-heading-weight: 600;
+
+  --font-size-body-l: 20px;
+  --font-size-body-l-line-height: 1.6;
+  --font-size-body-l-weight: 400;
+
+  --font-size-body-m: 17px;
+  --font-size-body-m-line-height: 1.65;
+  --font-size-body-m-weight: 400;
+
+  --font-size-body-s: 14px;
+  --font-size-body-s-line-height: 1.5;
+  --font-size-body-s-weight: 400;
+
+  --font-size-label: 12px;
+  --font-size-label-line-height: 1.4;
+  --font-size-label-weight: 500;
+
+  --font-weight-bold: 700;
+  --font-weight-semibold: 600;
+  --font-weight-medium: 500;
+  --font-weight-regular: 400;
+
+  /* ----- 8. Abstände ----- */
+  --space-hero-top: 150px;
+  --space-section-vertical: 120px;
+  --space-section-horizontal: 50px;
+  --space-element-gap: 50px;
+  --space-card-padding: 32px;
+  --space-button-padding: 16px 28px;
+  --max-width-content: 1300px;
+  --max-width-text: 700px;
+
+  /* ----- 9. Border & Radius ----- */
+  --radius-button: 12px;
+  --radius-card: 16px;
+  --radius-tag: 8px;
+  --radius-section-block: 24px;
+  --border-card-subtle: 1px solid rgba(37, 23, 42, 0.08);
+  --border-divider: 1px solid rgba(37, 23, 42, 0.1);
+
+  /* ----- 10. Schatten ----- */
+  --shadow-card: 0 2px 16px rgba(37, 23, 42, 0.08);
+  --shadow-card-hover: 0 8px 32px rgba(37, 23, 42, 0.12);
+  --shadow-button: 0 4px 20px rgba(37, 23, 42, 0.25);
+  --shadow-none: none;
+
+  /* ----- 11. Button-Komponenten (Referenzwerte) ----- */
+  --button-primary-bg: #25172a;
+  --button-primary-color: #ffffff;
+  --button-primary-font-size: 16px;
+  --button-primary-font-weight: 600;
+  --button-primary-padding: 16px 28px;
+  --button-primary-radius: 12px;
+  --button-primary-shadow: 0 4px 20px rgba(37, 23, 42, 0.25);
+  --button-primary-hover-bg: #2f2f91;
+
+  --button-secondary-bg: transparent;
+  --button-secondary-color: #25172a;
+  --button-secondary-border: 1px solid rgba(37, 23, 42, 0.2);
+
+  --button-microcopy-font-size: 13px;
+  --button-microcopy-color: rgba(37, 23, 42, 0.5);
+  --button-microcopy-margin-top: 12px;
+}

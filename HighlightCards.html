@@ -1,0 +1,258 @@
+<!--
+  ASANTIAL – Highlight Cards (Modul 9)
+  Wiederverwendbare Komponente. Inhalte laut asantial-landingpage-briefing-clean.md.
+  Farben: asantial-design-tokens.xml → Lila #a3a0ff, Lavender #d4c4ee, Blau #bfd9f5, Gold #f5c543
+  Stage passt in Content-Breite (max-width: 1300px).
+-->
+<style>
+/* ----- Highlight Cards: Stage (überlappend + responsiv) ----- */
+.highlight-cards {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+}
+.highlight-cards__stage {
+  position: relative;
+  width: 100%;
+  min-width: 720px;
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 0;
+  padding-bottom: 40%;
+  min-height: 320px;
+  overflow: visible;
+}
+
+/* ----- Base Tile (quadratisch, überlappend, responsiv) ----- */
+.highlight-cards__tile {
+  position: absolute;
+  width: max(240px, 32.5%);
+  aspect-ratio: 1;
+  max-width: 324px;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 32px 28px;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    left 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+    top 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, left;
+  box-sizing: border-box;
+}
+.highlight-cards__tile:hover {
+  z-index: 10 !important;
+  box-shadow: 0 32px 70px rgba(37,23,42,0.16), 0 8px 24px rgba(37,23,42,0.08) !important;
+}
+
+/* Blob (blobmove keyframes) */
+.highlight-cards__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(35px);
+  pointer-events: none;
+  animation: highlight-cards-blobmove 9s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+.highlight-cards__tile:hover .highlight-cards__blob { opacity: 1 !important; }
+
+.highlight-cards__icon {
+  font-size: 22px;
+  margin-bottom: 16px;
+  position: relative; z-index: 1;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+}
+.highlight-cards__cat {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--font-size-label-line-height);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  position: relative; z-index: 1;
+  max-width: 100%;
+}
+.highlight-cards__title {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-l);
+  font-weight: var(--font-size-heading-weight);
+  line-height: var(--font-size-body-l-line-height);
+  color: var(--color-ink-deep);
+  margin: 0 0 12px;
+  position: relative; z-index: 1;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+}
+.highlight-cards__text {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-s);
+  line-height: var(--font-size-body-s-line-height);
+  color: var(--ink-60);
+  margin: 0;
+  position: relative; z-index: 1;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* TILE 1 – Lila #a3a0ff, -3deg */
+.highlight-cards__tile--1 {
+  left: 0; top: 12%;
+  transform: rotate(-3deg);
+  box-shadow: 0 20px 50px rgba(37,23,42,0.14), 0 4px 16px rgba(163,160,255,0.2);
+  z-index: 3;
+}
+.highlight-cards__stage:hover .highlight-cards__tile--1 { left: -2%; }
+.highlight-cards__tile--1 .highlight-cards__blob {
+  width: 240px; height: 220px;
+  right: -50px; bottom: -50px;
+  background: radial-gradient(ellipse, rgba(163,160,255,0.7) 0%, transparent 70%);
+  opacity: 0.6;
+  animation-delay: 0s;
+}
+.highlight-cards__tile--1 .highlight-cards__icon { background: rgba(163,160,255,0.15); color: #6b68d4; }
+.highlight-cards__tile--1 .highlight-cards__cat { color: #6b68d4; }
+
+/* TILE 2 – Lavender #d4c4ee (ersetzt Rosa), +2deg */
+.highlight-cards__tile--2 {
+  left: 22.5%; top: 6%;
+  transform: rotate(2deg);
+  box-shadow: 0 24px 56px rgba(37,23,42,0.15), 0 4px 16px rgba(212,196,238,0.18);
+  z-index: 4;
+}
+.highlight-cards__stage:hover .highlight-cards__tile--2 { left: 25%; }
+.highlight-cards__tile--2 .highlight-cards__blob {
+  width: 265px; height: 220px;
+  left: -40px; bottom: -40px;
+  background: radial-gradient(ellipse, rgba(212,196,238,0.6) 0%, rgba(212,196,238,0.3) 55%, transparent 75%);
+  opacity: 0.55;
+  animation-delay: -3s;
+}
+.highlight-cards__tile--2 .highlight-cards__icon { background: rgba(212,196,238,0.12); color: #8a6aa4; }
+.highlight-cards__tile--2 .highlight-cards__cat { color: #8a6aa4; }
+
+/* TILE 3 – Blau #bfd9f5, -1.5deg */
+.highlight-cards__tile--3 {
+  left: 45%; top: 14%;
+  transform: rotate(-1.5deg);
+  box-shadow: 0 28px 60px rgba(37,23,42,0.13), 0 4px 16px rgba(191,217,245,0.2);
+  z-index: 2;
+}
+.highlight-cards__stage:hover .highlight-cards__tile--3 { left: 50%; }
+.highlight-cards__tile--3 .highlight-cards__blob {
+  width: 255px; height: 200px;
+  right: -30px; top: -40px;
+  background: radial-gradient(ellipse, rgba(191,217,245,0.7) 0%, rgba(163,160,255,0.3) 50%, transparent 75%);
+  opacity: 0.6;
+  animation-delay: -5s;
+}
+.highlight-cards__tile--3 .highlight-cards__icon { background: rgba(191,217,245,0.15); color: #3060b0; }
+.highlight-cards__tile--3 .highlight-cards__cat { color: #3060b0; }
+
+/* TILE 4 – Gold #f5c543, +3.5deg */
+.highlight-cards__tile--4 {
+  left: 67.5%; top: 10%;
+  transform: rotate(3.5deg);
+  box-shadow: 0 20px 48px rgba(37,23,42,0.14), 0 4px 16px rgba(245,197,67,0.2);
+  z-index: 3;
+}
+.highlight-cards__stage:hover .highlight-cards__tile--4 { left: 72%; }
+.highlight-cards__tile--4 .highlight-cards__blob {
+  width: 240px; height: 220px;
+  left: -30px; bottom: -40px;
+  background: radial-gradient(ellipse, rgba(245,197,67,0.6) 0%, rgba(212,196,238,0.3) 50%, transparent 75%);
+  opacity: 0.55;
+  animation-delay: -7s;
+}
+.highlight-cards__tile--4 .highlight-cards__icon { background: rgba(245,197,67,0.15); color: #9a7500; }
+.highlight-cards__tile--4 .highlight-cards__cat { color: #9a7500; }
+
+/* Floating (float1–4) */
+.highlight-cards__tile--1 { animation: highlight-cards-float1 7s ease-in-out infinite; }
+.highlight-cards__tile--2 { animation: highlight-cards-float2 9s ease-in-out infinite; }
+.highlight-cards__tile--3 { animation: highlight-cards-float3 8s ease-in-out infinite; }
+.highlight-cards__tile--4 { animation: highlight-cards-float4 10s ease-in-out infinite; }
+
+@keyframes highlight-cards-float1 {
+  0%,100% { transform: rotate(-3deg) translateY(0); }
+  50%     { transform: rotate(-3deg) translateY(-10px); }
+}
+@keyframes highlight-cards-float2 {
+  0%,100% { transform: rotate(2deg) translateY(0); }
+  50%     { transform: rotate(2deg) translateY(-14px); }
+}
+@keyframes highlight-cards-float3 {
+  0%,100% { transform: rotate(-1.5deg) translateY(0); }
+  50%     { transform: rotate(-1.5deg) translateY(-8px); }
+}
+@keyframes highlight-cards-float4 {
+  0%,100% { transform: rotate(3.5deg) translateY(0); }
+  50%     { transform: rotate(3.5deg) translateY(-12px); }
+}
+
+@keyframes highlight-cards-blobmove {
+  0%,100% { transform: translate(0,0) scale(1); border-radius: 50%; }
+  33%     { transform: translate(-12px,-8px) scale(1.1); border-radius: 40% 60% 55% 45%; }
+  66%     { transform: translate(8px,12px) scale(0.92); border-radius: 60% 40% 45% 55%; }
+}
+
+/* Hover: animation none, scale + translateY (1.2s transition) */
+.highlight-cards__tile--1:hover { animation: none; transform: rotate(-1.5deg) translateY(-10px) scale(1.03) !important; }
+.highlight-cards__tile--2:hover { animation: none; transform: rotate(1deg) translateY(-10px) scale(1.03) !important; }
+.highlight-cards__tile--3:hover { animation: none; transform: rotate(-0.8deg) translateY(-10px) scale(1.03) !important; }
+.highlight-cards__tile--4:hover { animation: none; transform: rotate(2deg) translateY(-10px) scale(1.03) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .highlight-cards__tile--1,
+  .highlight-cards__tile--2,
+  .highlight-cards__tile--3,
+  .highlight-cards__tile--4 { animation: none; }
+  .highlight-cards__blob { animation: none; }
+}
+</style>
+
+<div class="highlight-cards">
+  <div class="highlight-cards__stage">
+
+    <div class="highlight-cards__tile highlight-cards__tile--1">
+      <div class="highlight-cards__blob"></div>
+      <div class="highlight-cards__icon">◈</div>
+      <div class="highlight-cards__cat">Analyse</div>
+      <h3 class="highlight-cards__title">Arbeitsmarktanalyse</h3>
+      <p class="highlight-cards__text">Ordnet Markt, Zielgruppen und Branchenrealität sachlich ein – als Entscheidungsgrundlage, nicht als Auslöser für den nächsten Schnellschuss.</p>
+    </div>
+
+    <div class="highlight-cards__tile highlight-cards__tile--2">
+      <div class="highlight-cards__blob"></div>
+      <div class="highlight-cards__icon">◆</div>
+      <div class="highlight-cards__cat">Strategie</div>
+      <h3 class="highlight-cards__title">EVP Paket</h3>
+      <p class="highlight-cards__text">Entwickelt ein Arbeitgeberversprechen, das trägt – mit Substanz und Anschlussfähigkeit statt mit Wunschformulierungen, die in der Schublade landen.</p>
+    </div>
+
+    <div class="highlight-cards__tile highlight-cards__tile--3">
+      <div class="highlight-cards__blob"></div>
+      <div class="highlight-cards__icon">◇</div>
+      <div class="highlight-cards__cat">Umsetzung</div>
+      <h3 class="highlight-cards__title">Projektmanager</h3>
+      <p class="highlight-cards__text">Begleitet strukturiert durch alle Phasen – damit Employer Branding nicht bei Phase 1 stecken bleibt, weil das Tagesgeschäft übernimmt.</p>
+    </div>
+
+    <div class="highlight-cards__tile highlight-cards__tile--4">
+      <div class="highlight-cards__blob"></div>
+      <div class="highlight-cards__icon">≡</div>
+      <div class="highlight-cards__cat">Argumentation</div>
+      <h3 class="highlight-cards__title">Businessargumente</h3>
+      <p class="highlight-cards__text">Macht Employer Branding wirtschaftlich erklärbar – gegenüber Geschäftsführung, Controlling und allen, die fragen: Was bringt das eigentlich?</p>
+    </div>
+
+  </div>
+</div>

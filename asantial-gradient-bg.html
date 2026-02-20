@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  width:100vw; height:100vh;
+  background:#fcfaf9;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+}
+
+.scene {
+  position:relative;
+  width:100%; height:100%;
+  overflow:hidden;
+}
+
+/* Grain overlay via SVG filter */
+.scene::after {
+  content:"";
+  position:absolute; inset:0; z-index:10;
+  pointer-events:none;
+  opacity:0.055;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+.blob {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(70px);
+  opacity:0.85;
+  transform-origin:center center;
+}
+
+/* BLOB 1 – Lila, links-mitte */
+.b1 {
+  width:600px; height:500px;
+  left:-100px; top:50%;
+  margin-top:-250px;
+  background: radial-gradient(ellipse at 40% 50%, rgba(163,160,255,1) 0%, rgba(138,106,164,0.7) 50%, transparent 80%);
+  animation: morph1 12s ease-in-out infinite, drift1 18s ease-in-out infinite;
+}
+
+/* BLOB 2 – Lavendel/Pink, mitte */
+.b2 {
+  width:500px; height:420px;
+  left:30%; top:50%;
+  margin-top:-260px;
+  background: radial-gradient(ellipse at 50% 45%, rgba(212,196,238,1) 0%, rgba(163,160,255,0.6) 45%, transparent 78%);
+  animation: morph2 15s ease-in-out infinite, drift2 22s ease-in-out infinite;
+}
+
+/* BLOB 3 – Himmelblau, rechts */
+.b3 {
+  width:580px; height:460px;
+  right:-80px; top:50%;
+  margin-top:-240px;
+  background: radial-gradient(ellipse at 55% 50%, rgba(191,217,245,1) 0%, rgba(163,160,255,0.65) 48%, transparent 78%);
+  animation: morph3 18s ease-in-out infinite, drift3 20s ease-in-out infinite;
+}
+
+/* BLOB 4 – Gold-Akzent, subtil in der Mitte */
+.b4 {
+  width:380px; height:300px;
+  left:38%; top:50%;
+  margin-top:-180px;
+  background: radial-gradient(ellipse at 50% 50%, rgba(245,197,67,0.45) 0%, rgba(212,196,238,0.3) 55%, transparent 80%);
+  animation: morph4 20s ease-in-out infinite, drift4 25s ease-in-out infinite;
+}
+
+/* Morphing = border-radius + scale */
+@keyframes morph1 {
+  0%   { border-radius:60% 40% 70% 30% / 50% 60% 40% 50%; transform:scale(1); }
+  33%  { border-radius:40% 60% 30% 70% / 60% 40% 70% 30%; transform:scale(1.08); }
+  66%  { border-radius:70% 30% 50% 50% / 40% 70% 30% 60%; transform:scale(0.95); }
+  100% { border-radius:60% 40% 70% 30% / 50% 60% 40% 50%; transform:scale(1); }
+}
+@keyframes morph2 {
+  0%   { border-radius:50% 50% 40% 60% / 60% 40% 60% 40%; transform:scale(1); }
+  40%  { border-radius:70% 30% 60% 40% / 40% 60% 30% 70%; transform:scale(1.06); }
+  70%  { border-radius:30% 70% 50% 50% / 50% 50% 70% 30%; transform:scale(0.97); }
+  100% { border-radius:50% 50% 40% 60% / 60% 40% 60% 40%; transform:scale(1); }
+}
+@keyframes morph3 {
+  0%   { border-radius:40% 60% 60% 40% / 70% 30% 50% 50%; transform:scale(1); }
+  35%  { border-radius:60% 40% 40% 60% / 30% 70% 40% 60%; transform:scale(1.07); }
+  65%  { border-radius:50% 50% 70% 30% / 60% 40% 60% 40%; transform:scale(0.93); }
+  100% { border-radius:40% 60% 60% 40% / 70% 30% 50% 50%; transform:scale(1); }
+}
+@keyframes morph4 {
+  0%   { border-radius:55% 45% 50% 50% / 45% 55% 50% 50%; transform:scale(1) rotate(0deg); }
+  50%  { border-radius:40% 60% 65% 35% / 60% 40% 55% 45%; transform:scale(1.1) rotate(8deg); }
+  100% { border-radius:55% 45% 50% 50% / 45% 55% 50% 50%; transform:scale(1) rotate(0deg); }
+}
+
+/* Drift = langsame Positionsverschiebung */
+@keyframes drift1 {
+  0%,100% { transform:translate(0px, 0px) scale(1); }
+  30%     { transform:translate(40px, -30px) scale(1.05); }
+  60%     { transform:translate(-20px, 25px) scale(0.97); }
+}
+@keyframes drift2 {
+  0%,100% { transform:translate(0px, 0px); }
+  40%     { transform:translate(-50px, 30px); }
+  70%     { transform:translate(35px, -20px); }
+}
+@keyframes drift3 {
+  0%,100% { transform:translate(0px, 0px); }
+  25%     { transform:translate(-30px, -25px); }
+  55%     { transform:translate(45px, 30px); }
+}
+@keyframes drift4 {
+  0%,100% { transform:translate(0px, 0px); }
+  35%     { transform:translate(30px, -40px); }
+  65%     { transform:translate(-40px, 20px); }
+}
+</style>
+</head>
+<body>
+<div class="scene">
+  <div class="blob b1"></div>
+  <div class="blob b2"></div>
+  <div class="blob b3"></div>
+  <div class="blob b4"></div>
+</div>
+</body>
+</html>

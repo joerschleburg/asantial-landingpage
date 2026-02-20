@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: linear-gradient(135deg, #c8bfee 0%, #d4cef5 20%, #bdd4f0 50%, #a8c8ee 75%, #b8d8f8 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.blob {
+  width: 380px;
+  height: 440px;
+  border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
+  overflow: hidden;
+  animation: morph 10s ease-in-out infinite;
+  box-shadow:
+    0 40px 80px rgba(80,60,140,0.28),
+    0 8px 24px rgba(80,60,140,0.16),
+    0 0 0 3px rgba(255,255,255,0.35);
+}
+
+.blob img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.06);
+}
+
+@keyframes morph {
+  0%,100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
+  33%     { border-radius: 48% 52% 60% 40% / 52% 58% 42% 48%; }
+  66%     { border-radius: 55% 45% 38% 62% / 44% 62% 38% 56%; }
+}
+</style>
+</head>
+<body>
+  <div class="blob">
+    <img src="joerg.jpg" alt="Jörg Schleburg">
+  </div>
+</body>
+</html>

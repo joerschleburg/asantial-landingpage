@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0ece7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── FLOATING CARD SHELL ── */
+.tile {
+  position: relative;
+  width: 680px;
+  background: #fff;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 12px rgba(37,23,42,0.06),
+    0 24px 60px rgba(37,23,42,0.14),
+    0 2px 0px rgba(255,255,255,0.8) inset;
+  transform: rotate(-1.5deg);
+  animation: float 9s ease-in-out infinite;
+}
+
+/* purple blob inside */
+.tile::before {
+  content:"";
+  position:absolute;
+  width:300px; height:240px;
+  right:-60px; bottom:-60px;
+  border-radius:50%;
+  background: radial-gradient(ellipse, rgba(163,160,255,0.35) 0%, rgba(191,217,245,0.2) 50%, transparent 75%);
+  filter:blur(40px);
+  pointer-events:none;
+  z-index:0;
+  animation: blobmove 11s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: rotate(-1.5deg) translateY(0px); }
+  50%     { transform: rotate(-1.5deg) translateY(-14px); }
+}
+@keyframes blobmove {
+  0%,100% { transform: translate(0,0) scale(1); }
+  40%     { transform: translate(-20px,-15px) scale(1.1); }
+  70%     { transform: translate(10px,20px) scale(0.92); }
+}
+
+/* ── INNER UI ── */
+.ui {
+  display: flex;
+  height: 420px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 170px;
+  flex-shrink: 0;
+  background: #eae6e1;
+  border-right: 1px solid rgba(37,23,42,0.07);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.logo { padding: 16px 14px 12px; border-bottom: 1px solid rgba(37,23,42,0.07); }
+.logo-name { font-size: 12px; font-weight: 800; letter-spacing: 0.1em; color: #25172a; }
+.logo-sub { font-size: 8px; color: rgba(37,23,42,0.38); margin-top: 1px; }
+.nav-head { padding: 10px 14px 5px; font-size: 10px; font-weight: 600; color: rgba(37,23,42,0.4); }
+.nav { padding: 3px 7px; flex:1; }
+.nav-item {
+  display: flex; align-items: center; gap: 7px;
+  padding: 7px 7px; border-radius: 7px; margin-bottom: 1px;
+  font-size: 11px; color: rgba(37,23,42,0.5); cursor: pointer;
+}
+.nav-item.active { background: rgba(37,23,42,0.09); color: #25172a; font-weight: 500; }
+.nav-icon { font-size: 12px; width: 14px; text-align: center; }
+.sidebar-user {
+  padding: 10px 14px; border-top: 1px solid rgba(37,23,42,0.07);
+  display: flex; align-items: center; gap: 7px;
+}
+.avatar {
+  width: 24px; height: 24px; border-radius: 50%;
+  background: linear-gradient(135deg, #8a6aa4, #a3a0ff);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.sidebar-user span { font-size: 10px; color: #25172a; font-weight: 500; }
+
+/* Main */
+.main { flex:1; display: flex; flex-direction: column; background: #fff; overflow: hidden; }
+.topbar {
+  padding: 0 18px; height: 40px;
+  border-bottom: 1px solid rgba(37,23,42,0.06);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.topbar-title { font-size: 12px; font-weight: 600; color: #25172a; }
+.topbar-actions { display: flex; gap: 6px; align-items: center; }
+.topbar-btn {
+  padding: 4px 10px; border-radius: 6px; font-size: 10px;
+  border: 1px solid rgba(37,23,42,0.12); cursor: pointer;
+  color: rgba(37,23,42,0.6); font-family: inherit; background: transparent;
+}
+.topbar-btn.primary { background: #25172a; color: #fff; border-color: transparent; }
+
+/* Gantt Area */
+.gantt-wrap { flex:1; overflow: auto; padding: 14px 16px; }
+
+/* Month header */
+.gantt-header {
+  display: grid;
+  grid-template-columns: 130px repeat(6, 1fr);
+  gap: 0;
+  margin-bottom: 6px;
+}
+.gantt-header-cell {
+  font-size: 9px; font-weight: 600; text-align: center;
+  color: rgba(37,23,42,0.35); letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0 4px 6px;
+  border-bottom: 1px solid rgba(37,23,42,0.07);
+}
+.gantt-header-cell:first-child { text-align: left; padding-left: 0; }
+
+/* Row */
+.gantt-row {
+  display: grid;
+  grid-template-columns: 130px repeat(6, 1fr);
+  gap: 0;
+  align-items: center;
+  border-bottom: 1px solid rgba(37,23,42,0.04);
+  min-height: 36px;
+}
+.gantt-row:last-child { border-bottom: none; }
+.gantt-label {
+  font-size: 11px; color: #25172a; font-weight: 500;
+  padding: 6px 10px 6px 0;
+  display: flex; align-items: center; gap: 6px;
+}
+.gantt-label-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.gantt-label-sub { font-size: 9px; color: rgba(37,23,42,0.38); font-weight: 400; display: block; margin-top: 1px; }
+
+.gantt-cells {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  position: relative;
+  height: 36px;
+  align-items: center;
+}
+
+/* Background grid lines */
+.gantt-cells::before {
+  content:"";
+  position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent calc(100%/6 - 1px),
+    rgba(37,23,42,0.04) calc(100%/6 - 1px),
+    rgba(37,23,42,0.04) calc(100%/6)
+  );
+  pointer-events:none;
+}
+
+/* Bar */
+.bar {
+  position: absolute;
+  height: 18px;
+  border-radius: 5px;
+  display: flex; align-items: center; padding: 0 8px;
+  font-size: 9px; font-weight: 600; color: rgba(255,255,255,0.9);
+  white-space: nowrap; overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* Milestone diamond */
+.milestone {
+  position: absolute;
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Today line */
+.today-line {
+  position: absolute;
+  top: -6px; bottom: -6px;
+  width: 1.5px;
+  background: rgba(255,80,80,0.5);
+  z-index: 10;
+}
+.today-line::before {
+  content:"Heute";
+  position:absolute; top:-14px; left:50%;
+  transform: translateX(-50%);
+  font-size:8px; color:rgba(255,80,80,0.8); font-weight:600; white-space:nowrap;
+}
+
+/* Progress fill */
+.bar-progress {
+  position: absolute;
+  left:0; top:0; height:100%; border-radius: 5px;
+  background: rgba(255,255,255,0.2);
+}
+
+/* Legend */
+.legend {
+  display: flex; gap: 14px; padding: 10px 16px 12px;
+  border-top: 1px solid rgba(37,23,42,0.06);
+  flex-shrink: 0;
+}
+.legend-item { display: flex; align-items: center; gap: 5px; }
+.legend-dot { width: 8px; height: 8px; border-radius: 2px; }
+.legend-label { font-size: 9px; color: rgba(37,23,42,0.4); }
+</style>
+</head>
+<body>
+
+<div class="tile">
+  <div class="ui">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <div class="logo-name">ASANTIAL</div>
+        <div class="logo-sub">by VonVorteil</div>
+      </div>
+      <div class="nav-head">KI Apps</div>
+      <div class="nav">
+        <div class="nav-item"><span class="nav-icon">⊞</span> App-Bibliothek</div>
+        <div class="nav-item active"><span class="nav-icon">≡</span> Projektmanager</div>
+        <div class="nav-item"><span class="nav-icon">◈</span> Start-App</div>
+        <div class="nav-item"><span class="nav-icon">↗</span> Roadmap</div>
+      </div>
+      <div class="sidebar-user">
+        <div class="avatar">JS</div>
+        <span>Jörg Schleburg</span>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+      <div class="topbar">
+        <span class="topbar-title">Projektmanager – Q1/Q2 2026</span>
+        <div class="topbar-actions">
+          <button class="topbar-btn">Exportieren</button>
+          <button class="topbar-btn primary">+ Aufgabe</button>
+        </div>
+      </div>
+
+      <div class="gantt-wrap">
+
+        <!-- Header -->
+        <div class="gantt-header">
+          <div class="gantt-header-cell">Phase / Aufgabe</div>
+          <div class="gantt-header-cell">Jan</div>
+          <div class="gantt-header-cell">Feb</div>
+          <div class="gantt-header-cell">Mrz</div>
+          <div class="gantt-header-cell">Apr</div>
+          <div class="gantt-header-cell">Mai</div>
+          <div class="gantt-header-cell">Jun</div>
+        </div>
+
+        <!-- ROW 1: Analyse -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#a3a0ff"></div>
+            <div>Arbeitsmarktanalyse<span class="gantt-label-sub">abgeschlossen · 100%</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="today-line" style="left:33%"></div>
+            <div class="bar" style="left:2%; width:28%; background:linear-gradient(90deg,#a3a0ff,#8a80f0);">
+              <div class="bar-progress" style="width:100%"></div>
+              Analyse
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 2: EVP -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#d4c4ee"></div>
+            <div>EVP Entwicklung<span class="gantt-label-sub">laufend · 60%</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="bar" style="left:18%; width:38%; background:linear-gradient(90deg,#d4c4ee,#b8a0d8); color:rgba(37,23,42,0.8);">
+              <div class="bar-progress" style="width:60%"></div>
+              EVP & Positionierung
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 3: Führungsabgleich -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#f5c543"></div>
+            <div>Führungsabgleich<span class="gantt-label-sub">geplant · 0%</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="bar" style="left:35%; width:22%; background:linear-gradient(90deg,#f5c543,#e0b030); color:rgba(37,23,42,0.8);">
+              Führung
+            </div>
+            <!-- Milestone -->
+            <div class="milestone" style="left:56.5%; top:50%; transform:translateY(-50%) rotate(45deg); background:#f5c543;"></div>
+          </div>
+        </div>
+
+        <!-- ROW 4: Kanalstrategie -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#bfd9f5"></div>
+            <div>Kanalstrategie<span class="gantt-label-sub">geplant · 0%</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="bar" style="left:50%; width:32%; background:linear-gradient(90deg,#bfd9f5,#8ab8e8); color:rgba(37,23,42,0.8);">
+              Content & Kanäle
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 5: Businessargumente -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#c5e2ca"></div>
+            <div>Businessargumente<span class="gantt-label-sub">laufend · 45%</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="bar" style="left:25%; width:42%; background:linear-gradient(90deg,#c5e2ca,#90c898); color:rgba(37,23,42,0.8);">
+              <div class="bar-progress" style="width:45%"></div>
+              GF-Argumentation
+            </div>
+          </div>
+        </div>
+
+        <!-- ROW 6: Launch -->
+        <div class="gantt-row">
+          <div class="gantt-label">
+            <div class="gantt-label-dot" style="background:#25172a"></div>
+            <div>Go-Live<span class="gantt-label-sub">Meilenstein</span></div>
+          </div>
+          <div class="gantt-cells">
+            <div class="milestone" style="left:82%; top:50%; transform:translateY(-50%) rotate(45deg); background:#25172a; width:12px; height:12px;"></div>
+          </div>
+        </div>
+
+      </div><!-- /gantt-wrap -->
+
+      <!-- Legend -->
+      <div class="legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#a3a0ff"></div><span class="legend-label">Analyse</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#d4c4ee"></div><span class="legend-label">Strategie</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f5c543"></div><span class="legend-label">Führung</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#bfd9f5"></div><span class="legend-label">Kanäle</span></div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c5e2ca"></div><span class="legend-label">Argumentation</span></div>
+        <div class="legend-item" style="margin-left:auto;">
+          <div style="width:10px;height:1.5px;background:rgba(255,80,80,0.5);margin-right:4px;"></div>
+          <span class="legend-label" style="color:rgba(255,80,80,0.7)">Heute</span>
+        </div>
+      </div>
+
+    </div><!-- /main -->
+  </div><!-- /ui -->
+</div><!-- /tile -->
+
+</body>
+</html>

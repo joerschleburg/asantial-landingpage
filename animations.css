@@ -1,0 +1,352 @@
+/**
+ * ASANTIAL – Motion & Animation
+ * Übersetzt aus asantial-motion-interaction.xml
+ * @keyframes, Scroll-Reveal, Hero-Entrance, Float, CTA-Gradient.
+ * Respektiert prefers-reduced-motion.
+ */
+
+/* ---------------------------------------------------------------------------
+   Easing & Duration (CSS Custom Properties für Animationen)
+   --------------------------------------------------------------------------- */
+:root {
+  --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-soft: cubic-bezier(0.45, 0, 0.55, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-medium: 400ms;
+  --duration-slow: 600ms;
+  --duration-storytelling: 900ms;
+  --duration-stagger-delay: 80ms;
+}
+
+/* ---------------------------------------------------------------------------
+   1. SCROLL-REVEAL – Basis .reveal / .revealed
+   IntersectionObserver fügt .revealed hinzu.
+   --------------------------------------------------------------------------- */
+
+/* Standard: fade-up (24px, 600ms) */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 600ms var(--ease-out-smooth),
+    transform 600ms var(--ease-out-smooth);
+}
+
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Headline: größerer Abstand, längere Dauer */
+.reveal--headline {
+  opacity: 0;
+  transform: translateY(32px);
+  transition:
+    opacity 900ms var(--ease-out-expo),
+    transform 900ms var(--ease-out-expo);
+}
+
+.reveal--headline.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Gestaffelte Karten (Stagger per JS oder nth-child) */
+.reveal--stagger {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 500ms var(--ease-out-smooth),
+    transform 500ms var(--ease-out-smooth);
+}
+
+.reveal--stagger.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Nur Fade, keine Bewegung */
+.reveal--fade-only {
+  opacity: 0;
+  transform: none;
+  transition: opacity 800ms ease;
+}
+
+.reveal--fade-only.revealed {
+  opacity: 1;
+}
+
+/* Scale-up für UI-Mockup / Diagramme */
+.reveal--scale-up {
+  opacity: 0;
+  transform: scale(0.96);
+  transition:
+    opacity 700ms var(--ease-out-smooth),
+    transform 700ms var(--ease-out-smooth);
+}
+
+.reveal--scale-up.revealed {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ---------------------------------------------------------------------------
+   2. HERO-ENTRANCE – @keyframes (Page Load)
+   Klassen: .hero-entrance-nav, .hero-entrance-headline, etc.
+   animation-fill-mode: both; animation-delay wie in Spec.
+   --------------------------------------------------------------------------- */
+
+@keyframes hero-entrance-nav {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-entrance-headline {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-entrance-subline {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-entrance-cta {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hero-entrance-aura {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes hero-entrance-mockup {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Hero-Entrance Klassen – werden beim Load angewendet */
+.hero-entrance-nav {
+  animation: hero-entrance-nav 400ms var(--ease-out-smooth) 0ms both;
+}
+
+.hero-entrance-headline {
+  animation: hero-entrance-headline 900ms var(--ease-out-expo) 150ms both;
+}
+
+.hero-entrance-subline {
+  animation: hero-entrance-subline 700ms var(--ease-out-smooth) 350ms both;
+}
+
+.hero-entrance-cta {
+  animation: hero-entrance-cta 600ms var(--ease-out-smooth) 500ms both;
+}
+
+.hero-entrance-aura {
+  animation: hero-entrance-aura 1200ms ease 400ms both;
+}
+
+.hero-entrance-mockup {
+  animation: hero-entrance-mockup 800ms var(--ease-out-smooth) 700ms both;
+}
+
+/* ---------------------------------------------------------------------------
+   3. HERO-UI-MOCKUP FLOAT + 3D
+   Leicht schräg (3D), sanftes Schweben und dezente Rotation.
+   --------------------------------------------------------------------------- */
+@keyframes hero-mockup-float {
+  0% {
+    transform: perspective(1400px) rotateX(6deg) rotateY(-10deg) translateY(0);
+  }
+  33% {
+    transform: perspective(1400px) rotateX(5deg) rotateY(-7deg) translateY(-6px);
+  }
+  66% {
+    transform: perspective(1400px) rotateX(7deg) rotateY(-8deg) translateY(-4px);
+  }
+  100% {
+    transform: perspective(1400px) rotateX(6deg) rotateY(-10deg) translateY(0);
+  }
+}
+
+.hero-mockup-float {
+  transform: perspective(1400px) rotateX(6deg) rotateY(-10deg);
+  animation: hero-mockup-float 8s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------------------------
+   4. CTA-GRADIENT-ANIMATION (Modul 13 / Abschluss-CTA)
+   Langsam fließender Gradient-Hintergrund.
+   --------------------------------------------------------------------------- */
+@keyframes cta-gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.cta-gradient-animate {
+  background-size: 200% 200%;
+  animation: cta-gradient-flow 12s ease infinite;
+}
+
+/* Für prefers-reduced-motion: reines Opacity-Fade (Keyframe global) */
+@keyframes hero-entrance-reduced {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   5. HOVER-INTERACTIONS (CSS-Klassen für Karten & Buttons)
+   Werden in HTML/JS verwendet.
+   --------------------------------------------------------------------------- */
+
+/* Karten: Heben + Schatten */
+.card-hover {
+  transition:
+    transform 300ms var(--ease-out-smooth),
+    box-shadow 300ms var(--ease-out-smooth);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Primärer Button: Farbe + leichte Skalierung */
+.btn-primary-hover {
+  transition:
+    background-color 100ms ease,
+    transform 200ms var(--ease-spring);
+}
+
+.btn-primary-hover:hover {
+  background-color: var(--button-primary-hover-bg);
+  transform: scale(1.02);
+}
+
+.btn-primary-hover:active {
+  transform: scale(0.97);
+  transition-duration: 100ms;
+}
+
+/* ---------------------------------------------------------------------------
+   6. PREFERS-REDUCED-MOTION
+   Alle transform-Animationen auf reines Opacity-Fade reduzieren.
+   --------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal--headline,
+  .reveal--stagger,
+  .reveal--scale-up {
+    transform: none;
+    transition: opacity 600ms ease;
+  }
+
+  .reveal--fade-only {
+    transition: opacity 600ms ease;
+  }
+
+  .reveal--headline.revealed,
+  .reveal--stagger.revealed {
+    transform: none;
+  }
+
+  .reveal--scale-up.revealed {
+    transform: none;
+  }
+
+  /* Hero-Entrance: nur Opacity-Fade, keine transform */
+  .hero-entrance-nav {
+    animation: hero-entrance-reduced 400ms ease 0ms both;
+  }
+
+  .hero-entrance-headline {
+    animation: hero-entrance-reduced 500ms ease 100ms both;
+  }
+
+  .hero-entrance-subline {
+    animation: hero-entrance-reduced 400ms ease 200ms both;
+  }
+
+  .hero-entrance-cta {
+    animation: hero-entrance-reduced 400ms ease 300ms both;
+  }
+
+  .hero-entrance-mockup {
+    animation: hero-entrance-reduced 500ms ease 400ms both;
+  }
+
+  .hero-entrance-aura {
+    animation: hero-entrance-aura 800ms ease 200ms both;
+  }
+
+  /* Float-Animation deaktivieren, 3D-Neigung bleibt */
+  .hero-mockup-float {
+    animation: none;
+    transform: perspective(1400px) rotateX(6deg) rotateY(-10deg);
+  }
+
+  /* CTA-Gradient: keine Bewegung */
+  .cta-gradient-animate {
+    animation: none;
+  }
+
+  /* Hover: nur Schatten/Farbe, kein translate/scale */
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .btn-primary-hover:hover,
+  .btn-primary-hover:active {
+    transform: none;
+  }
+}

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f0ece7;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+}
+
+/* Subtle paper texture */
+body::before {
+  content:"";
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  opacity:0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:150px 150px;
+}
+
+.stage {
+  position: relative;
+  width: 960px;
+  height: 440px;
+}
+
+/* --- BASE CARD --- */
+.tile {
+  position: absolute;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 26px;
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    transform 0.8s cubic-bezier(0.22,1,0.36,1),
+    box-shadow 0.8s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+
+.tile:hover {
+  z-index: 10 !important;
+  box-shadow: 0 32px 70px rgba(37,23,42,0.16), 0 8px 24px rgba(37,23,42,0.08) !important;
+}
+
+/* Morphing gradient blob inside tile */
+.blob {
+  position:absolute;
+  border-radius:50%;
+  filter:blur(35px);
+  pointer-events:none;
+  animation: blobmove 9s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+.tile:hover .blob { opacity: 1 !important; }
+
+.icon {
+  font-size: 22px;
+  margin-bottom: 16px;
+  position: relative; z-index:1;
+  display: inline-block;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items:center; justify-content:center;
+}
+
+.tile-cat {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 8px;
+  position: relative; z-index:1;
+}
+
+.tile-title {
+  font-size: 18px; font-weight: 800;
+  color: #181229; line-height: 1.2;
+  margin-bottom: 10px;
+  position: relative; z-index:1;
+}
+
+.tile-text {
+  font-size: 12.5px; line-height: 1.65;
+  color: rgba(37,23,42,0.52);
+  position: relative; z-index:1;
+}
+
+/* =====================
+   TILE 1 – Start App
+   Lila, leicht links, -3deg
+   ===================== */
+.t1 {
+  width: 230px;
+  left: 20px; top: 60px;
+  transform: rotate(-3deg);
+  box-shadow: 0 20px 50px rgba(37,23,42,0.14), 0 4px 16px rgba(163,160,255,0.2);
+  z-index: 3;
+}
+.t1 .blob {
+  width:180px; height:160px;
+  right:-40px; bottom:-40px;
+  background: radial-gradient(ellipse, rgba(163,160,255,0.7) 0%, transparent 70%);
+  opacity:0.6;
+  animation-delay: 0s;
+}
+.t1 .icon { background: rgba(163,160,255,0.15); color: #6b68d4; }
+.t1 .tile-cat { color: #6b68d4; }
+.t1:hover { transform: rotate(-1deg) translateY(-8px) scale(1.03); }
+
+/* =====================
+   TILE 2 – EVP
+   Rosa, mitte-links, +2deg
+   ===================== */
+.t2 {
+  width: 245px;
+  left: 200px; top: 20px;
+  transform: rotate(2deg);
+  box-shadow: 0 24px 56px rgba(37,23,42,0.15), 0 4px 16px rgba(255,140,160,0.18);
+  z-index: 4;
+}
+.t2 .blob {
+  width:200px; height:160px;
+  left:-30px; bottom:-30px;
+  background: radial-gradient(ellipse, rgba(255,140,160,0.6) 0%, rgba(212,196,238,0.3) 55%, transparent 75%);
+  opacity:0.55;
+  animation-delay: -3s;
+}
+.t2 .icon { background: rgba(255,140,160,0.12); color: #c0506a; }
+.t2 .tile-cat { color: #c0506a; }
+.t2:hover { transform: rotate(0.5deg) translateY(-8px) scale(1.03); }
+
+/* =====================
+   TILE 3 – Content
+   Blau, mitte-rechts, -1.5deg
+   ===================== */
+.t3 {
+  width: 235px;
+  left: 410px; top: 80px;
+  transform: rotate(-1.5deg);
+  box-shadow: 0 28px 60px rgba(37,23,42,0.13), 0 4px 16px rgba(139,185,245,0.2);
+  z-index: 2;
+}
+.t3 .blob {
+  width:190px; height:150px;
+  right:-20px; top:-30px;
+  background: radial-gradient(ellipse, rgba(139,185,245,0.7) 0%, rgba(163,160,255,0.3) 50%, transparent 75%);
+  opacity:0.6;
+  animation-delay: -5s;
+}
+.t3 .icon { background: rgba(139,185,245,0.15); color: #3060b0; }
+.t3 .tile-cat { color: #3060b0; }
+.t3:hover { transform: rotate(-0.3deg) translateY(-8px) scale(1.03); }
+
+/* =====================
+   TILE 4 – Projektmanager
+   Gold, rechts, +3.5deg
+   ===================== */
+.t4 {
+  width: 228px;
+  right: 40px; top: 50px;
+  transform: rotate(3.5deg);
+  box-shadow: 0 20px 48px rgba(37,23,42,0.14), 0 4px 16px rgba(245,197,67,0.2);
+  z-index: 3;
+}
+.t4 .blob {
+  width:180px; height:160px;
+  left:-20px; bottom:-30px;
+  background: radial-gradient(ellipse, rgba(245,197,67,0.6) 0%, rgba(212,196,238,0.3) 50%, transparent 75%);
+  opacity:0.55;
+  animation-delay: -7s;
+}
+.t4 .icon { background: rgba(245,197,67,0.15); color: #9a7500; }
+.t4 .tile-cat { color: #9a7500; }
+.t4:hover { transform: rotate(1.5deg) translateY(-8px) scale(1.03); }
+
+/* =====================
+   FLOATING ANIMATION
+   Jede Karte driftet leicht
+   ===================== */
+.t1 { animation: float1 7s ease-in-out infinite; }
+.t2 { animation: float2 9s ease-in-out infinite; }
+.t3 { animation: float3 8s ease-in-out infinite; }
+.t4 { animation: float4 10s ease-in-out infinite; }
+
+@keyframes float1 {
+  0%,100% { transform: rotate(-3deg) translateY(0px); }
+  50%     { transform: rotate(-3deg) translateY(-10px); }
+}
+@keyframes float2 {
+  0%,100% { transform: rotate(2deg) translateY(0px); }
+  50%     { transform: rotate(2deg) translateY(-14px); }
+}
+@keyframes float3 {
+  0%,100% { transform: rotate(-1.5deg) translateY(0px); }
+  50%     { transform: rotate(-1.5deg) translateY(-8px); }
+}
+@keyframes float4 {
+  0%,100% { transform: rotate(3.5deg) translateY(0px); }
+  50%     { transform: rotate(3.5deg) translateY(-12px); }
+}
+
+@keyframes blobmove {
+  0%,100% { transform: translate(0,0) scale(1); border-radius:50%; }
+  33%     { transform: translate(-12px,-8px) scale(1.1); border-radius:40% 60% 55% 45%; }
+  66%     { transform: translate(8px,12px) scale(0.92); border-radius:60% 40% 45% 55%; }
+}
+
+/* Hover overrides the float */
+.t1:hover { animation: none; transform: rotate(-1.5deg) translateY(-12px) scale(1.04) !important; }
+.t2:hover { animation: none; transform: rotate(1deg) translateY(-12px) scale(1.04) !important; }
+.t3:hover { animation: none; transform: rotate(-0.8deg) translateY(-12px) scale(1.04) !important; }
+.t4:hover { animation: none; transform: rotate(2deg) translateY(-12px) scale(1.04) !important; }
+
+</style>
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="tile t1">
+    <div class="blob"></div>
+    <div class="icon">◈</div>
+    <div class="tile-cat">Navigation</div>
+    <div class="tile-title">Start-App</div>
+    <div class="tile-text">Einstieg und Navigation. Hier starten Sie jeden Arbeitstag mit der richtigen Frage.</div>
+  </div>
+
+  <div class="tile t2">
+    <div class="blob"></div>
+    <div class="icon">◆</div>
+    <div class="tile-cat">Strategie</div>
+    <div class="tile-title">EVP & Positionierung</div>
+    <div class="tile-text">Kernbotschaften und Werte – konsistent formuliert und für alle Kanäle nutzbar.</div>
+  </div>
+
+  <div class="tile t3">
+    <div class="blob"></div>
+    <div class="icon">◇</div>
+    <div class="tile-cat">Umsetzung</div>
+    <div class="tile-title">Content & Kanäle</div>
+    <div class="tile-text">Von Text über Social bis Recruiting – Inhalte, die zur Strategie passen.</div>
+  </div>
+
+  <div class="tile t4">
+    <div class="blob"></div>
+    <div class="icon">≡</div>
+    <div class="tile-cat">Steuerung</div>
+    <div class="tile-title">Projektmanager</div>
+    <div class="tile-text">Maßnahmen planen, priorisieren und mit der Wirkungslogik verbinden.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

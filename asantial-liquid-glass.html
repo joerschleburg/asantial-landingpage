@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #c8bfee 0%, #d4cef5 20%, #bdd4f0 50%, #a8c8ee 75%, #b8d8f8 100%);
+}
+
+body::before {
+  content:"";
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 70% 60% at 25% 40%, rgba(255,255,255,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 75% 65%, rgba(180,200,255,0.18) 0%, transparent 55%);
+}
+
+.depth-far {
+  position:fixed; inset:0; z-index:0;
+  background:
+    radial-gradient(ellipse 55% 45% at 15% 70%, rgba(163,140,255,0.5) 0%, transparent 65%),
+    radial-gradient(ellipse 45% 55% at 85% 30%, rgba(140,190,255,0.45) 0%, transparent 60%);
+  filter: blur(45px);
+}
+
+/* ── DOT GRID ── */
+.grid {
+  position:fixed; inset:0; z-index:1; pointer-events:none;
+  background-image: radial-gradient(circle, rgba(20,10,80,0.7) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
+  opacity: 0.32;
+}
+
+.stage { position:relative; width:920px; height:460px; z-index:2; }
+
+/* ── LIQUID GLASS ── */
+.tile {
+  position:absolute; border-radius:28px; padding:28px 26px; cursor:pointer;
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(32px) saturate(180%) brightness(1.06) contrast(1.02);
+  -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.06) contrast(1.02);
+  border-top:1.5px solid rgba(255,255,255,0.72);
+  border-left:1.5px solid rgba(255,255,255,0.42);
+  border-right:1px solid rgba(255,255,255,0.14);
+  border-bottom:1px solid rgba(255,255,255,0.10);
+  box-shadow:
+    0 32px 64px rgba(80,60,140,0.22),
+    0 16px 32px rgba(80,60,140,0.14),
+    0 6px 12px rgba(80,60,140,0.10),
+    0 2px 4px rgba(40,30,80,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.80),
+    inset 0 0 20px rgba(255,255,255,0.06);
+  transition: transform 0.85s cubic-bezier(0.22,1,0.36,1), box-shadow 0.85s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform; isolation: isolate;
+}
+.tile::before {
+  content:""; position:absolute; inset:0; border-radius:28px; z-index:0; pointer-events:none; opacity:0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:140px 140px; mix-blend-mode:overlay;
+}
+.tile::after {
+  content:""; position:absolute; top:-50%; left:-15%; width:50%; height:200%;
+  background:linear-gradient(108deg, transparent 0%, rgba(255,255,255,0.00) 36%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0.00) 64%, transparent 100%);
+  transform:skewX(-10deg); pointer-events:none; z-index:1;
+}
+.tile-ca {
+  position:absolute; top:0; left:0; right:0; height:2px; border-radius:28px 28px 0 0;
+  background:linear-gradient(90deg, rgba(180,140,255,0.35) 0%, rgba(255,255,255,0.75) 50%, rgba(140,200,255,0.35) 100%);
+  z-index:3; pointer-events:none;
+}
+.tile:hover {
+  background:rgba(255,255,255,0.11); z-index:10 !important;
+  box-shadow:0 50px 100px rgba(80,60,140,0.26), 0 24px 48px rgba(80,60,140,0.18), inset 0 1px 0 rgba(255,255,255,0.88);
+}
+.tile-content { position:relative; z-index:2; }
+.icon { width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:18px; background:rgba(255,255,255,0.16); backdrop-filter:blur(20px) saturate(150%); -webkit-backdrop-filter:blur(20px) saturate(150%); border-top:1.5px solid rgba(255,255,255,0.65); border-left:1px solid rgba(255,255,255,0.35); border-right:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.06); box-shadow:0 4px 14px rgba(80,60,140,0.18), inset 0 1px 0 rgba(255,255,255,0.60); }
+.tile-cat { font-size:9px; font-weight:700; letter-spacing:0.13em; text-transform:uppercase; margin-bottom:8px; opacity:0.75; }
+.tile-title { font-size:17px; font-weight:800; color:#1a1040; line-height:1.2; margin-bottom:10px; text-shadow:0 1px 3px rgba(255,255,255,0.5); }
+.tile-text { font-size:12px; line-height:1.65; color:rgba(30,20,70,0.65); }
+
+.t1 { width:238px; left:10px; top:75px; z-index:2; transform:rotate(-3deg); animation:f1 7s ease-in-out infinite; }
+.t1 .icon,.t1 .tile-cat { color:#5248c8; }
+.t1:hover { animation:none; transform:rotate(-1.5deg) translateY(-14px) scale(1.03); }
+.t2 { width:250px; left:196px; top:14px; z-index:3; transform:rotate(2deg); animation:f2 9s ease-in-out infinite; }
+.t2 .icon,.t2 .tile-cat { color:#a03458; }
+.t2:hover { animation:none; transform:rotate(0.5deg) translateY(-14px) scale(1.03); }
+.t3 { width:242px; left:394px; top:82px; z-index:2; transform:rotate(-1.5deg); animation:f3 8s ease-in-out infinite; }
+.t3 .icon,.t3 .tile-cat { color:#2050a0; }
+.t3:hover { animation:none; transform:rotate(-0.3deg) translateY(-14px) scale(1.03); }
+.t4 { width:238px; left:584px; top:28px; z-index:3; transform:rotate(3.5deg); animation:f4 10s ease-in-out infinite; }
+.t4 .icon,.t4 .tile-cat { color:#7a5c00; }
+.t4:hover { animation:none; transform:rotate(2deg) translateY(-14px) scale(1.03); }
+
+@keyframes f1{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-3deg) translateY(-14px)}}
+@keyframes f2{0%,100%{transform:rotate(2deg) translateY(0)}50%{transform:rotate(2deg) translateY(-17px)}}
+@keyframes f3{0%,100%{transform:rotate(-1.5deg) translateY(0)}50%{transform:rotate(-1.5deg) translateY(-12px)}}
+@keyframes f4{0%,100%{transform:rotate(3.5deg) translateY(0)}50%{transform:rotate(3.5deg) translateY(-15px)}}
+</style>
+</head>
+<body>
+
+<div class="depth-far"></div>
+<div class="grid"></div>
+
+<div class="stage">
+  <div class="tile t1">
+    <div class="tile-ca"></div>
+    <div class="tile-content">
+      <div class="icon">◈</div>
+      <div class="tile-cat">Navigation</div>
+      <div class="tile-title">Start-App</div>
+      <div class="tile-text">Einstieg und Navigation. Hier starten Sie jeden Arbeitstag mit der richtigen Frage.</div>
+    </div>
+  </div>
+  <div class="tile t2">
+    <div class="tile-ca"></div>
+    <div class="tile-content">
+      <div class="icon">◆</div>
+      <div class="tile-cat">Strategie</div>
+      <div class="tile-title">EVP & Positionierung</div>
+      <div class="tile-text">Kernbotschaften und Werte – konsistent formuliert und für alle Kanäle nutzbar.</div>
+    </div>
+  </div>
+  <div class="tile t3">
+    <div class="tile-ca"></div>
+    <div class="tile-content">
+      <div class="icon">◇</div>
+      <div class="tile-cat">Umsetzung</div>
+      <div class="tile-title">Content & Kanäle</div>
+      <div class="tile-text">Von Text über Social bis Recruiting – Inhalte, die zur Strategie passen.</div>
+    </div>
+  </div>
+  <div class="tile t4">
+    <div class="tile-ca"></div>
+    <div class="tile-content">
+      <div class="icon">≡</div>
+      <div class="tile-cat">Steuerung</div>
+      <div class="tile-title">Projektmanager</div>
+      <div class="tile-text">Maßnahmen planen, priorisieren und mit der Wirkungslogik verbinden.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

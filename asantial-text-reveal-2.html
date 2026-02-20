@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #f5f2ee;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px;
+}
+
+.text-block {
+  max-width: 720px;
+  text-align: center;
+}
+
+.line {
+  display: block;
+  margin-bottom: 2px;
+}
+
+.line span {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #181229;
+  line-height: 1.5;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.line.revealed span {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.line:nth-child(1) span { transition-delay: 0ms; }
+.line:nth-child(2) span { transition-delay: 200ms; }
+.line:nth-child(3) span { transition-delay: 400ms; }
+.line:nth-child(4) span { transition-delay: 600ms; }
+.line:nth-child(5) span { transition-delay: 800ms; }
+
+.trigger {
+  margin-top: 52px;
+  display: flex;
+  justify-content: center;
+}
+button {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: 1px solid rgba(37,23,42,0.12);
+  background: transparent;
+  font-size: 13px;
+  color: rgba(37,23,42,0.45);
+  cursor: pointer;
+  font-family: inherit;
+}
+</style>
+</head>
+<body>
+
+<div>
+  <div class="text-block" id="reveal">
+    <div class="line"><span>Employer Branding scheitert im Mittelstand</span></div>
+    <div class="line"><span>nicht an Engagement. Es scheitert an der Art,</span></div>
+    <div class="line"><span>wie es organisiert wird.</span></div>
+    <div class="line"><span>ASANTIAL gibt HR die Struktur, um aus Einzelaktionen</span></div>
+    <div class="line"><span>eine durchgängige Wirkungslogik zu machen.</span></div>
+  </div>
+
+  <div class="trigger">
+    <button onclick="replay()">↺ Nochmal abspielen</button>
+  </div>
+</div>
+
+<script>
+  const lines = document.querySelectorAll('.line');
+
+  setTimeout(() => {
+    lines.forEach(l => l.classList.add('revealed'));
+  }, 300);
+
+  function replay() {
+    lines.forEach(l => l.classList.remove('revealed'));
+    setTimeout(() => {
+      lines.forEach(l => l.classList.add('revealed'));
+    }, 80);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          lines.forEach(l => l.classList.add('revealed'));
+        }, 200);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(document.getElementById('reveal'));
+</script>
+
+</body>
+</html>
