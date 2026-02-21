@@ -4,10 +4,7 @@
 <meta charset="UTF-8">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system, system-ui, sans-serif;
-  background: #f5f2ee;
-}
+body { font-family: -apple-system, system-ui, sans-serif; background: #f5f2ee; }
 
 .modul10 {
   background: #181229;
@@ -15,81 +12,36 @@ body {
   position: relative;
   overflow: hidden;
 }
-
-/* PROFESSIONAL Wasserzeichen */
 .modul10::before {
   content: "PROFESSIONAL";
   position: absolute;
-  bottom: -30px;
-  right: -20px;
-  font-size: 180px;
-  font-weight: 900;
+  bottom: -30px; right: -20px;
+  font-size: 180px; font-weight: 900;
   color: rgba(255,255,255,0.04);
-  letter-spacing: -0.02em;
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  white-space: nowrap;
+  letter-spacing: -0.02em; line-height: 1;
+  pointer-events: none; user-select: none; white-space: nowrap;
 }
-
 .inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: center;
+  position: relative; z-index: 1;
 }
+.eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #a3a0ff; margin-bottom: 24px; }
+.title { font-size: 52px; font-weight: 800; color: white; line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em; }
+.body-text { font-size: 16px; line-height: 1.7; color: rgba(255,255,255,0.45); max-width: 420px; }
 
-.eyebrow {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
-  text-transform: uppercase; color: #a3a0ff; margin-bottom: 24px;
-}
-.title {
-  font-size: 52px; font-weight: 800; color: white;
-  line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em;
-}
-.body-text {
-  font-size: 16px; line-height: 1.7;
-  color: rgba(255,255,255,0.45); max-width: 420px;
-}
+.right { position: relative; display: flex; flex-direction: column; gap: 0; }
 
-/* RECHTS – Benefits + schwebende Karte */
-.right {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.benefit {
-  padding: 32px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  display: flex; align-items: flex-start; gap: 20px;
-}
+.benefit { padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: flex-start; gap: 20px; }
 .benefit:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-.benefit-line {
-  width: 24px; height: 2px; background: #a3a0ff;
-  flex-shrink: 0; margin-top: 14px;
-}
-.benefit-text {
-  font-size: 22px; font-weight: 700; color: white; line-height: 1.3;
-}
+.benefit-line { width: 24px; height: 2px; background: #a3a0ff; flex-shrink: 0; margin-top: 14px; }
+.benefit-text { font-size: 22px; font-weight: 700; color: white; line-height: 1.3; }
 
-/* SCHWEBENDE LIQUID GLASS KARTE */
+.card-stack { position: absolute; top: -70px; right: -40px; width: 210px; height: 140px; }
+
 .floating-card {
-  position: absolute;
-  top: -60px;
-  right: -40px;
-  width: 200px;
-  border-radius: 20px;
-  padding: 20px;
-  transform: rotate(6deg);
-  animation: float 6s ease-in-out infinite;
-
-  /* Liquid Glass */
+  position: absolute; inset: 0; border-radius: 20px; padding: 20px;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -97,72 +49,43 @@ body {
   border-left: 1.5px solid rgba(255,255,255,0.3);
   border-right: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  box-shadow:
-    0 24px 48px rgba(0,0,0,0.4),
-    0 8px 16px rgba(0,0,0,0.3),
-    inset 0 1px 0 rgba(255,255,255,0.6);
+  box-shadow: 0 24px 48px rgba(0,0,0,0.4), 0 8px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.6);
+  opacity: 0;
+  transition: opacity 0.7s ease;
 }
-
-/* Glanz-Sweep auf der Karte */
 .floating-card::after {
-  content:"";
-  position:absolute;
-  top:-40%; left:-10%;
-  width:50%; height:180%;
+  content:""; position:absolute; top:-40%; left:-10%; width:50%; height:180%;
   background:linear-gradient(108deg, transparent 0%, rgba(255,255,255,0.00) 38%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.00) 62%, transparent 100%);
-  transform:skewX(-10deg);
-  pointer-events:none;
+  transform:skewX(-10deg); pointer-events:none;
 }
-
-@keyframes float {
+.floating-card.active {
+  opacity: 1;
+  animation: floatCard 4s ease-in-out infinite;
+}
+@keyframes floatCard {
   0%,100% { transform: rotate(6deg) translateY(0); }
-  50%      { transform: rotate(6deg) translateY(-12px); }
+  50%      { transform: rotate(6deg) translateY(-10px); }
 }
 
-.card-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: rgba(163,160,255,0.2);
-  border: 1px solid rgba(163,160,255,0.3);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; margin-bottom: 14px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
-}
-.card-label {
-  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: rgba(163,160,255,0.8); margin-bottom: 6px;
-}
-.card-title {
-  font-size: 13px; font-weight: 700; color: white;
-  line-height: 1.3; margin-bottom: 10px;
-}
-.card-bar-wrap {
-  height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 6px;
-}
-.card-bar {
-  height: 3px; border-radius: 2px; background: #a3a0ff;
-}
-.card-meta {
-  font-size: 10px; color: rgba(255,255,255,0.3); display: flex;
-  justify-content: space-between;
-}
+.card-icon { width: 32px; height: 32px; border-radius: 9px; background: rgba(163,160,255,0.2); border: 1px solid rgba(163,160,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 13px; margin-bottom: 12px; color: #a3a0ff; }
+.card-label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(163,160,255,0.8); margin-bottom: 5px; }
+.card-title { font-size: 13px; font-weight: 700; color: white; line-height: 1.3; margin-bottom: 10px; }
+.card-bar-wrap { height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 5px; }
+.card-bar { height: 3px; border-radius: 2px; background: #a3a0ff; }
+.card-meta { font-size: 10px; color: rgba(255,255,255,0.3); display: flex; justify-content: space-between; }
 
-@media (max-width: 1024px) {
-  .floating-card { top: -40px; right: -20px; width: 170px; }
-}
 @media (max-width: 768px) {
   .modul10 { padding: 80px 24px; }
   .inner { grid-template-columns: 1fr; gap: 60px; }
   .title { font-size: 36px; }
-  .floating-card { display: none; }
+  .card-stack { display: none; }
   .modul10::before { font-size: 80px; }
 }
 </style>
 </head>
 <body>
-
 <section class="modul10">
   <div class="inner">
-
     <div class="left">
       <div class="eyebrow">ASANTIAL Professional</div>
       <div class="title">Ihre tägliche Arbeitsgrundlage.</div>
@@ -170,14 +93,88 @@ body {
     </div>
 
     <div class="right">
+      <div class="card-stack">
 
-      <!-- Schwebende Karte -->
-      <div class="floating-card">
-        <div class="card-icon">◈</div>
-        <div class="card-label">Analyse</div>
-        <div class="card-title">Arbeitsmarkt­analyse</div>
-        <div class="card-bar-wrap"><div class="card-bar" style="width:78%"></div></div>
-        <div class="card-meta"><span>Abgeschlossen</span><span>78%</span></div>
+        <div class="floating-card active">
+          <div class="card-icon">✦</div>
+          <div class="card-label">Content</div>
+          <div class="card-title">Stellenanzeigen</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:100%"></div></div>
+          <div class="card-meta"><span>Bereit</span><span>EVP-konsistent</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">◎</div>
+          <div class="card-label">Social Media</div>
+          <div class="card-title">Social Posts</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:100%"></div></div>
+          <div class="card-meta"><span>LinkedIn ready</span><span>✓</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">↩</div>
+          <div class="card-label">Reputation</div>
+          <div class="card-title">Kununu-Antworten</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:100%"></div></div>
+          <div class="card-meta"><span>3 Entwürfe</span><span>Bereit</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">◑</div>
+          <div class="card-label">Strategie</div>
+          <div class="card-title">Kick-Off Workshop</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:65%"></div></div>
+          <div class="card-meta"><span>In Vorbereitung</span><span>65%</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">⊙</div>
+          <div class="card-label">Analyse</div>
+          <div class="card-title">Arbeitsmarktbild</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:88%"></div></div>
+          <div class="card-meta"><span>Aktualisiert</span><span>88%</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">◐</div>
+          <div class="card-label">Interviews</div>
+          <div class="card-title">Mitarbeiter­interviews</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:50%"></div></div>
+          <div class="card-meta"><span>6 von 12</span><span>50%</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">≋</div>
+          <div class="card-label">Kampagne</div>
+          <div class="card-title">Kampagnen­briefing</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:30%"></div></div>
+          <div class="card-meta"><span>Gestartet</span><span>30%</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">⊕</div>
+          <div class="card-label">Digital</div>
+          <div class="card-title">Karriereseiten­analyse</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:100%"></div></div>
+          <div class="card-meta"><span>Abgeschlossen</span><span>✓</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">✉</div>
+          <div class="card-label">Intern</div>
+          <div class="card-title">Interne Kommunikation</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:75%"></div></div>
+          <div class="card-meta"><span>Entwurf</span><span>75%</span></div>
+        </div>
+
+        <div class="floating-card">
+          <div class="card-icon">⊞</div>
+          <div class="card-label">Compliance</div>
+          <div class="card-title">EU AI Act</div>
+          <div class="card-bar-wrap"><div class="card-bar" style="width:100%"></div></div>
+          <div class="card-meta"><span>Geprüft</span><span>✓</span></div>
+        </div>
+
       </div>
 
       <div class="benefit">
@@ -192,10 +189,18 @@ body {
         <div class="benefit-line"></div>
         <div class="benefit-text">Rückhalt für HR, die Verantwortung tragen.</div>
       </div>
-
     </div>
   </div>
 </section>
 
+<script>
+const cards = document.querySelectorAll('.floating-card');
+let current = 0;
+setInterval(() => {
+  cards[current].classList.remove('active');
+  current = (current + 1) % cards.length;
+  cards[current].classList.add('active');
+}, 2200);
+</script>
 </body>
 </html>

@@ -2821,16 +2821,21 @@
       line-height: 1.3;
     }
 
-    /* Floating Liquid Glass Card */
+    /* Rotating Card Stack */
+    .professional__card-stack {
+      position: absolute;
+      top: -70px;
+      right: -40px;
+      width: 210px;
+      height: 140px;
+      z-index: 2;
+    }
+
     .professional__floating-card {
       position: absolute;
-      top: -60px;
-      right: -40px;
-      width: 200px;
+      inset: 0;
       border-radius: 20px;
       padding: 20px;
-      transform: rotate(6deg);
-      animation: pro-float 6s ease-in-out infinite;
       background: rgba(255,255,255,0.08);
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
@@ -2842,7 +2847,8 @@
         0 24px 48px rgba(0,0,0,0.4),
         0 8px 16px rgba(0,0,0,0.3),
         inset 0 1px 0 rgba(255,255,255,0.6);
-      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.7s ease;
     }
 
     .professional__floating-card::after {
@@ -2855,29 +2861,34 @@
       pointer-events: none;
     }
 
+    .professional__floating-card.pro-card--active {
+      opacity: 1;
+      animation: pro-float 4s ease-in-out infinite;
+    }
+
     @keyframes pro-float {
       0%,100% { transform: rotate(6deg) translateY(0); }
-      50%     { transform: rotate(6deg) translateY(-12px); }
+      50%     { transform: rotate(6deg) translateY(-10px); }
     }
 
     .professional__card-icon {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 32px; height: 32px; border-radius: 9px;
       background: rgba(163,160,255,0.2);
       border: 1px solid rgba(163,160,255,0.3);
       display: flex; align-items: center; justify-content: center;
-      font-size: 14px; margin-bottom: 14px; color: #a3a0ff;
+      font-size: 13px; margin-bottom: 12px; color: #a3a0ff;
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
     }
     .professional__card-label {
       font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(163,160,255,0.8); margin-bottom: 6px;
+      text-transform: uppercase; color: rgba(163,160,255,0.8); margin-bottom: 5px;
     }
     .professional__card-title {
       font-size: 13px; font-weight: 700; color: #fff;
       line-height: 1.3; margin-bottom: 10px;
     }
     .professional__card-bar-wrap {
-      height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 6px;
+      height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 5px;
     }
     .professional__card-bar {
       height: 3px; border-radius: 2px; background: #a3a0ff;
@@ -2888,17 +2899,17 @@
     }
 
     @media (max-width: 1023px) {
-      .professional__floating-card { top: -40px; right: -20px; width: 170px; }
+      .professional__card-stack { top: -50px; right: -20px; width: 180px; height: 130px; }
     }
     @media (max-width: 767px) {
       .professional { padding: 80px 0; }
       .professional__title { font-size: 36px; }
-      .professional__floating-card { display: none; }
+      .professional__card-stack { display: none; }
       .professional::before { font-size: 80px; }
       .professional__body { max-width: 100%; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .professional__floating-card { animation: none; }
+      .professional__floating-card.pro-card--active { animation: none; }
     }
 
     /* ----- FAQ ----- */
@@ -3761,12 +3772,77 @@
           <p class="professional__body reveal">Alle Analyse-, Strategie- und Umsetzungs-Apps in einem Zugang. Kein Einzelprojekt mit Enddatum – sondern die Arbeitsumgebung, in der Employer Branding dauerhaft gesteuert wird. DSGVO-konform. Ergebnisse, die aufeinander aufbauen. Und Argumentationssicherheit, wenn die Geschäftsführung fragt.</p>
         </div>
         <div class="professional__right">
-          <div class="professional__floating-card" aria-hidden="true">
-            <div class="professional__card-icon">◈</div>
-            <div class="professional__card-label">Analyse</div>
-            <div class="professional__card-title">Arbeitsmarkt­analyse</div>
-            <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:78%"></div></div>
-            <div class="professional__card-meta"><span>Abgeschlossen</span><span>78%</span></div>
+          <div class="professional__card-stack" aria-hidden="true">
+            <div class="professional__floating-card pro-card--active">
+              <div class="professional__card-icon">✦</div>
+              <div class="professional__card-label">Content</div>
+              <div class="professional__card-title">Stellenanzeigen</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:100%"></div></div>
+              <div class="professional__card-meta"><span>Bereit</span><span>EVP-konsistent</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">◎</div>
+              <div class="professional__card-label">Social Media</div>
+              <div class="professional__card-title">Social Posts</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:100%"></div></div>
+              <div class="professional__card-meta"><span>LinkedIn ready</span><span>✓</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">↩</div>
+              <div class="professional__card-label">Reputation</div>
+              <div class="professional__card-title">Kununu-Antworten</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:100%"></div></div>
+              <div class="professional__card-meta"><span>3 Entwürfe</span><span>Bereit</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">◑</div>
+              <div class="professional__card-label">Strategie</div>
+              <div class="professional__card-title">Kick-Off Workshop</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:65%"></div></div>
+              <div class="professional__card-meta"><span>In Vorbereitung</span><span>65%</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">⊙</div>
+              <div class="professional__card-label">Analyse</div>
+              <div class="professional__card-title">Arbeitsmarktbild</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:88%"></div></div>
+              <div class="professional__card-meta"><span>Aktualisiert</span><span>88%</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">◐</div>
+              <div class="professional__card-label">Interviews</div>
+              <div class="professional__card-title">Mitarbeiter­interviews</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:50%"></div></div>
+              <div class="professional__card-meta"><span>6 von 12</span><span>50%</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">≋</div>
+              <div class="professional__card-label">Kampagne</div>
+              <div class="professional__card-title">Kampagnen­briefing</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:30%"></div></div>
+              <div class="professional__card-meta"><span>Gestartet</span><span>30%</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">⊕</div>
+              <div class="professional__card-label">Digital</div>
+              <div class="professional__card-title">Karriereseiten­analyse</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:100%"></div></div>
+              <div class="professional__card-meta"><span>Abgeschlossen</span><span>✓</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">✉</div>
+              <div class="professional__card-label">Intern</div>
+              <div class="professional__card-title">Interne Kommunikation</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:75%"></div></div>
+              <div class="professional__card-meta"><span>Entwurf</span><span>75%</span></div>
+            </div>
+            <div class="professional__floating-card">
+              <div class="professional__card-icon">⊞</div>
+              <div class="professional__card-label">Compliance</div>
+              <div class="professional__card-title">EU AI Act</div>
+              <div class="professional__card-bar-wrap"><div class="professional__card-bar" style="width:100%"></div></div>
+              <div class="professional__card-meta"><span>Geprüft</span><span>✓</span></div>
+            </div>
           </div>
           <div class="professional__benefit reveal">
             <div class="professional__benefit-line"></div>
