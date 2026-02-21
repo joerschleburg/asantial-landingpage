@@ -2848,22 +2848,12 @@
         0 8px 16px rgba(0,0,0,0.3),
         inset 0 1px 0 rgba(255,255,255,0.6);
       opacity: 0;
-      transition: opacity 0.7s ease;
-    }
-
-    .professional__floating-card::after {
-      content: "";
-      position: absolute;
-      top: -40%; left: -10%;
-      width: 50%; height: 180%;
-      background: linear-gradient(108deg, transparent 0%, rgba(255,255,255,0) 38%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 62%, transparent 100%);
-      transform: skewX(-10deg);
-      pointer-events: none;
+      transition: opacity 1.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .professional__floating-card.pro-card--active {
       opacity: 1;
-      animation: pro-float 4s ease-in-out infinite;
+      animation: pro-float 5s ease-in-out infinite;
     }
 
     @keyframes pro-float {
@@ -3871,7 +3861,7 @@
       cards[current].classList.remove('pro-card--active');
       current = (current + 1) % cards.length;
       cards[current].classList.add('pro-card--active');
-    }, 2200);
+    }, 4500);
   })();
   </script>
 
