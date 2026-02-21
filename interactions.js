@@ -335,19 +335,6 @@
     });
   }
 
-  function initProCardRotation() {
-    var cards = document.querySelectorAll('.professional__floating-card');
-    if (!cards.length) return;
-    if (prefersReducedMotion()) return;
-
-    var current = 0;
-    setInterval(function () {
-      cards[current].classList.remove('pro-card--active');
-      current = (current + 1) % cards.length;
-      cards[current].classList.add('pro-card--active');
-    }, 2200);
-  }
-
   function run() {
     initRevealObservers();
     initStaggerReveal();
@@ -357,7 +344,6 @@
     initSystemlogikDiagram();
     initBurgerMenu();
     initFaqAccordion();
-    initProCardRotation();
   }
 
   init();
