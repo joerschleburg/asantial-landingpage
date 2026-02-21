@@ -818,13 +818,19 @@
       .speech-bubble { animation: none; opacity: 1; }
     }
 
-    .verlegenheit__morph-ring {
+    .verlegenheit__ring-wrapper {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 68%;
       aspect-ratio: 1;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      z-index: 0;
+    }
+
+    .verlegenheit__morph-ring {
+      width: 100%;
+      height: 100%;
       border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%;
       background: conic-gradient(
         from 0deg,
@@ -836,7 +842,6 @@
         #7b77e0 100%
       );
       animation: morphRing 10s ease-in-out infinite, cycle-rotate 24s linear infinite;
-      z-index: 0;
       box-shadow:
         0 0 40px rgba(163,160,255,0.3),
         0 0 80px rgba(163,160,255,0.15);
@@ -881,7 +886,7 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .verlegenheit__morph-ring { animation: none; }
+      .verlegenheit__morph-ring { animation: none; border-radius: 50%; }
       .verlegenheit__diagram-labels-rotate { animation: none; }
       .verlegenheit__diagram-labels { animation: none; }
     }
@@ -3364,7 +3369,9 @@
           <div class="speech-bubble__attr speech-bubble__attr--hr">HR-Leitung</div>
         </div>
         <div class="verlegenheit__diagram" aria-hidden="true">
-        <div class="verlegenheit__morph-ring"></div>
+        <div class="verlegenheit__ring-wrapper">
+          <div class="verlegenheit__morph-ring"></div>
+        </div>
         <svg viewBox="-60 -60 520 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zyklus: Viel machen, Kein Fortschritt, Viel Rechtfertigung, Kein Wirkung">
           <defs>
             <linearGradient id="cycle-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
