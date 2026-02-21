@@ -1821,26 +1821,29 @@
     }
     .nav__link:hover { opacity: 1; }
 
+    .nav__right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
     .nav__cta {
       display: none;
       padding: 10px 20px;
-      margin-left: auto;
-      margin-right: 12px;
       background: #181229;
       color: white;
       border-radius: 10px;
       font-size: 13px;
       font-weight: 700;
+      white-space: nowrap;
       text-decoration: none;
       transition: background 0.2s ease, transform 0.2s ease;
-      flex-shrink: 0;
     }
     .nav__cta:hover { background: #2d1f4e; transform: translateY(-1px); }
     @media (min-width: 768px) {
       .nav__cta { display: block; }
-    }
-    @media (max-width: 767px) {
-      .nav__cta { display: none; }
     }
 
     /* Trust Bar */
@@ -3631,12 +3634,14 @@
         <span class="trust-dot"></span>
         <span>Für Unternehmen mit 50–500 Mitarbeitenden</span>
       </div>
-      <a href="#einstiegsgespraech" class="nav__cta">Gespräch vereinbaren</a>
-      <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-overlay">
-        <span class="burger__line"></span>
-        <span class="burger__line"></span>
-        <span class="burger__line"></span>
-      </button>
+      <div class="nav__right">
+        <a href="#einstiegsgespraech" class="nav__cta">Gespräch vereinbaren</a>
+        <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-overlay">
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+          <span class="burger__line"></span>
+        </button>
+      </div>
     </div>
   </nav>
 
