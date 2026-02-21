@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #f5f2ee;
+}
+
+.modul10 {
+  background: #181229;
+  padding: 120px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* PROFESSIONAL Wasserzeichen */
+.modul10::before {
+  content: "PROFESSIONAL";
+  position: absolute;
+  bottom: -30px;
+  right: -20px;
+  font-size: 180px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: #a3a0ff; margin-bottom: 24px;
+}
+.title {
+  font-size: 52px; font-weight: 800; color: white;
+  line-height: 1.1; margin-bottom: 32px; letter-spacing: -0.02em;
+}
+.body-text {
+  font-size: 16px; line-height: 1.7;
+  color: rgba(255,255,255,0.45); max-width: 420px;
+}
+
+/* RECHTS – Benefits + schwebende Karte */
+.right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.benefit {
+  padding: 32px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: flex-start; gap: 20px;
+}
+.benefit:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+.benefit-line {
+  width: 24px; height: 2px; background: #a3a0ff;
+  flex-shrink: 0; margin-top: 14px;
+}
+.benefit-text {
+  font-size: 22px; font-weight: 700; color: white; line-height: 1.3;
+}
+
+/* SCHWEBENDE LIQUID GLASS KARTE */
+.floating-card {
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 200px;
+  border-radius: 20px;
+  padding: 20px;
+  transform: rotate(6deg);
+  animation: float 6s ease-in-out infinite;
+
+  /* Liquid Glass */
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1.5px solid rgba(255,255,255,0.5);
+  border-left: 1.5px solid rgba(255,255,255,0.3);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    0 24px 48px rgba(0,0,0,0.4),
+    0 8px 16px rgba(0,0,0,0.3),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+/* Glanz-Sweep auf der Karte */
+.floating-card::after {
+  content:"";
+  position:absolute;
+  top:-40%; left:-10%;
+  width:50%; height:180%;
+  background:linear-gradient(108deg, transparent 0%, rgba(255,255,255,0.00) 38%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0.00) 62%, transparent 100%);
+  transform:skewX(-10deg);
+  pointer-events:none;
+}
+
+@keyframes float {
+  0%,100% { transform: rotate(6deg) translateY(0); }
+  50%      { transform: rotate(6deg) translateY(-12px); }
+}
+
+.card-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: rgba(163,160,255,0.2);
+  border: 1px solid rgba(163,160,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; margin-bottom: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.card-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(163,160,255,0.8); margin-bottom: 6px;
+}
+.card-title {
+  font-size: 13px; font-weight: 700; color: white;
+  line-height: 1.3; margin-bottom: 10px;
+}
+.card-bar-wrap {
+  height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-bottom: 6px;
+}
+.card-bar {
+  height: 3px; border-radius: 2px; background: #a3a0ff;
+}
+.card-meta {
+  font-size: 10px; color: rgba(255,255,255,0.3); display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .floating-card { top: -40px; right: -20px; width: 170px; }
+}
+@media (max-width: 768px) {
+  .modul10 { padding: 80px 24px; }
+  .inner { grid-template-columns: 1fr; gap: 60px; }
+  .title { font-size: 36px; }
+  .floating-card { display: none; }
+  .modul10::before { font-size: 80px; }
+}
+</style>
+</head>
+<body>
+
+<section class="modul10">
+  <div class="inner">
+
+    <div class="left">
+      <div class="eyebrow">ASANTIAL Professional</div>
+      <div class="title">Ihre tägliche Arbeitsgrundlage.</div>
+      <div class="body-text">Alle Analyse-, Strategie- und Umsetzungs-Apps in einem Zugang. Kein Einzelprojekt mit Enddatum – sondern die Arbeitsumgebung, in der Employer Branding dauerhaft gesteuert wird. DSGVO-konform. Ergebnisse, die aufeinander aufbauen. Und Argumentationssicherheit, wenn die Geschäftsführung fragt.</div>
+    </div>
+
+    <div class="right">
+
+      <!-- Schwebende Karte -->
+      <div class="floating-card">
+        <div class="card-icon">◈</div>
+        <div class="card-label">Analyse</div>
+        <div class="card-title">Arbeitsmarkt­analyse</div>
+        <div class="card-bar-wrap"><div class="card-bar" style="width:78%"></div></div>
+        <div class="card-meta"><span>Abgeschlossen</span><span>78%</span></div>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-line"></div>
+        <div class="benefit-text">Struktur statt Einzelimpulse.</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-line"></div>
+        <div class="benefit-text">Ergebnisse, die anschlussfähig sind.</div>
+      </div>
+      <div class="benefit">
+        <div class="benefit-line"></div>
+        <div class="benefit-text">Rückhalt für HR, die Verantwortung tragen.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
