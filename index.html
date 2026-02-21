@@ -848,6 +848,40 @@
       .verlegenheit__diagram-labels { animation: none; }
     }
 
+    .verlegenheit__ring-labels {
+      display: none;
+    }
+
+    @media (max-width: 767px) {
+      .verlegenheit__diagram-labels-rotate {
+        display: none;
+      }
+      .verlegenheit__diagram svg {
+        width: min(320px, 80vw);
+        height: min(320px, 80vw);
+        margin: 0 auto;
+      }
+      .verlegenheit__ring-labels {
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding: 0 20px;
+      }
+      .verlegenheit__ring-labels--top {
+        margin-bottom: 20px;
+      }
+      .verlegenheit__ring-labels--bottom {
+        margin-top: 20px;
+      }
+      .verlegenheit__ring-labels span {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(37,23,42,0.55);
+        white-space: nowrap;
+      }
+    }
+
     /* ----- Modul 4: Entscheidungen statt Aktionismus ----- */
     .entscheidungen {
       background-color: var(--bg-base);
@@ -3325,6 +3359,10 @@
           <div class="speech-bubble__quote">Kann jemand die Zahlen für die Personalversammlung aufbereiten?</div>
           <div class="speech-bubble__attr speech-bubble__attr--hr">HR-Leitung</div>
         </div>
+        <div class="verlegenheit__ring-labels verlegenheit__ring-labels--top">
+          <span>Viel machen</span>
+          <span>Kein Fortschritt</span>
+        </div>
         <div class="verlegenheit__diagram" aria-hidden="true">
         <svg viewBox="-60 -60 520 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zyklus: Viel machen, Kein Fortschritt, Viel Rechtfertigung, Kein Wirkung">
           <defs>
@@ -3370,6 +3408,10 @@
             </g>
           </g>
         </svg>
+        </div>
+        <div class="verlegenheit__ring-labels verlegenheit__ring-labels--bottom">
+          <span>Viel Rechtfertigung</span>
+          <span>Keine Wirkung</span>
         </div>
       </div>
     </div>
