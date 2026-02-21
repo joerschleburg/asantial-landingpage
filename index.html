@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="design-tokens.css" />
   <link rel="stylesheet" href="animations.css" />
   <style>
+    html, body {
+      overflow-x: hidden;
+      max-width: 100%;
+    }
     html {
       scroll-behavior: smooth;
       scroll-padding-top: 72px;
@@ -1775,7 +1779,7 @@
       right: 0;
       z-index: 100;
       height: 60px;
-      overflow: visible;
+      overflow: hidden;
       transition: background 0.4s ease, box-shadow 0.4s ease;
     }
 
@@ -1789,9 +1793,9 @@
     .nav .container {
       display: flex;
       align-items: center;
+      max-width: 100%;
       justify-content: space-between;
       height: 60px;
-      overflow: visible;
     }
 
     .nav__logo {
