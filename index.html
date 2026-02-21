@@ -2784,6 +2784,261 @@
       .faq__icon { transition: none; }
       .faq__answer { transition: none; }
     }
+
+    /* ========================================
+       RESPONSIVE – GLOBAL BREAKPOINTS
+       ======================================== */
+
+    /* --- Responsive Typography (all sizes) --- */
+    .hero__title {
+      font-size: clamp(32px, 5vw, 72px);
+    }
+    .hero__subline {
+      font-size: clamp(16px, 2.5vw, 24px);
+    }
+    .hero__body,
+    .verlegenheit__body,
+    .verlegenheit__close,
+    .entscheidungen__intro,
+    .entscheidungen__step-body,
+    .apps__intro,
+    .highlight-cards__desc,
+    .einstieg__intro,
+    .testimonial-card__body,
+    .faq__answer-inner,
+    .founder__bio,
+    .ba-panel__item,
+    .footer__brand-desc {
+      font-size: clamp(14px, 1.8vw, 18px);
+    }
+    .verlegenheit__title,
+    .entscheidungen__title,
+    .apps__title,
+    .einstieg__title,
+    .faq__title,
+    .founder__name,
+    .before-after__title {
+      font-size: clamp(28px, 4.5vw, 56px);
+    }
+    .testimonials__title {
+      font-size: clamp(24px, 4vw, 48px);
+    }
+
+    /* --- Tablet and below (< 1024px) --- */
+    @media (max-width: 1023px) {
+      .highlight-cards__tile {
+        transform: none !important;
+      }
+      .highlight-cards__stage:hover .highlight-cards__tile--1,
+      .highlight-cards__stage:hover .highlight-cards__tile--2,
+      .highlight-cards__stage:hover .highlight-cards__tile--3,
+      .highlight-cards__stage:hover .highlight-cards__tile--4 {
+        left: auto !important;
+      }
+    }
+
+    /* --- Mobile & Tablet (< 768px) --- */
+    @media (max-width: 767px) {
+      .container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      /* Hero */
+      .hero {
+        padding-top: 100px;
+      }
+      .hero .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero__cta-wrap {
+        align-items: center;
+      }
+      .hero__mockup-col {
+        display: none;
+      }
+
+      /* Statement */
+      .statement__line {
+        font-size: clamp(20px, 5vw, 46px);
+        white-space: normal;
+        line-height: 1.4;
+      }
+
+      /* Verlegenheits-Falle */
+      .verlegenheit {
+        padding-top: calc(var(--space-section-vertical) + 400px);
+      }
+      .verlegenheit__diagram-wrap {
+        min-height: 360px;
+      }
+      .speech-bubble--left-1,
+      .speech-bubble--left-2,
+      .speech-bubble--left-3 {
+        left: 2% !important;
+      }
+      .speech-bubble--right-1,
+      .speech-bubble--right-2,
+      .speech-bubble--right-3 {
+        right: 2% !important;
+      }
+
+      /* Entscheidungen */
+      .entscheidungen__steps-row {
+        flex-direction: column;
+      }
+      .entscheidungen__arrow-wrap {
+        display: none;
+      }
+
+      /* Vorher/Nachher */
+      .before-after__grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      /* Highlight Cards */
+      .highlight-cards {
+        overflow: visible;
+        perspective: none;
+      }
+      .highlight-cards__stage {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        height: auto;
+        padding-bottom: 0;
+        min-width: 0;
+        min-height: 0;
+        transform-style: flat;
+      }
+      .highlight-cards__tile {
+        position: static !important;
+        width: 100% !important;
+        max-width: 100%;
+        aspect-ratio: auto;
+        transform: none !important;
+        border-radius: 20px;
+      }
+      .highlight-cards__tile::before {
+        border-radius: 19px;
+      }
+
+      /* Testimonials */
+      .testimonials__grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Founder */
+      .founder__inner {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+      }
+      .founder__photo-wrap {
+        order: -1;
+        margin: 0 auto !important;
+        max-width: 320px !important;
+        width: 100%;
+      }
+      .founder__content {
+        text-align: center;
+        align-items: center;
+      }
+      .founder__credentials {
+        justify-content: center;
+      }
+
+      /* Einstieg CTA */
+      .einstieg .container {
+        text-align: center;
+      }
+
+      /* FAQ */
+      .faq__question {
+        font-size: 16px;
+      }
+      .faq__answer-inner {
+        font-size: 14px;
+      }
+
+      /* Footer */
+      .footer__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      /* Navigation */
+      .nav__trust {
+        display: none !important;
+      }
+
+      /* Section spacing */
+      .hero,
+      .statement,
+      .verlegenheit,
+      .entscheidungen,
+      .before-after,
+      .apps,
+      .testimonials,
+      .founder,
+      .einstieg,
+      .faq,
+      .footer {
+        --space-section-vertical: 64px;
+      }
+    }
+
+    /* --- Tablet (768px – 1023px) --- */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .container {
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+
+      .hero {
+        padding-top: 120px;
+      }
+
+      .statement__line {
+        font-size: clamp(28px, 4vw, 46px);
+        white-space: normal;
+      }
+
+      .testimonials__grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .highlight-cards__stage {
+        min-width: 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        height: auto;
+        padding-bottom: 0;
+        position: static;
+        transform-style: flat;
+      }
+      .highlight-cards__tile {
+        position: static !important;
+        width: 100% !important;
+        max-width: 100%;
+        aspect-ratio: auto;
+      }
+      .highlight-cards {
+        overflow: visible;
+        perspective: none;
+      }
+    }
+
+    /* --- Desktop (1280px+) --- */
+    @media (min-width: 1280px) {
+      .container {
+        padding-left: 80px;
+        padding-right: 80px;
+      }
+    }
   </style>
 </head>
 <body class="page">
