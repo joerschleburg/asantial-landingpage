@@ -2855,7 +2855,7 @@
       .hero__cta-wrap {
         align-items: center;
       }
-      .hero__mockup-col {
+      .hero__mockup {
         display: none;
       }
 
@@ -2866,9 +2866,18 @@
         line-height: 1.4;
       }
 
+      /* Statement */
+      .statement {
+        padding: 40px 0 64px;
+      }
+
       /* Verlegenheits-Falle */
       .verlegenheit {
+        margin-top: 0;
         padding-top: calc(var(--space-section-vertical) + 400px);
+        position: relative;
+        z-index: 1;
+        background-color: var(--bg-base);
       }
       .verlegenheit__diagram-wrap {
         min-height: 360px;
@@ -2999,6 +3008,11 @@
 
       .hero {
         padding-top: 120px;
+      }
+
+      .verlegenheit {
+        margin-top: -400px;
+        padding-top: calc(var(--space-section-vertical) + 400px);
       }
 
       .statement__line {
