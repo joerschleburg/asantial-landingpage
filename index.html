@@ -1386,7 +1386,9 @@
         background 1.4s cubic-bezier(0.22, 1, 0.36, 1),
         left 1.8s cubic-bezier(0.22, 1, 0.36, 1),
         top 1.8s cubic-bezier(0.22, 1, 0.36, 1);
-      will-change: transform, left;
+      will-change: transform, left, z-index;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
     }
 
     /* Inner border (double edge for thickness) */
