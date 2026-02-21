@@ -1950,6 +1950,9 @@
     .nav-overlay--open .nav-overlay__item:nth-child(5) .nav-overlay__link { transition-delay: 0.32s; }
     .nav-overlay--open .nav-overlay__item:nth-child(6) .nav-overlay__link { transition-delay: 0.38s; }
     .nav-overlay--open .nav-overlay__item:nth-child(7) .nav-overlay__link { transition-delay: 0.44s; }
+    .nav-overlay--open .nav-overlay__item:nth-child(8) .nav-overlay__link { transition-delay: 0.50s; }
+    .nav-overlay--open .nav-overlay__item:nth-child(9) .nav-overlay__link { transition-delay: 0.56s; }
+    .nav-overlay--open .nav-overlay__item:nth-child(10) .nav-overlay__link { transition-delay: 0.62s; }
 
     .nav-overlay__link:hover {
       background: rgba(163,160,255,0.08);
@@ -2902,6 +2905,276 @@
       .professional__floating-card.pro-card--active { animation: none; }
     }
 
+    /* ----- QUIZ / SELBSTTEST ----- */
+    .quiz-section {
+      background: var(--bg-base);
+      padding: 120px 80px;
+    }
+    .quiz-section__inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .quiz-section__header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .quiz-section__label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #a3a0ff;
+      margin-bottom: 12px;
+    }
+    .quiz-section__title {
+      font-family: var(--font-family-display);
+      font-size: 40px;
+      font-weight: 800;
+      color: #181229;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .quiz-section__sub {
+      font-size: 16px;
+      color: rgba(37,23,42,0.48);
+      line-height: 1.6;
+    }
+
+    .quiz-container {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .quiz-progress-label {
+      font-size: 11px;
+      color: rgba(37,23,42,0.35);
+      margin-bottom: 8px;
+      text-align: right;
+    }
+    .quiz-progress-bar {
+      height: 3px;
+      background: rgba(163,160,255,0.2);
+      border-radius: 2px;
+      margin-bottom: 36px;
+      overflow: hidden;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: #a3a0ff;
+      border-radius: 2px;
+      transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .quiz-question-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(37,23,42,0.06), 0 1px 4px rgba(37,23,42,0.04);
+      margin-bottom: 16px;
+    }
+    .quiz-question-number {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(37,23,42,0.3);
+      margin-bottom: 14px;
+    }
+    .quiz-question-text {
+      font-size: 19px;
+      font-weight: 700;
+      color: #181229;
+      line-height: 1.4;
+      margin-bottom: 28px;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .quiz-option {
+      padding: 14px 18px;
+      border: 1.5px solid rgba(37,23,42,0.10);
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 14px;
+      color: rgba(37,23,42,0.75);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: white;
+      text-align: left;
+      font-family: inherit;
+      width: 100%;
+    }
+    .quiz-option:hover {
+      border-color: #a3a0ff;
+      background: rgba(163,160,255,0.04);
+      color: #181229;
+    }
+    .quiz-option.quiz-selected {
+      border-color: #a3a0ff;
+      background: rgba(163,160,255,0.08);
+      color: #181229;
+    }
+    .quiz-option-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(37,23,42,0.15);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .quiz-option.quiz-selected .quiz-option-dot {
+      border-color: #a3a0ff;
+      background: #a3a0ff;
+    }
+    .quiz-option.quiz-selected .quiz-option-dot::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: white;
+    }
+    .quiz-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .quiz-btn {
+      padding: 13px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      border: none;
+      transition: all 0.2s ease;
+    }
+    .quiz-btn-primary {
+      background: #181229;
+      color: white;
+    }
+    .quiz-btn-primary:hover { background: #2d1f4e; transform: translateY(-1px); }
+    .quiz-btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+    .quiz-btn-ghost {
+      background: transparent;
+      color: rgba(37,23,42,0.4);
+      border: 1.5px solid rgba(37,23,42,0.12);
+    }
+    .quiz-btn-ghost:hover { color: #181229; border-color: rgba(37,23,42,0.25); }
+
+    .quiz-email-gate {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(37,23,42,0.06);
+      display: none;
+    }
+    .quiz-email-gate.quiz-active { display: block; }
+    .quiz-gate-title { font-size: 22px; font-weight: 800; color: #181229; margin-bottom: 10px; }
+    .quiz-gate-sub { font-size: 14px; color: rgba(37,23,42,0.55); line-height: 1.6; margin-bottom: 28px; }
+    .quiz-teaser-result {
+      background: rgba(163,160,255,0.08);
+      border: 1.5px solid rgba(163,160,255,0.25);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 28px;
+    }
+    .quiz-teaser-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #a3a0ff; margin-bottom: 6px; }
+    .quiz-teaser-type { font-size: 20px; font-weight: 800; color: #181229; margin-bottom: 6px; }
+    .quiz-teaser-desc { font-size: 13px; color: rgba(37,23,42,0.55); }
+    .quiz-input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .quiz-input {
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(37,23,42,0.12);
+      font-size: 14px;
+      font-family: inherit;
+      color: #181229;
+      outline: none;
+      transition: border-color 0.2s;
+      background: white;
+    }
+    .quiz-input:focus { border-color: #a3a0ff; }
+    .quiz-privacy-note { font-size: 11px; color: rgba(37,23,42,0.3); text-align: center; }
+    .quiz-btn-full { width: 100%; justify-content: center; display: flex; padding: 15px; }
+
+    .quiz-result-header {
+      background: linear-gradient(135deg, #1a1040 0%, #2d1f4e 100%);
+      border-radius: 20px;
+      padding: 36px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .quiz-result-emoji { font-size: 48px; margin-bottom: 16px; }
+    .quiz-result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(163,160,255,0.7); margin-bottom: 8px; }
+    .quiz-result-type { font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
+    .quiz-result-tagline { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+    .quiz-result-body {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 24px rgba(37,23,42,0.06);
+      margin-bottom: 16px;
+    }
+    .quiz-result-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(37,23,42,0.35);
+      margin-bottom: 10px;
+    }
+    .quiz-result-text { font-size: 15px; color: rgba(37,23,42,0.75); line-height: 1.65; margin-bottom: 28px; }
+    .quiz-result-pain {
+      background: rgba(255,200,100,0.08);
+      border-left: 3px solid #f5c543;
+      padding: 16px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 28px;
+    }
+    .quiz-result-pain p { font-size: 14px; color: rgba(37,23,42,0.7); line-height: 1.6; }
+    .quiz-result-cta {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 4px 24px rgba(37,23,42,0.06);
+      text-align: center;
+    }
+    .quiz-result-cta-title { font-size: 20px; font-weight: 800; color: #181229; margin-bottom: 8px; }
+    .quiz-result-cta-sub { font-size: 14px; color: rgba(37,23,42,0.5); margin-bottom: 24px; line-height: 1.5; }
+    .quiz-btn-cta {
+      background: #181229;
+      color: white;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    .quiz-btn-cta:hover { background: #2d1f4e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,23,42,0.2); }
+    .quiz-cta-micro { font-size: 11px; color: rgba(37,23,42,0.3); margin-top: 10px; }
+    .quiz-screen { display: none; }
+    .quiz-screen.quiz-active { display: block; }
+
+    @media (max-width: 767px) {
+      .quiz-section { padding: 80px 20px; }
+      .quiz-section__title { font-size: 28px; }
+      .quiz-question-card { padding: 24px; }
+      .quiz-email-gate { padding: 24px; }
+      .quiz-result-header { padding: 24px; }
+      .quiz-result-body { padding: 24px; }
+      .quiz-result-cta { padding: 24px; }
+    }
+
     /* ----- FAQ ----- */
     .faq {
       padding: var(--space-section-vertical) 0;
@@ -3305,6 +3578,7 @@
         <li class="nav-overlay__item"><a href="#vorher-nachher" class="nav-overlay__link">Vorher / Nachher</a></li>
         <li class="nav-overlay__item"><a href="#apps" class="nav-overlay__link">Module</a></li>
         <li class="nav-overlay__item"><a href="#professional" class="nav-overlay__link">Professional</a></li>
+        <li class="nav-overlay__item"><a href="#selbsttest" class="nav-overlay__link">Selbsttest</a></li>
         <li class="nav-overlay__item"><a href="#kundenstimmen" class="nav-overlay__link">Kundenstimmen</a></li>
         <li class="nav-overlay__item"><a href="#faq" class="nav-overlay__link">FAQ</a></li>
         <li class="nav-overlay__item"><a href="#einstiegsgespraech" class="nav-overlay__link">Gespräch</a></li>
@@ -3862,6 +4136,294 @@
       current = (current + 1) % cards.length;
       cards[current].classList.add('pro-card--active');
     }, 4500);
+  })();
+  </script>
+
+  <!-- Lead-Generator Quiz / Selbsttest -->
+  <section id="selbsttest" class="quiz-section">
+    <div class="quiz-section__inner">
+      <div class="quiz-section__header reveal">
+        <div class="quiz-section__label">Selbsttest · 3 Minuten</div>
+        <h2 class="quiz-section__title">Wie strukturiert ist euer<br>Employer Branding wirklich?</h2>
+        <p class="quiz-section__sub">8 Fragen. Ehrliche Antworten. Eine klare Einschätzung.</p>
+      </div>
+
+      <div class="quiz-container">
+
+        <!-- Screen 1: Quiz -->
+        <div class="quiz-screen quiz-active" id="quiz-screen-quiz">
+          <div class="quiz-progress-label" id="quiz-progress-label">Frage 1 von 8</div>
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-progress-fill" style="width:12.5%"></div></div>
+
+          <div class="quiz-question-card">
+            <div class="quiz-question-number" id="quiz-q-number">Frage 01</div>
+            <div class="quiz-question-text" id="quiz-q-text"></div>
+            <div class="quiz-options" id="quiz-q-options"></div>
+          </div>
+
+          <div class="quiz-nav">
+            <button class="quiz-btn quiz-btn-ghost" id="quiz-btn-back" style="display:none">&#8592; Zurück</button>
+            <button class="quiz-btn quiz-btn-primary" id="quiz-btn-next" disabled>Weiter &#8594;</button>
+          </div>
+        </div>
+
+        <!-- Screen 2: Email Gate -->
+        <div class="quiz-screen" id="quiz-screen-email">
+          <div class="quiz-email-gate quiz-active">
+            <div class="quiz-gate-title">Fast geschafft.</div>
+            <div class="quiz-gate-sub">Dein Ergebnis ist bereit. Hier ist schon ein Vorgeschmack – die vollständige Auswertung mit konkreten Handlungsempfehlungen bekommst du per Mail.</div>
+            <div class="quiz-teaser-result">
+              <div class="quiz-teaser-label">Dein Typ</div>
+              <div class="quiz-teaser-type" id="quiz-teaser-type">wird berechnet...</div>
+              <div class="quiz-teaser-desc" id="quiz-teaser-desc"></div>
+            </div>
+            <div class="quiz-input-group">
+              <input class="quiz-input" type="text" placeholder="Vorname" id="quiz-input-name">
+              <input class="quiz-input" type="email" placeholder="E-Mail-Adresse" id="quiz-input-email">
+              <input class="quiz-input" type="text" placeholder="Unternehmen (optional)" id="quiz-input-company">
+            </div>
+            <button class="quiz-btn quiz-btn-primary quiz-btn-full" id="quiz-btn-result">Vollständige Auswertung erhalten</button>
+            <p class="quiz-privacy-note" style="margin-top:12px">Kein Newsletter. Keine Weitergabe. Nur dein Ergebnis.</p>
+          </div>
+        </div>
+
+        <!-- Screen 3: Ergebnis -->
+        <div class="quiz-screen" id="quiz-screen-result">
+          <div class="quiz-result-header">
+            <div class="quiz-result-emoji" id="quiz-r-emoji"></div>
+            <div class="quiz-result-label">Dein Employer-Branding-Typ</div>
+            <div class="quiz-result-type" id="quiz-r-type"></div>
+            <div class="quiz-result-tagline" id="quiz-r-tagline"></div>
+          </div>
+
+          <div class="quiz-result-body">
+            <div class="quiz-result-section-title">Was das bedeutet</div>
+            <div class="quiz-result-text" id="quiz-r-desc"></div>
+
+            <div class="quiz-result-section-title">Dein blinder Fleck</div>
+            <div class="quiz-result-pain"><p id="quiz-r-pain"></p></div>
+
+            <div class="quiz-result-section-title">Der nächste sinnvolle Schritt</div>
+            <div class="quiz-result-text" id="quiz-r-next"></div>
+          </div>
+
+          <div class="quiz-result-cta">
+            <div class="quiz-result-cta-title">Passt ASANTIAL zu euch?</div>
+            <div class="quiz-result-cta-sub">30 Minuten. Kein Pitch. Wir schauen gemeinsam ob es passt – nicht mehr.</div>
+            <a href="#einstiegsgespraech" class="quiz-btn-cta">Einstiegsgespräch vereinbaren</a>
+            <div class="quiz-cta-micro">ca. 30 Minuten · unverbindlich · keine klassische Produktdemo</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+  (function() {
+    var quizQuestions = [
+      {
+        text: "Wenn jemand aus der Geschäftsführung fragt, was Employer Branding gerade bringt – wie antworten Sie?",
+        options: [
+          { text: "Ich zeige konkrete Maßnahmen und deren Ergebnisse", score: 3 },
+          { text: "Ich erkläre den strategischen Rahmen, aber Zahlen sind schwierig", score: 2 },
+          { text: "Ich liste auf, was wir gemacht haben", score: 1 },
+          { text: "Das ist ein unangenehmes Gespräch", score: 0 }
+        ]
+      },
+      {
+        text: "Wie entscheiden Sie, welche Employer-Branding-Maßnahme als nächstes umgesetzt wird?",
+        options: [
+          { text: "Anhand einer klaren Wirkungslogik und Priorisierung", score: 3 },
+          { text: "Nach aktuellem Bedarf und verfügbaren Ressourcen", score: 2 },
+          { text: "Wer am lautesten fragt, bekommt die nächste Maßnahme", score: 1 },
+          { text: "Meistens reagieren wir auf das, was gerade dringend ist", score: 0 }
+        ]
+      },
+      {
+        text: "Haben Sie eine schriftlich fixierte EVP (Employer Value Proposition)?",
+        options: [
+          { text: "Ja – sie ist aktuell und wird aktiv genutzt", score: 3 },
+          { text: "Ja – aber sie liegt irgendwo und wird kaum verwendet", score: 1 },
+          { text: "Wir haben Ansätze, aber nichts Finales", score: 1 },
+          { text: "Nein", score: 0 }
+        ]
+      },
+      {
+        text: "Wie gut sind Ihre Employer-Branding-Aktivitäten intern abgestimmt – mit GF, Führungskräften, Marketing?",
+        options: [
+          { text: "Sehr gut – wir haben klare Verantwortlichkeiten und regelmäßigen Austausch", score: 3 },
+          { text: "Okay – aber es hängt stark von einzelnen Personen ab", score: 2 },
+          { text: "Schwierig – jede Abteilung macht irgendwie ihr Ding", score: 1 },
+          { text: "Employer Branding ist im Wesentlichen meine Aufgabe alleine", score: 0 }
+        ]
+      },
+      {
+        text: "Wenn Sie ehrlich sind: Wie viel Ihrer Arbeitszeit geht für operative Einzelaufgaben drauf statt für strategische Weiterentwicklung?",
+        options: [
+          { text: "Weniger als 30% – ich habe Struktur, die Raum lässt", score: 3 },
+          { text: "Etwa 50/50 – ich versuche beides zu balancieren", score: 2 },
+          { text: "Eher 70% operativ – die Strategie bleibt oft liegen", score: 1 },
+          { text: "Fast alles ist operativ – ich komme kaum zum Denken", score: 0 }
+        ]
+      },
+      {
+        text: "Wie würden Sie den Zusammenhang zwischen Ihrer EVP und Ihren aktuellen Recruitingmaßnahmen beschreiben?",
+        options: [
+          { text: "Klar und durchgängig – alles ist aufeinander abgestimmt", score: 3 },
+          { text: "Meistens stimmig, aber nicht systematisch", score: 2 },
+          { text: "Eher zufällig – die Maßnahmen entstehen unabhängig", score: 1 },
+          { text: "Wir haben keine klare EVP als Grundlage", score: 0 }
+        ]
+      },
+      {
+        text: "Wie erklären Sie der Geschäftsführung den ROI Ihrer Employer-Branding-Arbeit?",
+        options: [
+          { text: "Mit definierten KPIs und regelmäßigem Reporting", score: 3 },
+          { text: "Mit qualitativen Einschätzungen und einzelnen Kennzahlen", score: 2 },
+          { text: "Mit Aktivitätsnachweisen – was wir gemacht haben", score: 1 },
+          { text: "Das ist schwierig – wir haben noch kein gutes Modell dafür", score: 0 }
+        ]
+      },
+      {
+        text: "Was beschreibt Ihre aktuelle Situation am besten?",
+        options: [
+          { text: "Wir haben Struktur, Strategie und Umsetzung im Griff", score: 3 },
+          { text: "Gute Ansätze, aber fehlende Systematik", score: 2 },
+          { text: "Viel Aktivität, wenig strategischer Rahmen", score: 1 },
+          { text: "Wir stehen eigentlich noch ganz am Anfang", score: 0 }
+        ]
+      }
+    ];
+
+    var quizPersonas = [
+      {
+        min: 0, max: 8,
+        emoji: "\uD83D\uDD25",
+        type: "Der Aktionist",
+        tagline: "Viel Energie. Wenig Struktur. Immer beschäftigt.",
+        teaser: "Du arbeitest viel – aber ohne durchgängige Wirkungslogik.",
+        desc: "Du kennst das Gefühl: Die To-do-Liste wird nicht kürzer, die nächste Kampagne wartet, und irgendwo im Hintergrund liegt die Strategie, die du eigentlich fertigstellen wolltest. Du lieferst – das ist nicht das Problem. Das Problem ist, dass die Ergebnisse schwer zu erklären sind und jede neue Anfrage dich wieder in den operativen Modus zieht.",
+        pain: "Der eigentliche Schmerz: Du kannst nicht klar erklären, was deine Arbeit bewirkt. Nicht weil du schlecht arbeitest – sondern weil die Struktur fehlt, die Wirkung sichtbar macht.",
+        next: "Der nächste sinnvolle Schritt ist nicht mehr Maßnahmen, sondern eine Entscheidungsgrundlage. Bevor die nächste Kampagne startet: Wo stehen wir wirklich? Was wirkt? Was nicht? ASANTIAL gibt dir genau diese Struktur – damit aus Aktivität Wirkung wird."
+      },
+      {
+        min: 9, max: 16,
+        emoji: "\u2699\uFE0F",
+        type: "Der Pragmatiker",
+        tagline: "Solide Basis. Aber noch kein System das hält.",
+        teaser: "Du hast gute Ansätze – aber sie greifen noch nicht ineinander.",
+        desc: "Du machst vieles richtig. Es gibt eine EVP – zumindest in Grundzügen. Du weißt was Employer Branding leisten soll. Und trotzdem: Die Maßnahmen entstehen oft nebeneinander statt aufeinander aufbauend. Abstimmung kostet Energie, Priorisierung ist schwierig, und der Nachweis der Wirkung bleibt ein wunder Punkt.",
+        pain: "Der eigentliche Schmerz: Du bist nah dran an einem funktionierenden System – aber der letzte Schritt fehlt. Nicht wegen mangelndem Wissen, sondern wegen fehlender Struktur die alles zusammenhält.",
+        next: "Du brauchst kein neues Konzept – du brauchst eine Architektur, die das was du bereits hast zusammenführt und steuerbar macht. ASANTIAL ist genau dafür gebaut: nicht von null anfangen, sondern das Vorhandene in eine durchgängige Wirkungslogik überführen."
+      },
+      {
+        min: 17, max: 24,
+        emoji: "\uD83C\uDFAF",
+        type: "Der Stratege",
+        tagline: "Strukturiert. Klar. Bereit für den nächsten Level.",
+        teaser: "Du arbeitest bereits strategisch – jetzt geht es um Skalierung.",
+        desc: "Du hast das geschafft, woran viele scheitern: Employer Branding ist bei dir kein Aktivismus, sondern ein gesteuerter Prozess. Du kannst erklären was du tust und warum. Entscheidungen folgen einer Logik. Das ist selten – und es ist der Grund, warum du wahrscheinlich intern ernst genommen wirst.",
+        pain: "Der eigentliche Schmerz: Auf diesem Niveau wird Skalierbarkeit zur Herausforderung. Was funktioniert, wenn du persönlich dabei bist – funktioniert es auch wenn das Unternehmen wächst oder du ausfällst?",
+        next: "Du brauchst kein Fundament mehr – du brauchst ein System das dein Wissen institutionalisiert und unabhängig von einzelnen Personen macht. ASANTIAL kann genau das: aus deiner persönlichen Expertise eine organisationale Fähigkeit machen."
+      }
+    ];
+
+    var qCurrentQ = 0;
+    var qScores = [];
+    var qSelectedOption = null;
+
+    var qNumber = document.getElementById('quiz-q-number');
+    var qText = document.getElementById('quiz-q-text');
+    var qOptions = document.getElementById('quiz-q-options');
+    var qProgressLabel = document.getElementById('quiz-progress-label');
+    var qProgressFill = document.getElementById('quiz-progress-fill');
+    var qBtnBack = document.getElementById('quiz-btn-back');
+    var qBtnNext = document.getElementById('quiz-btn-next');
+
+    function qRenderQuestion() {
+      var q = quizQuestions[qCurrentQ];
+      qNumber.textContent = 'Frage ' + String(qCurrentQ + 1).padStart(2, '0');
+      qText.textContent = q.text;
+      qProgressLabel.textContent = 'Frage ' + (qCurrentQ + 1) + ' von ' + quizQuestions.length;
+      qProgressFill.style.width = ((qCurrentQ + 1) / quizQuestions.length * 100) + '%';
+
+      qOptions.innerHTML = '';
+      q.options.forEach(function(opt, i) {
+        var btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.innerHTML = '<div class="quiz-option-dot"></div><span>' + opt.text + '</span>';
+        btn.addEventListener('click', function() { qSelectOption(i, opt.score); });
+        qOptions.appendChild(btn);
+      });
+
+      qBtnBack.style.display = qCurrentQ > 0 ? 'block' : 'none';
+      qBtnNext.disabled = true;
+      qSelectedOption = null;
+    }
+
+    function qSelectOption(index, score) {
+      qSelectedOption = { index: index, score: score };
+      var opts = qOptions.querySelectorAll('.quiz-option');
+      opts.forEach(function(el, i) {
+        el.classList.toggle('quiz-selected', i === index);
+      });
+      qBtnNext.disabled = false;
+    }
+
+    function qGetPersona() {
+      var total = qScores.reduce(function(a, b) { return a + b; }, 0);
+      for (var i = 0; i < quizPersonas.length; i++) {
+        if (total >= quizPersonas[i].min && total <= quizPersonas[i].max) return quizPersonas[i];
+      }
+      return quizPersonas[1];
+    }
+
+    function qShowEmailGate() {
+      document.getElementById('quiz-screen-quiz').classList.remove('quiz-active');
+      document.getElementById('quiz-screen-email').classList.add('quiz-active');
+      var p = qGetPersona();
+      document.getElementById('quiz-teaser-type').textContent = p.emoji + ' ' + p.type;
+      document.getElementById('quiz-teaser-desc').textContent = p.teaser;
+    }
+
+    function qShowResult() {
+      document.getElementById('quiz-screen-email').classList.remove('quiz-active');
+      document.getElementById('quiz-screen-result').classList.add('quiz-active');
+      var p = qGetPersona();
+      document.getElementById('quiz-r-emoji').textContent = p.emoji;
+      document.getElementById('quiz-r-type').textContent = p.type;
+      document.getElementById('quiz-r-tagline').textContent = p.tagline;
+      document.getElementById('quiz-r-desc').textContent = p.desc;
+      document.getElementById('quiz-r-pain').textContent = p.pain;
+      document.getElementById('quiz-r-next').textContent = p.next;
+    }
+
+    qBtnNext.addEventListener('click', function() {
+      if (qSelectedOption === null) return;
+      qScores[qCurrentQ] = qSelectedOption.score;
+      if (qCurrentQ < quizQuestions.length - 1) {
+        qCurrentQ++;
+        qSelectedOption = null;
+        qRenderQuestion();
+      } else {
+        qShowEmailGate();
+      }
+    });
+
+    qBtnBack.addEventListener('click', function() {
+      if (qCurrentQ > 0) {
+        qCurrentQ--;
+        qSelectedOption = null;
+        qRenderQuestion();
+      }
+    });
+
+    document.getElementById('quiz-btn-result').addEventListener('click', function() {
+      qShowResult();
+    });
+
+    qRenderQuestion();
   })();
   </script>
 
