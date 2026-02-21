@@ -1775,6 +1775,7 @@
       right: 0;
       z-index: 100;
       height: 60px;
+      overflow: visible;
       transition: background 0.4s ease, box-shadow 0.4s ease;
     }
 
@@ -1790,6 +1791,7 @@
       align-items: center;
       justify-content: space-between;
       height: 60px;
+      overflow: visible;
     }
 
     .nav__logo {
@@ -1827,6 +1829,7 @@
     .nav__cta {
       display: none;
       padding: 10px 20px;
+      margin-right: 16px;
       background: #181229;
       color: white;
       border-radius: 10px;
@@ -1856,6 +1859,11 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
+      background: none;
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
     }
     @media (min-width: 768px) {
       .trust-bar { display: flex; }
