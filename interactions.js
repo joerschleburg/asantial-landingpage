@@ -125,7 +125,7 @@
       var vh = window.innerHeight;
       var sectionHeight = rect.height;
       var rawProgress = (vh - rect.top) / (vh + sectionHeight);
-      var clamped = Math.max(0, Math.min(1, rawProgress * 2.2));
+      var clamped = Math.max(0, Math.min(1, rawProgress * 1.55));
       wrap.style.setProperty('--arrow-progress', clamped);
       var container = wrap.closest('.container');
       if (container) container.style.setProperty('--arrow-progress', clamped);
