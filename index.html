@@ -2721,6 +2721,110 @@
       background: var(--accent-purple-light);
     }
 
+    /* ----- ASANTIAL Professional Banner ----- */
+    .professional {
+      padding: 100px 0;
+      background: #ede8e2;
+      position: relative;
+    }
+
+    .professional::before,
+    .professional::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 120px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .professional::before {
+      top: 0;
+      background: linear-gradient(to bottom, var(--bg-base) 0%, transparent 100%);
+    }
+    .professional::after {
+      bottom: 0;
+      background: linear-gradient(to top, var(--bg-warm, #ede8e2) 0%, transparent 100%);
+    }
+
+    .professional__inner {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .professional__inner {
+        grid-template-columns: 1fr 1fr;
+        gap: 80px;
+        align-items: center;
+      }
+    }
+
+    .professional__title {
+      font-family: var(--font-family-display);
+      font-size: clamp(28px, 4.5vw, 48px);
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--color-ink-deep);
+      margin: 0 0 1.2em;
+    }
+
+    .professional__body {
+      font-family: var(--font-family-body);
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 1.7;
+      color: var(--color-ink);
+      margin: 0;
+      max-width: 540px;
+    }
+
+    .professional__benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .professional__benefit {
+      font-family: var(--font-family-display);
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--color-ink-deep);
+      position: relative;
+      padding-left: 28px;
+    }
+
+    .professional__benefit::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--accent-purple-light);
+      font-weight: 400;
+    }
+
+    @media (max-width: 767px) {
+      .professional {
+        padding: 80px 0;
+      }
+      .professional__content,
+      .professional__benefits {
+        text-align: center;
+      }
+      .professional__body {
+        max-width: 100%;
+      }
+      .professional__benefit {
+        padding-left: 0;
+        text-align: center;
+      }
+      .professional__benefit::before {
+        display: none;
+      }
+    }
+
     /* ----- FAQ ----- */
     .faq {
       padding: var(--space-section-vertical) 0;
@@ -3123,6 +3227,7 @@
         <li class="nav-overlay__item"><a href="#entscheidungen" class="nav-overlay__link">Der Weg</a></li>
         <li class="nav-overlay__item"><a href="#vorher-nachher" class="nav-overlay__link">Vorher / Nachher</a></li>
         <li class="nav-overlay__item"><a href="#apps" class="nav-overlay__link">Module</a></li>
+        <li class="nav-overlay__item"><a href="#professional" class="nav-overlay__link">Professional</a></li>
         <li class="nav-overlay__item"><a href="#kundenstimmen" class="nav-overlay__link">Kundenstimmen</a></li>
         <li class="nav-overlay__item"><a href="#faq" class="nav-overlay__link">FAQ</a></li>
         <li class="nav-overlay__item"><a href="#einstiegsgespraech" class="nav-overlay__link">Gespräch</a></li>
@@ -3570,6 +3675,23 @@
     </div>
   </section>
 
+  <!-- Modul 10: ASANTIAL Professional -->
+  <section id="professional" class="professional" aria-labelledby="professional-title">
+    <div class="container">
+      <div class="professional__inner">
+        <div class="professional__content">
+          <h2 id="professional-title" class="professional__title reveal reveal--headline">ASANTIAL Professional –<br>Ihre tägliche Arbeitsgrundlage.</h2>
+          <p class="professional__body reveal">Alle Analyse-, Strategie- und Umsetzungs-Apps in einem Zugang. Kein Einzelprojekt mit Enddatum – sondern die Arbeitsumgebung, in der Employer Branding dauerhaft gesteuert wird. DSGVO-konform. Ergebnisse, die aufeinander aufbauen. Und Argumentationssicherheit, wenn die Geschäftsführung fragt.</p>
+        </div>
+        <div class="professional__benefits">
+          <p class="professional__benefit reveal">Struktur statt Einzelimpulse.</p>
+          <p class="professional__benefit reveal">Ergebnisse, die anschlussfähig sind.</p>
+          <p class="professional__benefit reveal">Rückhalt für HR, die Verantwortung tragen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Modul 12: Kundenstimmen -->
   <section id="kundenstimmen" class="testimonials" aria-labelledby="testimonials-title">
     <div class="container">
@@ -3670,29 +3792,38 @@
       <ul class="faq__list">
         <li class="faq__item reveal">
           <button class="faq__question" aria-expanded="false">
-            <span>Was genau ist ASANTIAL?</span>
+            <span>Was ist ASANTIAL?</span>
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">ASANTIAL ist ein digitales Betriebssystem für Employer Branding. Es gibt HR-Verantwortlichen im Mittelstand eine strukturierte Arbeitsumgebung – mit Analyse-Apps, Strategie-Werkzeugen und einer durchgängigen Entscheidungslogik. Kein Projektformat mit Enddatum, sondern eine dauerhafte Grundlage.</div>
+            <div class="faq__answer-inner">ASANTIAL ist ein SaaS-Betriebssystem für Employer Branding, das HR-Verantwortlichen im Mittelstand eine strukturierte Entscheidungsarchitektur bietet. Statt Einzelmaßnahmen zu verwalten, arbeitet ASANTIAL entlang einer durchgängigen Wirkungslogik – von der Arbeitsmarktanalyse bis zur Maßnahmensteuerung.</div>
           </div>
         </li>
         <li class="faq__item reveal">
           <button class="faq__question" aria-expanded="false">
-            <span>Für wen ist ASANTIAL gedacht?</span>
+            <span>Für wen ist ASANTIAL geeignet?</span>
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">Für HR-Verantwortliche in mittelständischen Unternehmen mit 50–500 Mitarbeitenden, die Employer Branding nicht als Einzelprojekt, sondern als Daueraufgabe verstehen. ASANTIAL ist besonders relevant, wenn Sie Struktur brauchen – nicht das nächste kreative Konzept.</div>
+            <div class="faq__answer-inner">ASANTIAL richtet sich an HR-Verantwortliche in mittelständischen Unternehmen mit 50 bis 500 Mitarbeitenden, die ihr Employer Branding strategisch steuern wollen – ohne externe Agenturabhängigkeit und ohne zusätzliches Personalbudget.</div>
           </div>
         </li>
         <li class="faq__item reveal">
           <button class="faq__question" aria-expanded="false">
-            <span>Was passiert im Einstiegsgespräch?</span>
+            <span>Wie unterscheidet sich ASANTIAL von einer Employer-Branding-Agentur?</span>
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">Wir sprechen ca. 30 Minuten über Ihre aktuelle Situation im Employer Branding. Keine Produktdemo, kein Pitch – sondern eine ehrliche Einschätzung, ob ASANTIAL zu Ihrer Lage passt. Danach entscheiden Sie, ob ein nächster Schritt sinnvoll ist.</div>
+            <div class="faq__answer-inner">Agenturen liefern Maßnahmen. ASANTIAL liefert Struktur. Während Agenturen projekt- und kampagnenbezogen arbeiten, schafft ASANTIAL eine dauerhaft nutzbare Entscheidungsgrundlage, die intern aufgebaut und gesteuert wird – unabhängig von externen Dienstleistern.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Was bedeutet EVP im Kontext von ASANTIAL?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Die EVP (Employer Value Proposition) ist in ASANTIAL kein einmaliges Strategieprojekt, sondern ein lebendes Dokument. Sie basiert auf drei Dimensionen: Identität, Haltung und Anspruch – und wird direkt in operative Maßnahmen übersetzt.</div>
           </div>
         </li>
         <li class="faq__item reveal">
@@ -3701,25 +3832,52 @@
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">Ja. ASANTIAL ist vollständig DSGVO-konform. Alle Daten werden in der EU verarbeitet und gespeichert. Datenschutz ist kein Add-on, sondern Grundlage der Plattform.</div>
+            <div class="faq__answer-inner">Ja. ASANTIAL ist vollständig DSGVO-konform und wird auf deutschen Servern betrieben. Nutzerdaten verlassen nicht den europäischen Rechtsraum.</div>
           </div>
         </li>
         <li class="faq__item reveal">
           <button class="faq__question" aria-expanded="false">
-            <span>Brauche ich technisches Vorwissen?</span>
+            <span>Welche Rolle spielt KI in ASANTIAL?</span>
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">Nein. ASANTIAL ist für HR-Verantwortliche gebaut, nicht für IT. Die Oberfläche ist so gestaltet, dass Sie sofort arbeitsfähig sind – ohne Schulung, ohne Implementierungsprojekt.</div>
+            <div class="faq__answer-inner">KI unterstützt in ASANTIAL konkrete Arbeitsschritte: Analyse von Arbeitsmarktdaten, Formulierung von Botschaften, Content-Erstellung und Priorisierung von Maßnahmen. Die KI erklärt ihre Vorschläge – sie ersetzt keine Entscheidung, sondern bereitet sie vor.</div>
           </div>
         </li>
         <li class="faq__item reveal">
           <button class="faq__question" aria-expanded="false">
-            <span>Was unterscheidet ASANTIAL von Agenturen oder Beratern?</span>
+            <span>Was ist die Verlegenheits-Falle im Employer Branding?</span>
             <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
           </button>
           <div class="faq__answer" aria-hidden="true">
-            <div class="faq__answer-inner">Agenturen liefern Konzepte und Kampagnen. Berater liefern Empfehlungen. ASANTIAL liefert die Struktur, mit der Sie beides selbst steuern können – dauerhaft, nicht projektweise. Die Entscheidungshoheit bleibt bei Ihnen.</div>
+            <div class="faq__answer-inner">Die Verlegenheits-Falle beschreibt das Muster, bei dem HR-Verantwortliche unter Rechtfertigungsdruck einfache, sichtbare Maßnahmen umsetzen – obwohl sie wissen, dass strategisch wichtigere Aufgaben liegenbleiben. Das Dringende verdrängt das Wichtige, ohne dass darüber gesprochen wird.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Wie lange dauert die Einführung von ASANTIAL?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Der strukturierte Einstieg in ASANTIAL dauert in der Regel vier bis acht Wochen. In dieser Phase werden Arbeitsmarktanalyse, EVP-Grundlage und erste Maßnahmenpriorisierung gemeinsam erarbeitet.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Was kostet ASANTIAL?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">ASANTIAL wird als monatliches SaaS-Abonnement angeboten. Details zu Preisstufen und Paketen werden im Einstiegsgespräch besprochen, da der Umfang vom jeweiligen Bedarf abhängt.</div>
+          </div>
+        </li>
+        <li class="faq__item reveal">
+          <button class="faq__question" aria-expanded="false">
+            <span>Wie kann ich ASANTIAL kennenlernen?</span>
+            <span class="faq__icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+          </button>
+          <div class="faq__answer" aria-hidden="true">
+            <div class="faq__answer-inner">Der erste Schritt ist ein 30-minütiges Einstiegsgespräch – kein Pitch, keine klassische Produktdemo. Im Gespräch wird gemeinsam geprüft, ob ASANTIAL zur aktuellen Situation des Unternehmens passt.</div>
           </div>
         </li>
       </ul>

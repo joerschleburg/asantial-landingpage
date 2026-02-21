@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, system-ui, sans-serif;
+  background: #f5f2ee;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.quiz-container {
+  max-width: 640px;
+  width: 100%;
+}
+
+/* HEADER */
+.quiz-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.quiz-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #a3a0ff; margin-bottom: 12px;
+}
+.quiz-title {
+  font-size: 32px; font-weight: 800; color: #181229;
+  line-height: 1.2; margin-bottom: 12px;
+}
+.quiz-sub {
+  font-size: 15px; color: rgba(37,23,42,0.55); line-height: 1.6;
+}
+
+/* PROGRESS */
+.progress-bar {
+  height: 3px; background: rgba(163,160,255,0.2);
+  border-radius: 2px; margin-bottom: 36px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: #a3a0ff;
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.progress-label {
+  font-size: 11px; color: rgba(37,23,42,0.35);
+  margin-bottom: 8px; text-align: right;
+}
+
+/* QUESTION CARD */
+.question-card {
+  background: white;
+  border-radius: 20px;
+  padding: 36px;
+  box-shadow: 0 4px 24px rgba(37,23,42,0.06), 0 1px 4px rgba(37,23,42,0.04);
+  margin-bottom: 16px;
+}
+.question-number {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(37,23,42,0.3); margin-bottom: 14px;
+}
+.question-text {
+  font-size: 19px; font-weight: 700; color: #181229;
+  line-height: 1.4; margin-bottom: 28px;
+}
+
+/* OPTIONS */
+.options { display: flex; flex-direction: column; gap: 10px; }
+.option {
+  padding: 14px 18px;
+  border: 1.5px solid rgba(37,23,42,0.10);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px; color: rgba(37,23,42,0.75);
+  transition: all 0.2s ease;
+  display: flex; align-items: center; gap: 12px;
+  background: white;
+  text-align: left;
+}
+.option:hover {
+  border-color: #a3a0ff;
+  background: rgba(163,160,255,0.04);
+  color: #181229;
+}
+.option.selected {
+  border-color: #a3a0ff;
+  background: rgba(163,160,255,0.08);
+  color: #181229;
+}
+.option-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(37,23,42,0.15);
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+}
+.option.selected .option-dot {
+  border-color: #a3a0ff;
+  background: #a3a0ff;
+}
+.option.selected .option-dot::after {
+  content: "";
+  width: 6px; height: 6px; border-radius: 50%;
+  background: white;
+}
+
+/* NAVIGATION */
+.nav { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; }
+.btn {
+  padding: 13px 28px; border-radius: 12px;
+  font-size: 14px; font-weight: 600; cursor: pointer;
+  font-family: inherit; border: none; transition: all 0.2s ease;
+}
+.btn-primary {
+  background: #181229; color: white;
+}
+.btn-primary:hover { background: #2d1f4e; transform: translateY(-1px); }
+.btn-primary:disabled { opacity: 0.3; cursor: not-allowed; transform: none; }
+.btn-ghost {
+  background: transparent; color: rgba(37,23,42,0.4);
+  border: 1.5px solid rgba(37,23,42,0.12);
+}
+.btn-ghost:hover { color: #181229; border-color: rgba(37,23,42,0.25); }
+
+/* EMAIL GATE */
+.email-gate {
+  background: white; border-radius: 20px; padding: 36px;
+  box-shadow: 0 4px 24px rgba(37,23,42,0.06);
+  display: none;
+}
+.email-gate.active { display: block; }
+.gate-title { font-size: 22px; font-weight: 800; color: #181229; margin-bottom: 10px; }
+.gate-sub { font-size: 14px; color: rgba(37,23,42,0.55); line-height: 1.6; margin-bottom: 28px; }
+.teaser-result {
+  background: rgba(163,160,255,0.08); border: 1.5px solid rgba(163,160,255,0.25);
+  border-radius: 14px; padding: 20px; margin-bottom: 28px;
+}
+.teaser-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #a3a0ff; margin-bottom: 6px; }
+.teaser-type { font-size: 20px; font-weight: 800; color: #181229; margin-bottom: 6px; }
+.teaser-desc { font-size: 13px; color: rgba(37,23,42,0.55); }
+.input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.quiz-input {
+  padding: 13px 16px; border-radius: 12px;
+  border: 1.5px solid rgba(37,23,42,0.12);
+  font-size: 14px; font-family: inherit; color: #181229;
+  outline: none; transition: border-color 0.2s;
+  background: white;
+}
+.quiz-input:focus { border-color: #a3a0ff; }
+.privacy-note { font-size: 11px; color: rgba(37,23,42,0.3); text-align: center; }
+.btn-full { width: 100%; justify-content: center; display: flex; padding: 15px; }
+
+/* RESULT */
+.result-card { display: none; }
+.result-card.active { display: block; }
+.result-header {
+  background: linear-gradient(135deg, #1a1040 0%, #2d1f4e 100%);
+  border-radius: 20px; padding: 36px; margin-bottom: 16px; text-align: center;
+}
+.result-emoji { font-size: 48px; margin-bottom: 16px; }
+.result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(163,160,255,0.7); margin-bottom: 8px; }
+.result-type { font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; }
+.result-tagline { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+.result-body {
+  background: white; border-radius: 20px; padding: 36px;
+  box-shadow: 0 4px 24px rgba(37,23,42,0.06); margin-bottom: 16px;
+}
+.result-section-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(37,23,42,0.35); margin-bottom: 10px;
+}
+.result-text { font-size: 15px; color: rgba(37,23,42,0.75); line-height: 1.65; margin-bottom: 28px; }
+.result-pain {
+  background: rgba(255,200,100,0.08); border-left: 3px solid #f5c543;
+  padding: 16px 18px; border-radius: 0 10px 10px 0; margin-bottom: 28px;
+}
+.result-pain p { font-size: 14px; color: rgba(37,23,42,0.7); line-height: 1.6; }
+
+.result-cta {
+  background: white; border-radius: 20px; padding: 32px;
+  box-shadow: 0 4px 24px rgba(37,23,42,0.06); text-align: center;
+}
+.result-cta-title { font-size: 20px; font-weight: 800; color: #181229; margin-bottom: 8px; }
+.result-cta-sub { font-size: 14px; color: rgba(37,23,42,0.5); margin-bottom: 24px; line-height: 1.5; }
+.btn-cta {
+  background: #181229; color: white; padding: 16px 32px;
+  border-radius: 14px; font-size: 15px; font-weight: 700;
+  cursor: pointer; border: none; font-family: inherit;
+  transition: all 0.2s ease; display: inline-block;
+}
+.btn-cta:hover { background: #2d1f4e; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,23,42,0.2); }
+.cta-micro { font-size: 11px; color: rgba(37,23,42,0.3); margin-top: 10px; }
+
+/* HIDDEN */
+.screen { display: none; }
+.screen.active { display: block; }
+</style>
+</head>
+<body>
+
+<div class="quiz-container">
+
+  <!-- SCREEN 1: QUIZ -->
+  <div class="screen active" id="screen-quiz">
+    <div class="quiz-header">
+      <div class="quiz-label">Selbsttest · 3 Minuten</div>
+      <div class="quiz-title">Wie strukturiert ist euer Employer Branding?</div>
+      <div class="quiz-sub">8 Fragen. Ehrliche Antworten. Eine klare Einschätzung.</div>
+    </div>
+
+    <div class="progress-label" id="progress-label">Frage 1 von 8</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:12.5%"></div></div>
+
+    <div class="question-card">
+      <div class="question-number" id="q-number">Frage 01</div>
+      <div class="question-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+    </div>
+
+    <div class="nav">
+      <button class="btn btn-ghost" id="btn-back" onclick="prevQuestion()" style="display:none">← Zurück</button>
+      <button class="btn btn-primary" id="btn-next" onclick="nextQuestion()" disabled>Weiter →</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 2: EMAIL GATE -->
+  <div class="screen" id="screen-email">
+    <div class="email-gate active">
+      <div class="gate-title">Fast geschafft.</div>
+      <div class="gate-sub">Dein Ergebnis ist bereit. Hier ist schon ein Vorgeschmack – die vollständige Auswertung mit konkreten Handlungsempfehlungen bekommst du per Mail.</div>
+      <div class="teaser-result">
+        <div class="teaser-label">Dein Typ</div>
+        <div class="teaser-type" id="teaser-type">wird berechnet...</div>
+        <div class="teaser-desc" id="teaser-desc"></div>
+      </div>
+      <div class="input-group">
+        <input class="quiz-input" type="text" placeholder="Vorname" id="input-name">
+        <input class="quiz-input" type="email" placeholder="E-Mail-Adresse" id="input-email">
+        <input class="quiz-input" type="text" placeholder="Unternehmen (optional)" id="input-company">
+      </div>
+      <button class="btn btn-primary btn-full" onclick="showResult()">Vollständige Auswertung erhalten</button>
+      <p class="privacy-note" style="margin-top:12px">Kein Newsletter. Keine Weitergabe. Nur dein Ergebnis.</p>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: ERGEBNIS -->
+  <div class="screen" id="screen-result">
+    <div class="result-header">
+      <div class="result-emoji" id="r-emoji"></div>
+      <div class="result-label">Dein Employer-Branding-Typ</div>
+      <div class="result-type" id="r-type"></div>
+      <div class="result-tagline" id="r-tagline"></div>
+    </div>
+
+    <div class="result-body">
+      <div class="result-section-title">Was das bedeutet</div>
+      <div class="result-text" id="r-desc"></div>
+
+      <div class="result-section-title">Dein blinder Fleck</div>
+      <div class="result-pain"><p id="r-pain"></p></div>
+
+      <div class="result-section-title">Der nächste sinnvolle Schritt</div>
+      <div class="result-text" id="r-next"></div>
+    </div>
+
+    <div class="result-cta">
+      <div class="result-cta-title">Passt ASANTIAL zu euch?</div>
+      <div class="result-cta-sub">30 Minuten. Kein Pitch. Wir schauen gemeinsam ob es passt – nicht mehr.</div>
+      <button class="btn-cta">Einstiegsgespräch vereinbaren</button>
+      <div class="cta-micro">ca. 30 Minuten · unverbindlich · keine klassische Produktdemo</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const questions = [
+  {
+    text: "Wenn jemand aus der Geschäftsführung fragt, was Employer Branding gerade bringt – wie antworten Sie?",
+    options: [
+      { text: "Ich zeige konkrete Maßnahmen und deren Ergebnisse", score: 3 },
+      { text: "Ich erkläre den strategischen Rahmen, aber Zahlen sind schwierig", score: 2 },
+      { text: "Ich liste auf, was wir gemacht haben", score: 1 },
+      { text: "Das ist ein unangenehmes Gespräch", score: 0 }
+    ]
+  },
+  {
+    text: "Wie entscheiden Sie, welche Employer-Branding-Maßnahme als nächstes umgesetzt wird?",
+    options: [
+      { text: "Anhand einer klaren Wirkungslogik und Priorisierung", score: 3 },
+      { text: "Nach aktuellem Bedarf und verfügbaren Ressourcen", score: 2 },
+      { text: "Wer am lautesten fragt, bekommt die nächste Maßnahme", score: 1 },
+      { text: "Meistens reagieren wir auf das, was gerade dringend ist", score: 0 }
+    ]
+  },
+  {
+    text: "Haben Sie eine schriftlich fixierte EVP (Employer Value Proposition)?",
+    options: [
+      { text: "Ja – sie ist aktuell und wird aktiv genutzt", score: 3 },
+      { text: "Ja – aber sie liegt irgendwo und wird kaum verwendet", score: 1 },
+      { text: "Wir haben Ansätze, aber nichts Finales", score: 1 },
+      { text: "Nein", score: 0 }
+    ]
+  },
+  {
+    text: "Wie gut sind Ihre Employer-Branding-Aktivitäten intern abgestimmt – mit GF, Führungskräften, Marketing?",
+    options: [
+      { text: "Sehr gut – wir haben klare Verantwortlichkeiten und regelmäßigen Austausch", score: 3 },
+      { text: "Okay – aber es hängt stark von einzelnen Personen ab", score: 2 },
+      { text: "Schwierig – jede Abteilung macht irgendwie ihr Ding", score: 1 },
+      { text: "Employer Branding ist im Wesentlichen meine Aufgabe alleine", score: 0 }
+    ]
+  },
+  {
+    text: "Wenn Sie ehrlich sind: Wie viel Ihrer Arbeitszeit geht für operative Einzelaufgaben drauf statt für strategische Weiterentwicklung?",
+    options: [
+      { text: "Weniger als 30% – ich habe Struktur, die Raum lässt", score: 3 },
+      { text: "Etwa 50/50 – ich versuche beides zu balancieren", score: 2 },
+      { text: "Eher 70% operativ – die Strategie bleibt oft liegen", score: 1 },
+      { text: "Fast alles ist operativ – ich komme kaum zum Denken", score: 0 }
+    ]
+  },
+  {
+    text: "Wie würden Sie den Zusammenhang zwischen Ihrer EVP und Ihren aktuellen Recruitingmaßnahmen beschreiben?",
+    options: [
+      { text: "Klar und durchgängig – alles ist aufeinander abgestimmt", score: 3 },
+      { text: "Meistens stimmig, aber nicht systematisch", score: 2 },
+      { text: "Eher zufällig – die Maßnahmen entstehen unabhängig", score: 1 },
+      { text: "Wir haben keine klare EVP als Grundlage", score: 0 }
+    ]
+  },
+  {
+    text: "Wie erklären Sie der Geschäftsführung den ROI Ihrer Employer-Branding-Arbeit?",
+    options: [
+      { text: "Mit definierten KPIs und regelmäßigem Reporting", score: 3 },
+      { text: "Mit qualitativen Einschätzungen und einzelnen Kennzahlen", score: 2 },
+      { text: "Mit Aktivitätsnachweisen – was wir gemacht haben", score: 1 },
+      { text: "Das ist schwierig – wir haben noch kein gutes Modell dafür", score: 0 }
+    ]
+  },
+  {
+    text: "Was beschreibt Ihre aktuelle Situation am besten?",
+    options: [
+      { text: "Wir haben Struktur, Strategie und Umsetzung im Griff", score: 3 },
+      { text: "Gute Ansätze, aber fehlende Systematik", score: 2 },
+      { text: "Viel Aktivität, wenig strategischer Rahmen", score: 1 },
+      { text: "Wir stehen eigentlich noch ganz am Anfang", score: 0 }
+    ]
+  }
+];
+
+const personas = [
+  {
+    min: 0, max: 8,
+    emoji: "🔥",
+    type: "Der Aktionist",
+    tagline: "Viel Energie. Wenig Struktur. Immer beschäftigt.",
+    teaser: "Du arbeitest viel – aber ohne durchgängige Wirkungslogik.",
+    desc: "Du kennst das Gefühl: Die To-do-Liste wird nicht kürzer, die nächste Kampagne wartet, und irgendwo im Hintergrund liegt die Strategie, die du eigentlich fertigstellen wolltest. Du lieferst – das ist nicht das Problem. Das Problem ist, dass die Ergebnisse schwer zu erklären sind und jede neue Anfrage dich wieder in den operativen Modus zieht.",
+    pain: "Der eigentliche Schmerz: Du kannst nicht klar erklären, was deine Arbeit bewirkt. Nicht weil du schlecht arbeitest – sondern weil die Struktur fehlt, die Wirkung sichtbar macht.",
+    next: "Der nächste sinnvolle Schritt ist nicht mehr Maßnahmen, sondern eine Entscheidungsgrundlage. Bevor die nächste Kampagne startet: Wo stehen wir wirklich? Was wirkt? Was nicht? ASANTIAL gibt dir genau diese Struktur – damit aus Aktivität Wirkung wird."
+  },
+  {
+    min: 9, max: 16,
+    emoji: "⚙️",
+    type: "Der Pragmatiker",
+    tagline: "Solide Basis. Aber noch kein System das hält.",
+    teaser: "Du hast gute Ansätze – aber sie greifen noch nicht ineinander.",
+    desc: "Du machst vieles richtig. Es gibt eine EVP – zumindest in Grundzügen. Du weißt was Employer Branding leisten soll. Und trotzdem: Die Maßnahmen entstehen oft nebeneinander statt aufeinander aufbauend. Abstimmung kostet Energie, Priorisierung ist schwierig, und der Nachweis der Wirkung bleibt ein wunder Punkt.",
+    pain: "Der eigentliche Schmerz: Du bist nah dran an einem funktionierenden System – aber der letzte Schritt fehlt. Nicht wegen mangelndem Wissen, sondern wegen fehlender Struktur die alles zusammenhält.",
+    next: "Du brauchst kein neues Konzept – du brauchst eine Architektur, die das was du bereits hast zusammenführt und steuerbar macht. ASANTIAL ist genau dafür gebaut: nicht von null anfangen, sondern das Vorhandene in eine durchgängige Wirkungslogik überführen."
+  },
+  {
+    min: 17, max: 24,
+    emoji: "🎯",
+    type: "Der Stratege",
+    tagline: "Strukturiert. Klar. Bereit für den nächsten Level.",
+    teaser: "Du arbeitest bereits strategisch – jetzt geht es um Skalierung.",
+    desc: "Du hast das geschafft, woran viele scheitern: Employer Branding ist bei dir kein Aktivismus, sondern ein gesteuerter Prozess. Du kannst erklären was du tust und warum. Entscheidungen folgen einer Logik. Das ist selten – und es ist der Grund, warum du wahrscheinlich intern ernst genommen wirst.",
+    pain: "Der eigentliche Schmerz: Auf diesem Niveau wird Skalierbarkeit zur Herausforderung. Was funktioniert, wenn du persönlich dabei bist – funktioniert es auch wenn das Unternehmen wächst oder du ausfällst?",
+    next: "Du brauchst kein Fundament mehr – du brauchst ein System das dein Wissen institutionalisiert und unabhängig von einzelnen Personen macht. ASANTIAL kann genau das: aus deiner persönlichen Expertise eine organisationale Fähigkeit machen."
+  }
+];
+
+let currentQ = 0;
+let scores = [];
+let selectedOption = null;
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  document.getElementById('q-number').textContent = `Frage ${String(currentQ + 1).padStart(2, '0')}`;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('progress-label').textContent = `Frage ${currentQ + 1} von ${questions.length}`;
+  document.getElementById('progress-fill').style.width = `${((currentQ + 1) / questions.length) * 100}%`;
+
+  const optContainer = document.getElementById('q-options');
+  optContainer.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const div = document.createElement('button');
+    div.className = 'option' + (scores[currentQ] !== undefined && questions[currentQ].options[scores[currentQ] === opt.score ? i : -1] ? ' selected' : '');
+    div.innerHTML = `<div class="option-dot"></div><span>${opt.text}</span>`;
+    div.onclick = () => selectOption(i, opt.score);
+    optContainer.appendChild(div);
+  });
+
+  document.getElementById('btn-back').style.display = currentQ > 0 ? 'block' : 'none';
+  document.getElementById('btn-next').disabled = selectedOption === null;
+  selectedOption = null;
+}
+
+function selectOption(index, score) {
+  selectedOption = { index, score };
+  document.querySelectorAll('.option').forEach((el, i) => {
+    el.classList.toggle('selected', i === index);
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextQuestion() {
+  if (selectedOption === null) return;
+  scores[currentQ] = selectedOption.score;
+
+  if (currentQ < questions.length - 1) {
+    currentQ++;
+    selectedOption = null;
+    renderQuestion();
+  } else {
+    showEmailGate();
+  }
+}
+
+function prevQuestion() {
+  if (currentQ > 0) {
+    currentQ--;
+    selectedOption = null;
+    renderQuestion();
+  }
+}
+
+function getPersona() {
+  const total = scores.reduce((a, b) => a + b, 0);
+  return personas.find(p => total >= p.min && total <= p.max) || personas[1];
+}
+
+function showEmailGate() {
+  document.getElementById('screen-quiz').classList.remove('active');
+  document.getElementById('screen-email').classList.add('active');
+  const p = getPersona();
+  document.getElementById('teaser-type').textContent = p.emoji + ' ' + p.type;
+  document.getElementById('teaser-desc').textContent = p.teaser;
+}
+
+function showResult() {
+  document.getElementById('screen-email').classList.remove('active');
+  document.getElementById('screen-result').classList.add('active');
+  const p = getPersona();
+  document.getElementById('r-emoji').textContent = p.emoji;
+  document.getElementById('r-type').textContent = p.type;
+  document.getElementById('r-tagline').textContent = p.tagline;
+  document.getElementById('r-desc').textContent = p.desc;
+  document.getElementById('r-pain').textContent = p.pain;
+  document.getElementById('r-next').textContent = p.next;
+}
+
+// Init
+renderQuestion();
+</script>
+
+</body>
+</html>
