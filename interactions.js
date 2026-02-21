@@ -181,36 +181,26 @@
    * Modul 2 Kernaussage: Zeile für Zeile sanft einblenden.
    */
   function initStatementReveal() {
-    var section = document.getElementById('statement');
-    if (!section) return;
-
-    var lines = section.querySelectorAll('.statement__line');
-    if (!lines.length) return;
-
-    var started = false;
-    var LINE_DELAY = 600;
+    var revealLines = document.querySelectorAll('.reveal-line');
+    if (!revealLines.length) return;
 
     if (prefersReducedMotion()) {
-      lines.forEach(function (el) { el.classList.add('statement__line--visible'); });
+      revealLines.forEach(function (el) { el.classList.add('visible'); });
       return;
     }
 
     var observer = new IntersectionObserver(
       function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting || started) return;
-          started = true;
-          lines.forEach(function (el, i) {
-            setTimeout(function () {
-              el.classList.add('statement__line--visible');
-            }, i * LINE_DELAY);
-          });
-          observer.unobserve(entry.target);
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
         });
       },
-      { threshold: 0.25 }
+      { threshold: 0.3 }
     );
-    observer.observe(section);
+    revealLines.forEach(function (el) { observer.observe(el); });
   }
 
   /**

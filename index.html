@@ -574,7 +574,7 @@
       align-items: center;
     }
 
-    .statement__line {
+    .statement__text-block {
       font-family: 'Fraunces', var(--font-family-display);
       font-size: 46px;
       line-height: 1.3;
@@ -582,29 +582,33 @@
       color: var(--color-ink-deep);
       text-align: center;
       max-width: none;
-      margin: 0 auto 0.15em;
       white-space: nowrap;
-      opacity: 0;
-      transform: translateY(32px);
-      filter: blur(6px);
-      transition:
-        opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-        transform 1s cubic-bezier(0.22, 1, 0.36, 1),
-        filter 1s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .statement__line.statement__line--visible {
+    .reveal-line span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(16px);
+      transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-line:nth-child(1) span { transition-delay: 0ms; }
+    .reveal-line:nth-child(2) span { transition-delay: 150ms; }
+    .reveal-line:nth-child(3) span { transition-delay: 300ms; }
+    .reveal-line:nth-child(4) span { transition-delay: 450ms; }
+    .reveal-line:nth-child(5) span { transition-delay: 600ms; }
+
+    .reveal-line.visible span {
       opacity: 1;
       transform: translateY(0);
-      filter: blur(0);
     }
 
     @media (prefers-reduced-motion: reduce) {
       .statement__blob { animation: none; }
-      .statement__line {
+      .reveal-line span {
         opacity: 1;
         transform: none;
-        filter: none;
         transition: none;
       }
     }
@@ -3346,7 +3350,7 @@
       }
 
       /* Statement */
-      .statement__line {
+      .statement__text-block {
         font-size: clamp(20px, 5vw, 46px);
         white-space: normal;
         line-height: 1.4;
@@ -3501,7 +3505,7 @@
         padding-top: calc(var(--space-section-vertical) + 400px);
       }
 
-      .statement__line {
+      .statement__text-block {
         font-size: clamp(28px, 4vw, 46px);
         white-space: normal;
       }
@@ -3778,7 +3782,13 @@
       <div class="statement__blob statement__blob--4"></div>
     </div>
     <div class="container">
-      <p class="statement__line" id="statement-line-0">Employer Branding scheitert im Mittelstand<br>nicht an Engagement. Es scheitert an der Art,<br>wie es organisiert wird.<br>ASANTIAL gibt HR die Struktur, um aus Einzelaktionen<br>eine durchgängige Wirkungslogik zu machen.</p>
+      <div class="statement__text-block" id="statement-line-0">
+        <div class="reveal-line"><span>Employer Branding scheitert im Mittelstand</span></div>
+        <div class="reveal-line"><span>nicht an Engagement. Es scheitert an der Art,</span></div>
+        <div class="reveal-line"><span>wie es organisiert wird.</span></div>
+        <div class="reveal-line"><span>ASANTIAL gibt HR die Struktur, um aus Einzelaktionen</span></div>
+        <div class="reveal-line"><span>eine durchgängige Wirkungslogik zu machen.</span></div>
+      </div>
     </div>
   </section>
 
