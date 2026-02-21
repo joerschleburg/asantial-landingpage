@@ -1806,20 +1806,48 @@
       display: block;
     }
 
-    /* Trust Bar (inside nav) */
-    .nav__trust {
+    .nav__links {
       display: none;
       align-items: center;
-      gap: 0;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      gap: 28px;
+    }
+    @media (min-width: 768px) {
+      .nav__links { display: flex; }
+    }
+    .nav__link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-ink-deep);
+      text-decoration: none;
+      opacity: 0.6;
+      transition: opacity 0.2s ease;
+    }
+    .nav__link:hover { opacity: 1; }
+
+    .nav__cta {
+      display: none;
+      padding: 10px 20px;
+      background: #181229;
+      color: white;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .nav__cta:hover { background: #2d1f4e; transform: translateY(-1px); }
+    @media (min-width: 768px) {
+      .nav__cta { display: block; }
+      .burger { display: none; }
+    }
+    @media (max-width: 767px) {
+      .nav__cta { display: none; }
     }
 
-    @media (min-width: 768px) {
-      .nav__trust {
-        display: flex;
-      }
+    /* Trust Bar (legacy, hidden) */
+    .nav__trust {
+      display: none;
     }
 
     .nav__trust-item {
@@ -1945,12 +1973,6 @@
     .nav-overlay--open .nav-overlay__item:nth-child(2) .nav-overlay__link { transition-delay: 0.14s; }
     .nav-overlay--open .nav-overlay__item:nth-child(3) .nav-overlay__link { transition-delay: 0.20s; }
     .nav-overlay--open .nav-overlay__item:nth-child(4) .nav-overlay__link { transition-delay: 0.26s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(5) .nav-overlay__link { transition-delay: 0.32s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(6) .nav-overlay__link { transition-delay: 0.38s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(7) .nav-overlay__link { transition-delay: 0.44s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(8) .nav-overlay__link { transition-delay: 0.50s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(9) .nav-overlay__link { transition-delay: 0.56s; }
-    .nav-overlay--open .nav-overlay__item:nth-child(10) .nav-overlay__link { transition-delay: 0.62s; }
 
     .nav-overlay__link:hover {
       background: rgba(163,160,255,0.08);
@@ -3594,13 +3616,13 @@
       <a href="#hero" class="nav__logo reveal hero-entrance-nav" aria-label="ASANTIAL Startseite">
         <img src="Asantial-Logo-transparent.png" alt="ASANTIAL Logo" />
       </a>
-      <div class="nav__trust" aria-label="Vertrauenssignale">
-        <div class="nav__trust-item"><span class="nav__trust-dot"></span>DSGVO-konform</div>
-        <div class="nav__trust-sep"></div>
-        <div class="nav__trust-item"><span class="nav__trust-dot"></span>KI-gestützt</div>
-        <div class="nav__trust-sep"></div>
-        <div class="nav__trust-item"><span class="nav__trust-dot"></span>15 Jahre Employer Branding</div>
+      <div class="nav__links">
+        <a href="#entscheidungen" class="nav__link">System</a>
+        <a href="#apps" class="nav__link">Apps</a>
+        <a href="#selbsttest" class="nav__link">Selbsttest</a>
+        <a href="#gruender" class="nav__link">Über uns</a>
       </div>
+      <a href="#einstiegsgespraech" class="nav__cta">Gespräch vereinbaren</a>
       <button class="burger" id="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="nav-overlay">
         <span class="burger__line"></span>
         <span class="burger__line"></span>
@@ -3613,18 +3635,12 @@
   <div class="nav-overlay" id="nav-overlay" aria-hidden="true">
     <nav aria-label="Seitennavigation">
       <ul class="nav-overlay__list">
-        <li class="nav-overlay__item"><a href="#hero" class="nav-overlay__link">Start</a></li>
-        <li class="nav-overlay__item"><a href="#verlegenheit" class="nav-overlay__link">Das Problem</a></li>
-        <li class="nav-overlay__item"><a href="#entscheidungen" class="nav-overlay__link">Der Weg</a></li>
-        <li class="nav-overlay__item"><a href="#vorher-nachher" class="nav-overlay__link">Vorher / Nachher</a></li>
-        <li class="nav-overlay__item"><a href="#apps" class="nav-overlay__link">Module</a></li>
-        <li class="nav-overlay__item"><a href="#professional" class="nav-overlay__link">Professional</a></li>
+        <li class="nav-overlay__item"><a href="#entscheidungen" class="nav-overlay__link">System</a></li>
+        <li class="nav-overlay__item"><a href="#apps" class="nav-overlay__link">Apps</a></li>
         <li class="nav-overlay__item"><a href="#selbsttest" class="nav-overlay__link">Selbsttest</a></li>
-        <li class="nav-overlay__item"><a href="#kundenstimmen" class="nav-overlay__link">Kundenstimmen</a></li>
-        <li class="nav-overlay__item"><a href="#faq" class="nav-overlay__link">FAQ</a></li>
-        <li class="nav-overlay__item"><a href="#einstiegsgespraech" class="nav-overlay__link">Gespräch</a></li>
+        <li class="nav-overlay__item"><a href="#gruender" class="nav-overlay__link">Über uns</a></li>
       </ul>
-      <a href="#einstiegsgespraech" class="nav-overlay__cta">Einstiegsgespräch vereinbaren</a>
+      <a href="#einstiegsgespraech" class="nav-overlay__cta">Gespräch vereinbaren</a>
     </nav>
   </div>
 

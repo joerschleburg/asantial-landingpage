@@ -213,6 +213,7 @@
     if (!burger || !overlay) return;
 
     var links = overlay.querySelectorAll('a[href^="#"]');
+    var navLinks = document.querySelectorAll('.nav__link, .nav__cta');
 
     function openMenu() {
       burger.classList.add('burger--open');
@@ -247,6 +248,17 @@
           setTimeout(function () {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }, 120);
+        }
+      });
+    });
+
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var targetId = link.getAttribute('href');
+        var target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
