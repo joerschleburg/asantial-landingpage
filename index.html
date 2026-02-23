@@ -2338,23 +2338,7 @@
 
     .before-after::before,
     .before-after::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 220px;
-      pointer-events: none;
-      z-index: 4;
-    }
-
-    .before-after::before {
-      top: 0;
-      background: linear-gradient(to bottom, var(--bg-base) 0%, rgba(252,250,249,0.6) 40%, transparent 100%);
-    }
-
-    .before-after::after {
-      bottom: 0;
-      background: linear-gradient(to top, var(--bg-base) 0%, rgba(252,250,249,0.6) 40%, transparent 100%);
+      display: none;
     }
 
     .before-after__blobs {
@@ -2399,9 +2383,7 @@
       font-size: var(--font-size-display-m);
       line-height: var(--font-size-display-m-line-height);
       font-weight: var(--font-size-display-m-weight);
-      color: #181229 !important;
-      opacity: 1 !important;
-      transform: none !important;
+      color: #181229;
       margin: 0 0 16px;
       text-align: center;
     }
