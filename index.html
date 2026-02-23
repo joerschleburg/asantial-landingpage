@@ -1855,16 +1855,26 @@
     .nav__cta {
       display: none;
       padding: 10px 20px;
-      background: #181229;
-      color: white;
-      border-radius: 10px;
+      font-family: var(--font-family-body);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: var(--button-primary-font-weight);
+      color: var(--button-primary-color);
+      background: linear-gradient(135deg, #25172a 0%, #2f2f91 50%, #25172a 100%);
+      background-size: 200% 200%;
+      animation: cta-gradient-shift 4s ease-in-out infinite;
+      border: none;
+      border-radius: var(--button-primary-radius);
+      box-shadow: var(--button-primary-shadow);
       white-space: nowrap;
       text-decoration: none;
-      transition: background 0.2s ease, transform 0.2s ease;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
     }
-    .nav__cta:hover { background: #2d1f4e; transform: translateY(-1px); }
+    .nav__cta:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 32px rgba(47,47,145,0.35), var(--button-primary-shadow);
+    }
+    .nav__cta:active { transform: scale(0.97); }
     @media (min-width: 768px) {
       .nav__cta { display: block; }
     }
