@@ -337,6 +337,53 @@
     });
   }
 
+  /**
+   * Speech Bubble Text Cycling
+   */
+  function initSpeechBubbleCycling() {
+    var bubbles = document.querySelectorAll('.speech-bubble[data-bubble]');
+    if (!bubbles.length) return;
+
+    var allTexts = [
+      { quote: '„Warum kriegen wir die Stellen im Vertrieb nicht besetzt?"', attr: 'Geschäftsführer', cls: 'gf' },
+      { quote: '„Ich hab auf LinkedIn was über Employer Branding gesehen. Machen wir das eigentlich?"', attr: 'Fachbereich', cls: 'fachbereich' },
+      { quote: '„Ohne klare Zielgruppe können wir keinen Entwurf machen."', attr: 'Externer Dienstleister', cls: 'dienstleister' },
+      { quote: '„Wir brauchen die Texte für die Landingpage – am besten gestern."', attr: 'Externer Dienstleister', cls: 'dienstleister' },
+      { quote: '„Bei uns bewirbt sich keiner mehr – könnt ihr da mal was machen?"', attr: 'Fachbereich', cls: 'fachbereich' },
+      { quote: '„Der Fotograf kommt Donnerstag. Könnt ihr drei Mitarbeitende organisieren, die mitmachen?"', attr: 'Marketing', cls: 'marketing' },
+      { quote: '„Das Bewerbungsformular ist seit zwei Tagen down."', attr: 'IT', cls: 'it' },
+      { quote: '„Soll ich auf die Google-Bewertung antworten oder du?"', attr: 'HR-Kollege', cls: 'hr' },
+      { quote: '„Die Azubi-Kampagne von letztem Jahr – wo liegt die nochmal?"', attr: 'HR-Kollegin', cls: 'hr' },
+      { quote: '„Ich hab gehört, TikTok funktioniert gut fürs Recruiting."', attr: 'Fachbereich', cls: 'fachbereich' },
+      { quote: '„Haben wir eine Vorlage für Mitarbeiter-Testimonials?"', attr: 'HR-Kollege', cls: 'hr' },
+      { quote: '„Dürfen wir die Fotos überhaupt verwenden?"', attr: 'Betriebsrat', cls: 'betriebsrat' }
+    ];
+
+    var currentOffset = 0;
+    var CYCLE_INTERVAL = 4000;
+    var FADE_DURATION = 400;
+
+    function updateBubble(bubble, textObj) {
+      bubble.classList.add('speech-bubble--fading');
+      setTimeout(function () {
+        var quoteEl = bubble.querySelector('.speech-bubble__quote');
+        var attrEl = bubble.querySelector('.speech-bubble__attr');
+        quoteEl.textContent = textObj.quote;
+        attrEl.textContent = textObj.attr;
+        attrEl.className = 'speech-bubble__attr speech-bubble__attr--' + textObj.cls;
+        bubble.classList.remove('speech-bubble--fading');
+      }, FADE_DURATION);
+    }
+
+    setInterval(function () {
+      currentOffset = (currentOffset + 1) % allTexts.length;
+      bubbles.forEach(function (bubble, i) {
+        var textIndex = (currentOffset + i) % allTexts.length;
+        updateBubble(bubble, allTexts[textIndex]);
+      });
+    }, CYCLE_INTERVAL);
+  }
+
   function run() {
     initRevealObservers();
     initStaggerReveal();
@@ -346,6 +393,7 @@
     initSystemlogikDiagram();
     initBurgerMenu();
     initFaqAccordion();
+    initSpeechBubbleCycling();
   }
 
   init();
