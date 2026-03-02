@@ -2325,292 +2325,221 @@
     }
 
     /* ----- Vorher / Nachher ----- */
-    .before-after {
+    /* ----- Vergleichstabelle ----- */
+    .compare {
       padding: 60px 0;
       position: relative;
       overflow: hidden;
-      background:
-        linear-gradient(135deg,
-          rgba(200,191,238,0.10) 0%, rgba(212,206,245,0.10) 20%, rgba(189,212,240,0.10) 50%,
-          rgba(168,200,238,0.10) 75%, rgba(184,216,248,0.10) 100%),
-        var(--bg-base);
+      background: var(--bg-base);
     }
 
-    .before-after::before,
-    .before-after::after {
-      display: none;
-    }
-
-    .before-after__blobs {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .before-after__blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(45px);
-    }
-
-    .before-after__blob--left {
-      width: 50%; height: 60%;
-      left: -5%; top: 40%;
-      background: radial-gradient(circle at 15% 70%, rgba(163,140,255,0.10) 0%, transparent 70%);
-      animation: env-drift1 18s ease-in-out infinite;
-    }
-
-    .before-after__blob--right {
-      width: 50%; height: 60%;
-      right: -5%; top: 0%;
-      background: radial-gradient(circle at 85% 30%, rgba(140,190,255,0.08) 0%, transparent 70%);
-      animation: env-drift2 22s ease-in-out infinite;
-    }
-
-    .before-after__dots {
-      display: none;
-    }
-
-    .before-after .container {
+    .compare .container {
       position: relative;
       z-index: 2;
+      max-width: var(--max-width-content);
     }
 
-    .before-after__title {
+    .compare__label {
+      font-family: var(--font-family-body);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #a3a0ff;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .compare__label::after {
+      content: "";
+      flex: 1;
+      max-width: 48px;
+      height: 1px;
+      background: rgba(163,160,255,0.4);
+    }
+
+    .compare__title {
       font-family: var(--font-family-display);
       font-size: var(--font-size-display-m);
       line-height: var(--font-size-display-m-line-height);
       font-weight: var(--font-size-display-m-weight);
       color: #181229;
-      margin: 0 0 16px;
-      text-align: center;
+      margin: 0 0 56px;
+      letter-spacing: -0.025em;
     }
 
-    .before-after__subtitle {
+    .compare-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .compare-table thead tr th {
+      padding: 20px 24px;
+      text-align: left;
       font-family: var(--font-family-body);
-      font-size: var(--font-size-body-l);
-      line-height: var(--font-size-body-l-line-height);
-      color: var(--ink-60);
-      margin: 0 auto var(--space-element-gap);
-      text-align: center;
-      max-width: var(--max-width-text);
-    }
-
-    .before-after__grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 24px;
-      perspective: 1000px;
-    }
-
-    @media (min-width: 768px) {
-      .before-after__grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 32px;
-      }
-    }
-
-    /* Glass Panel Base */
-    .ba-panel {
-      border-radius: 28px;
-      padding: 40px 36px;
-      position: relative;
-      overflow: hidden;
-      transform-style: preserve-3d;
-      backdrop-filter: blur(14px) saturate(1.4);
-      -webkit-backdrop-filter: blur(14px) saturate(1.4);
-      border: 1px solid rgba(255,255,255,0.28);
-      transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    /* Inner border for glass thickness */
-    .ba-panel::before {
-      content: "";
-      position: absolute;
-      inset: 1px;
-      border-radius: 27px;
-      border: 1px solid rgba(255,255,255,0.1);
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    /* Specular highlight */
-    .ba-panel::after {
-      content: "";
-      position: absolute;
-      top: -35%;
-      left: -15%;
-      width: 130%;
-      height: 55%;
-      background: linear-gradient(
-        160deg,
-        rgba(255,255,255,0.4) 0%,
-        rgba(255,255,255,0.1) 30%,
-        transparent 55%
-      );
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .ba-panel:hover {
-      transform: translateY(-6px) translateZ(20px);
-    }
-
-    /* Noise overlay */
-    .ba-panel__noise {
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
-      opacity: 0.03;
-      pointer-events: none;
-      z-index: 2;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      background-size: 128px 128px;
-    }
-
-    /* Inner glow */
-    .ba-panel__glow {
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
-      pointer-events: none;
-      z-index: 1;
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.35),
-        inset 0 -1px 2px rgba(0,0,0,0.03),
-        inset 2px 0 6px rgba(255,255,255,0.06),
-        inset -2px 0 6px rgba(255,255,255,0.04);
-    }
-
-    /* Vorher panel: warmer, slightly red-tinted */
-    .ba-panel--before {
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,0.3) 0%,
-        rgba(255,240,235,0.15) 40%,
-        rgba(255,255,255,0.06) 100%
-      );
-      box-shadow:
-        0 8px 24px rgba(37,23,42,0.08),
-        0 24px 48px rgba(37,23,42,0.06);
-    }
-
-    .ba-panel--before:hover {
-      box-shadow:
-        0 12px 32px rgba(37,23,42,0.12),
-        0 32px 64px rgba(37,23,42,0.08);
-    }
-
-    /* Nachher panel: cooler, purple-tinted */
-    .ba-panel--after {
-      background: linear-gradient(
-        145deg,
-        rgba(255,255,255,0.35) 0%,
-        rgba(235,235,255,0.18) 40%,
-        rgba(255,255,255,0.08) 100%
-      );
-      box-shadow:
-        0 10px 28px rgba(37,23,42,0.1),
-        0 28px 56px rgba(37,23,42,0.07);
-    }
-
-    .ba-panel--after:hover {
-      box-shadow:
-        0 14px 36px rgba(37,23,42,0.14),
-        0 36px 72px rgba(37,23,42,0.1);
-    }
-
-    .ba-panel__label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: var(--font-family-body);
-      font-size: var(--font-size-label);
-      font-weight: var(--font-weight-bold);
-      letter-spacing: 0.1em;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      position: relative;
-      z-index: 5;
+      border-bottom: 1px solid rgba(37,23,42,0.08);
     }
 
-    .ba-panel__label-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
+    .compare-table .th-criteria {
+      width: 30%;
+      color: rgba(37,23,42,0.35);
+      background: transparent;
     }
 
-    .ba-panel--before .ba-panel__label {
-      color: rgba(180,80,60,0.7);
+    .compare-table .th-classic {
+      width: 23%;
+      color: rgba(37,23,42,0.5);
+      background: rgba(37,23,42,0.03);
+      border-radius: 14px 14px 0 0;
     }
 
-    .ba-panel--before .ba-panel__label-dot {
-      background: rgba(200,90,70,0.6);
+    .compare-table .th-llm {
+      width: 23%;
+      color: rgba(232,168,56,0.8);
+      background: rgba(232,168,56,0.04);
+      border-radius: 14px 14px 0 0;
     }
 
-    .ba-panel--after .ba-panel__label {
-      color: rgba(90,160,90,0.8);
+    .compare-table .th-asantial {
+      width: 24%;
+      color: #a3a0ff;
+      background: #181229;
+      border-radius: 14px 14px 0 0;
     }
 
-    .ba-panel--after .ba-panel__label-dot {
-      background: #5cb85c;
-    }
-
-    .ba-panel__list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .compare-table .th-inner {
       display: flex;
       flex-direction: column;
-      gap: 18px;
-      position: relative;
-      z-index: 5;
+      gap: 4px;
     }
 
-    .ba-panel__item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
+    .compare-table .th-name {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .compare-table .th-sub {
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 0.6;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .compare-table tbody tr td {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(37,23,42,0.06);
+      vertical-align: top;
       font-family: var(--font-family-body);
-      font-size: var(--font-size-body-m);
-      line-height: var(--font-size-body-m-line-height);
-      color: var(--color-ink-deep);
     }
 
-    .ba-panel__icon {
-      flex-shrink: 0;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .compare-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .compare-table .td-criteria {
       font-size: 13px;
-      margin-top: 2px;
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.25);
+      font-weight: 600;
+      color: rgba(37,23,42,0.65);
     }
 
-    .ba-panel--before .ba-panel__icon {
-      background: rgba(200,90,70,0.08);
-      color: rgba(180,80,60,0.6);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
+    .compare-table .td-classic {
+      background: rgba(37,23,42,0.02);
+      font-size: 13px;
+      color: rgba(37,23,42,0.55);
+      line-height: 1.5;
     }
 
-    .ba-panel--after .ba-panel__icon {
-      background: rgba(90,180,90,0.1);
-      color: #5cb85c;
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
+    .compare-table .td-llm {
+      background: rgba(232,168,56,0.03);
+      font-size: 13px;
+      color: rgba(37,23,42,0.55);
+      line-height: 1.5;
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      .before-after__blob { animation: none; }
-      .ba-panel { transition: none; }
+    .compare-table .td-asantial {
+      background: rgba(24,18,41,0.96);
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.5;
+    }
+
+    .compare-table tbody tr:last-child .td-classic {
+      border-radius: 0 0 14px 14px;
+    }
+
+    .compare-table tbody tr:last-child .td-llm {
+      border-radius: 0 0 14px 14px;
+    }
+
+    .compare-table tbody tr:last-child .td-asantial {
+      border-radius: 0 0 14px 14px;
+    }
+
+    .compare-table .icon-yes {
+      color: #4caf7d;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .compare-table .icon-no {
+      color: #c94f4f;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .compare-table .icon-half {
+      color: #e8a838;
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    @media (max-width: 767px) {
+      .compare-table thead .th-classic,
+      .compare-table tbody .td-classic {
+        display: none;
+      }
+
+      .compare-table .th-criteria {
+        width: 35%;
+      }
+
+      .compare-table .th-llm {
+        width: 32%;
+      }
+
+      .compare-table .th-asantial {
+        width: 33%;
+      }
+
+      .compare-table thead tr th,
+      .compare-table tbody tr td {
+        padding: 14px 12px;
+      }
+
+      .compare-table .th-name {
+        font-size: 12px;
+      }
+
+      .compare-table .td-criteria,
+      .compare-table .td-llm,
+      .compare-table .td-asantial {
+        font-size: 12px;
+      }
+
+      .compare__title {
+        font-size: clamp(28px, 4.5vw, 42px);
+        margin-bottom: 32px;
+      }
     }
 
     /* ----- Gründer ----- */
@@ -3383,7 +3312,10 @@
     .testimonial-card__body,
     .faq__answer-inner,
     .founder__bio,
-    .ba-panel__item,
+    .compare-table .td-criteria,
+    .compare-table .td-classic,
+    .compare-table .td-llm,
+    .compare-table .td-asantial,
     .footer__brand-desc {
       font-size: clamp(14px, 1.8vw, 18px);
     }
@@ -3393,7 +3325,7 @@
     .einstieg__title,
     .faq__title,
     .founder__name,
-    .before-after__title {
+    .compare__title {
       font-size: clamp(28px, 4.5vw, 56px);
     }
     .testimonials__title {
@@ -3477,10 +3409,9 @@
         display: none;
       }
 
-      /* Vorher/Nachher */
-      .before-after__grid {
-        grid-template-columns: 1fr;
-        gap: 24px;
+      /* Vergleichstabelle */
+      .compare-table {
+        font-size: 12px;
       }
 
       /* Highlight Cards */
@@ -3564,7 +3495,7 @@
       .statement,
       .verlegenheit,
       .entscheidungen,
-      .before-after,
+      .compare,
       .apps,
       .testimonials,
       .founder,
@@ -3914,7 +3845,7 @@
           <span>Kein Fortschritt</span>
         </div>
         <div class="verlegenheit__diagram" aria-hidden="true">
-        <svg viewBox="-60 -60 520 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zyklus: Viel machen, Kein Fortschritt, Viel Rechtfertigung, Kein Wirkung">
+        <svg viewBox="-60 -60 520 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Zyklus: Viel machen, Kein Fortschritt, Viel Rechtfertigung, Keine Wirkung">
           <defs>
             <linearGradient id="cycle-stroke" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#7b77e0" />
@@ -3948,7 +3879,7 @@
               <text><textPath href="#cycle-path-top" startOffset="50%" text-anchor="middle">Viel machen</textPath></text>
               <text><textPath href="#cycle-path-right" startOffset="50%" text-anchor="middle">Kein Fortschritt</textPath></text>
               <text><textPath href="#cycle-path-bottom" startOffset="50%" text-anchor="middle">Viel Rechtfertigung</textPath></text>
-              <text><textPath href="#cycle-path-left" startOffset="50%" text-anchor="middle">Kein Wirkung</textPath></text>
+              <text><textPath href="#cycle-path-left" startOffset="50%" text-anchor="middle">Keine Wirkung</textPath></text>
             </g>
             <g class="verlegenheit__diagram-labels">
               <circle cx="200" cy="25" r="5" fill="#a3a0ff" />
@@ -4020,41 +3951,81 @@
     </div>
   </section>
 
-  <!-- Vorher / Nachher -->
-  <section id="vorher-nachher" class="before-after" aria-labelledby="ba-title">
-    <div class="before-after__blobs" aria-hidden="true">
-      <div class="before-after__blob before-after__blob--left"></div>
-      <div class="before-after__blob before-after__blob--right"></div>
-    </div>
-    <div class="before-after__dots" aria-hidden="true"></div>
+  <!-- Vergleichstabelle: Drei Wege -->
+  <section id="vergleich" class="compare" aria-labelledby="compare-title">
     <div class="container">
-      <h2 id="ba-title" class="before-after__title reveal reveal--headline">Was sich mit ASANTIAL ändert.</h2>
-      <p class="before-after__subtitle reveal">Employer Branding mit System statt mit Hoffnung.</p>
-      <div class="before-after__grid">
-        <div class="ba-panel ba-panel--before reveal">
-          <div class="ba-panel__glow" aria-hidden="true"></div>
-          <div class="ba-panel__noise" aria-hidden="true"></div>
-          <div class="ba-panel__label"><span class="ba-panel__label-dot"></span>Ohne ASANTIAL</div>
-          <ul class="ba-panel__list">
-            <li class="ba-panel__item"><span class="ba-panel__icon">✕</span>Einzelaktionen ohne roten Faden</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✕</span>Bauchgefühl statt nachvollziehbarer Strategie</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✕</span>Employer Branding lässt sich nicht erklären</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✕</span>Jedes Projekt startet bei Null</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✕</span>HR kämpft allein um Sichtbarkeit</li>
-          </ul>
-        </div>
-        <div class="ba-panel ba-panel--after reveal">
-          <div class="ba-panel__glow" aria-hidden="true"></div>
-          <div class="ba-panel__noise" aria-hidden="true"></div>
-          <div class="ba-panel__label"><span class="ba-panel__label-dot"></span>Mit ASANTIAL</div>
-          <ul class="ba-panel__list">
-            <li class="ba-panel__item"><span class="ba-panel__icon">✓</span>Durchgängige Wirkungslogik</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✓</span>Nachvollziehbare Entscheidungen mit Substanz</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✓</span>Wirtschaftlich erklärbar gegenüber der Geschäftsführung</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✓</span>Ergebnisse schließen aneinander an</li>
-            <li class="ba-panel__item"><span class="ba-panel__icon">✓</span>HR arbeitet mit System und Struktur</li>
-          </ul>
-        </div>
+      <div class="compare__label reveal">Warum ASANTIAL</div>
+      <h2 id="compare-title" class="compare__title reveal reveal--headline">Drei Wege. Ein klarer Unterschied.</h2>
+      <div class="reveal">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th class="th-criteria"></th>
+              <th class="th-classic">
+                <div class="th-inner">
+                  <span class="th-name">Klassische Methoden</span>
+                  <span class="th-sub">Agentur · Beratung · intern</span>
+                </div>
+              </th>
+              <th class="th-llm">
+                <div class="th-inner">
+                  <span class="th-name" style="color:#e8a838">Generische KI-Tools</span>
+                  <span class="th-sub">ChatGPT · Copilot · Gemini</span>
+                </div>
+              </th>
+              <th class="th-asantial">
+                <div class="th-inner">
+                  <span class="th-name" style="color:white">ASANTIAL</span>
+                  <span class="th-sub" style="color:rgba(163,160,255,0.7)">KI · Expertise · System</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-criteria">Employer-Branding-Expertise</td>
+              <td class="td-classic"><span class="icon-yes">✓</span>Vorhanden – aber projektbezogen und nicht skalierbar</td>
+              <td class="td-llm"><span class="icon-no">✗</span>Nicht vorhanden – allgemein trainiert, kein Fachfokus</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>15 Jahre Erfahrung direkt ins System eingebaut</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">DSGVO-Konformität</td>
+              <td class="td-classic"><span class="icon-half">~</span>Abhängig vom Anbieter – oft unklar</td>
+              <td class="td-llm"><span class="icon-no">✗</span>Kritisch – Daten auf US-Servern, keine Garantien</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>Vollständig DSGVO-konform, deutsche Server</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">Halluzinationsrisiko</td>
+              <td class="td-classic"><span class="icon-yes">✓</span>Kein Risiko – menschliche Expertise</td>
+              <td class="td-llm"><span class="icon-no">✗</span>Hoch – erfindet Fakten, Studien, Quellen</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>Minimiert durch fachspezifisches Training und Struktur</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">Strukturiertes Vorgehen</td>
+              <td class="td-classic"><span class="icon-half">~</span>Gut – aber nur im Projekt, danach weg</td>
+              <td class="td-llm"><span class="icon-no">✗</span>Keine – jede Anfrage beginnt bei null</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>Durchgängige Wirkungslogik, Ergebnisse bauen aufeinander auf</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">Interne Steuerbarkeit</td>
+              <td class="td-classic"><span class="icon-no">✗</span>Agenturabhängigkeit – Know-how bleibt extern</td>
+              <td class="td-llm"><span class="icon-half">~</span>Vorhanden – aber ohne fachliche Führung</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>HR behält die Kontrolle – ASANTIAL ist das Werkzeug</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">Kosten & Skalierbarkeit</td>
+              <td class="td-classic"><span class="icon-no">✗</span>Projektpreise, hohe Tagessätze, schwer skalierbar</td>
+              <td class="td-llm"><span class="icon-yes">✓</span>Günstig – aber ohne Employer-Branding-Kontext wertlos</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>Ab 497 €/Monat – skalierbar, monatlich kündbar</td>
+            </tr>
+            <tr>
+              <td class="td-criteria">Argumentationssicherheit gegenüber GF</td>
+              <td class="td-classic"><span class="icon-half">~</span>Möglich – aber teuer erkauft</td>
+              <td class="td-llm"><span class="icon-no">✗</span>Nicht gegeben – keine nachvollziehbare Methodik</td>
+              <td class="td-asantial"><span class="icon-yes" style="color:#4caf7d">✓</span>Strukturierte Entscheidungsgrundlage jederzeit abrufbar</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
