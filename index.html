@@ -3774,22 +3774,20 @@
     .acc-card__icon {
       width: 28px; height: 28px;
       border-radius: 8px;
-      background: rgba(37,23,42,0.03);
-      border: 1px solid rgba(37,23,42,0.05);
+      background: rgba(var(--acc-glow-rgb), 0.06);
+      border: 1px solid rgba(var(--acc-glow-rgb), 0.10);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 14px;
     }
-    .acc-card__icon::after {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 1.5px;
-      background: var(--acc-glow);
-      opacity: 0.6;
-      transform: rotate(45deg);
+    .acc-card__icon svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
     }
     .acc-card__cat {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: 9px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -3799,7 +3797,7 @@
       margin-bottom: 5px;
     }
     .acc-card__name {
-      font-family: 'Fraunces', var(--font-family-display);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: 16px;
       font-weight: 700;
       color: #181229;
@@ -3808,9 +3806,10 @@
       letter-spacing: -0.01em;
     }
     .acc-card__desc {
-      font-size: 11.5px;
-      line-height: 1.55;
-      color: rgba(37,23,42,0.35);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(37,23,42,0.45);
       flex: 1;
       transition: color 0.4s ease;
       display: -webkit-box;
@@ -3818,7 +3817,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    .acc-card:hover .acc-card__desc { color: rgba(37,23,42,0.55); }
+    .acc-card:hover .acc-card__desc { color: rgba(37,23,42,0.6); }
     .acc-card__premium {
       position: absolute;
       top: 12px; right: 12px;
@@ -3833,13 +3832,13 @@
       border-radius: 100px;
       border: 1px solid rgba(245,197,67,0.12);
     }
-    .acc-cat-analyse       { --acc-glow: #6b8aed; }
-    .acc-cat-strategie     { --acc-glow: #a3a0ff; }
-    .acc-cat-content       { --acc-glow: #e87b6a; }
-    .acc-cat-steuerung     { --acc-glow: #4caf7d; }
-    .acc-cat-forschung     { --acc-glow: #5ec4c4; }
-    .acc-cat-argumentation { --acc-glow: #f5c543; }
-    .acc-cat-compliance    { --acc-glow: #8a6aa4; }
+    .acc-cat-analyse       { --acc-glow: #6b8aed; --acc-glow-rgb: 107,138,237; }
+    .acc-cat-strategie     { --acc-glow: #a3a0ff; --acc-glow-rgb: 163,160,255; }
+    .acc-cat-content       { --acc-glow: #e87b6a; --acc-glow-rgb: 232,123,106; }
+    .acc-cat-steuerung     { --acc-glow: #4caf7d; --acc-glow-rgb: 76,175,125; }
+    .acc-cat-forschung     { --acc-glow: #5ec4c4; --acc-glow-rgb: 94,196,196; }
+    .acc-cat-argumentation { --acc-glow: #f5c543; --acc-glow-rgb: 245,197,67; }
+    .acc-cat-compliance    { --acc-glow: #8a6aa4; --acc-glow-rgb: 138,106,164; }
     .acc-footer {
       display: flex;
       align-items: center;
@@ -4453,7 +4452,7 @@
           <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:0ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
               <div class="acc-card__cat">Analyse</div>
               <div class="acc-card__name">Arbeitsmarktanalyse</div>
               <div class="acc-card__desc">Ordnet Arbeitsmarktlage, Zielgruppen und Branchenreife sachlich ein – als belastbare Entscheidungsgrundlage.</div>
@@ -4462,7 +4461,7 @@
           <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:30ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
               <div class="acc-card__cat">Analyse</div>
               <div class="acc-card__name">Karriereseitenanalyse</div>
               <div class="acc-card__desc">Bewertet Klarheit, Glaubwürdigkeit und Differenzierung – ohne Lösungen vorzugeben.</div>
@@ -4471,7 +4470,7 @@
           <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:60ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
               <div class="acc-card__cat">Analyse</div>
               <div class="acc-card__name">Wettbewerbsanalyse</div>
               <div class="acc-card__desc">Untersucht die Arbeitgeberkommunikation relevanter Wettbewerber auf Muster und Formate.</div>
@@ -4480,7 +4479,7 @@
           <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:90ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
               <div class="acc-card__cat">Analyse</div>
               <div class="acc-card__name">Zielgruppeninsides</div>
               <div class="acc-card__desc">Denkweisen, Erwartungen und Entscheidungslogiken von Zielgruppen verstehen.</div>
@@ -4490,7 +4489,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
               <div class="acc-card__cat">Analyse</div>
               <div class="acc-card__name">EVP-Analyse</div>
               <div class="acc-card__desc">Erkennt in Arbeitgeberdokumenten wiederkehrende Muster, Denklogiken und kulturelle Strukturen.</div>
@@ -4499,7 +4498,7 @@
           <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:150ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">Start- und Navigations-App</div>
               <div class="acc-card__desc">Hilft, die passende App zu finden – ordnet Anliegen ein und empfiehlt den besten Einstieg.</div>
@@ -4508,7 +4507,7 @@
           <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:180ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">Kick-Off-Workshop</div>
               <div class="acc-card__desc">Klärt Ziel, Rollen, Zeit und methodische Leitplanken – der strategische Startpunkt.</div>
@@ -4517,7 +4516,7 @@
           <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:210ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">Kick-Off Auswertung</div>
               <div class="acc-card__desc">Verdichtet die Ergebnisse des Kick-Offs zu klaren Prioritäten und nächsten Schritten.</div>
@@ -4527,7 +4526,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">EVP-Entwicklung</div>
               <div class="acc-card__desc">Entwickelt ein präzises Arbeitgeberversprechen – Identität, Anspruch, Haltung und zentrale Aussagen.</div>
@@ -4537,7 +4536,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">Arbeitgeberclaim</div>
               <div class="acc-card__desc">Verdichtet Haltung, Kultur und Anspruch zu einer prägnanten, emotional wirksamen Aussage.</div>
@@ -4547,7 +4546,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></div>
               <div class="acc-card__cat">Strategie</div>
               <div class="acc-card__name">Führungsabgleich</div>
               <div class="acc-card__desc">Zeigt wo Führung das Arbeitgeberversprechen trägt und wo Abstand zum Anspruch besteht.</div>
@@ -4556,7 +4555,7 @@
           <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:330ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v4"/><path d="M8 21h8"/><path d="M10 18h4"/></svg></div>
               <div class="acc-card__cat">Forschung</div>
               <div class="acc-card__name">Befragungsdesign</div>
               <div class="acc-card__desc">Plant anonyme Mitarbeiterbefragungen professionell – von Ankündigung bis Auswertung.</div>
@@ -4565,7 +4564,7 @@
           <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:360ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v4"/><path d="M8 21h8"/><path d="M10 18h4"/></svg></div>
               <div class="acc-card__cat">Forschung</div>
               <div class="acc-card__name">Mitarbeiterinterviews</div>
               <div class="acc-card__desc">Strukturen für Vorbereitung, Gesprächsführung, Dokumentation und anonyme Auswertung.</div>
@@ -4574,7 +4573,7 @@
           <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:390ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v4"/><path d="M8 21h8"/><path d="M10 18h4"/></svg></div>
               <div class="acc-card__cat">Forschung</div>
               <div class="acc-card__name">Interviewauswertung</div>
               <div class="acc-card__desc">Erkennt wiederkehrende Themen, Spannungsfelder und Deutungsmuster – strukturiert für Management.</div>
@@ -4583,7 +4582,7 @@
           <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:420ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v4"/><path d="M8 21h8"/><path d="M10 18h4"/></svg></div>
               <div class="acc-card__cat">Forschung</div>
               <div class="acc-card__name">Hochschulkompass</div>
               <div class="acc-card__desc">Strukturiert Hochschulmarketing – von Zielklärung über passende Hochschulen bis zur Kontaktaufnahme.</div>
@@ -4592,7 +4591,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:450ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Stellenanzeigen</div>
               <div class="acc-card__desc">Klare, zielgruppengerechte Stellenanzeigen – gut lesbar und auffindbar.</div>
@@ -4601,7 +4600,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:480ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Social Posts</div>
               <div class="acc-card__desc">Beiträge für HR- und Arbeitgeberkommunikation – von sachlich bis aufmerksamkeitsstark.</div>
@@ -4610,7 +4609,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:510ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Kununu-Antworten</div>
               <div class="acc-card__desc">Professionelle Antworten auf Bewertungen – sachlich, wertschätzend, rechtlich sauber.</div>
@@ -4619,7 +4618,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:540ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Interne Kommunikation</div>
               <div class="acc-card__desc">Prüft Kommunikationsanlässe und formuliert interne Botschaften mit Klarheit und Relevanz.</div>
@@ -4628,7 +4627,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:570ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Kampagnenbriefing</div>
               <div class="acc-card__desc">Strukturiert Ziele, Zielgruppen und Inhalte zur verständlichen Grundlage für Kampagnen.</div>
@@ -4637,7 +4636,7 @@
           <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:600ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Karriereseitenkonzept</div>
               <div class="acc-card__desc">Übersetzt strategische Grundlagen in Informationsarchitektur und Inhaltsmodule.</div>
@@ -4647,7 +4646,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Kampagnenkonzept</div>
               <div class="acc-card__desc">Entwickelt Kampagnen vom Briefing bis zum strukturierten Designbriefing mit Headline und Hauptrichtung.</div>
@@ -4657,7 +4656,7 @@
             <div class="acc-card__premium">Premium</div>
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.85 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg></div>
               <div class="acc-card__cat">Content</div>
               <div class="acc-card__name">Kampagnendesigner</div>
               <div class="acc-card__desc">Übersetzt Kampagnenideen in visuelle Mockups – Großfläche, Social-Post, Website-Header.</div>
@@ -4666,7 +4665,7 @@
           <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:690ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></div>
               <div class="acc-card__cat">Steuerung</div>
               <div class="acc-card__name">Projektmanager</div>
               <div class="acc-card__desc">Begleitet strukturiert durch den vollständigen Employer-Branding-Prozess.</div>
@@ -4675,7 +4674,7 @@
           <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:720ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></div>
               <div class="acc-card__cat">Steuerung</div>
               <div class="acc-card__name">Roadmap</div>
               <div class="acc-card__desc">Bündelt alle Phasen eines Jahres in einem durchgehenden Gesamtfahrplan.</div>
@@ -4684,7 +4683,7 @@
           <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:750ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></div>
               <div class="acc-card__cat">Steuerung</div>
               <div class="acc-card__name">Kennzahlenkompass</div>
               <div class="acc-card__desc">Priorisiert relevante Kennzahlen und ordnet sie verständlich für die Geschäftsführung ein.</div>
@@ -4693,7 +4692,7 @@
           <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:780ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/></svg></div>
               <div class="acc-card__cat">Steuerung</div>
               <div class="acc-card__name">Trendradar</div>
               <div class="acc-card__desc">Ordnet neue Formate, Werkzeuge und Ansätze realistisch ein – Relevanz statt Hype.</div>
@@ -4702,7 +4701,7 @@
           <div class="acc-card acc-cat-argumentation" data-cat="argumentation" style="animation-delay:810ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
               <div class="acc-card__cat">Argumentation</div>
               <div class="acc-card__name">Businessargumente</div>
               <div class="acc-card__desc">Macht Employer Branding wirtschaftlich nachvollziehbar – für GF, Controlling und Management.</div>
@@ -4711,7 +4710,7 @@
           <div class="acc-card acc-cat-compliance" data-cat="compliance" style="animation-delay:840ms">
             <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
             <div class="acc-card__content">
-              <div class="acc-card__icon"></div>
+              <div class="acc-card__icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--acc-glow)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
               <div class="acc-card__cat">Compliance</div>
               <div class="acc-card__name">EU AI Act</div>
               <div class="acc-card__desc">Beantwortet Fragen zur KI-Verordnung – praxisnah, auch ohne juristische Vorkenntnisse.</div>
