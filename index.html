@@ -1278,12 +1278,12 @@
 
     .apps::before {
       top: 0;
-      background: linear-gradient(to bottom, var(--bg-base) 0%, rgba(252,250,249,0.6) 40%, transparent 100%);
+      background: linear-gradient(to bottom, var(--bg-base) 0%, rgba(245,242,248,0.7) 40%, transparent 100%);
     }
 
     .apps::after {
       bottom: 0;
-      background: linear-gradient(to top, var(--bg-warm) 0%, rgba(255,251,244,0.6) 40%, transparent 100%);
+      background: linear-gradient(to top, var(--bg-warm) 0%, rgba(248,244,252,0.7) 40%, transparent 100%);
     }
 
     /* Layer 2: Tiefenblobs */
@@ -1302,21 +1302,33 @@
     }
 
     .apps__blob--left {
-      width: 50%;
-      height: 60%;
+      width: 55%;
+      height: 65%;
       left: -5%;
-      top: 40%;
-      background: radial-gradient(circle at 15% 70%, rgba(163,140,255,0.25) 0%, transparent 70%);
+      top: 35%;
+      background: radial-gradient(circle at 15% 70%, rgba(163,140,255,0.42) 0%, rgba(163,140,255,0.08) 50%, transparent 75%);
+      filter: blur(55px);
       animation: env-drift1 20s ease-in-out infinite;
     }
 
     .apps__blob--right {
-      width: 50%;
-      height: 60%;
+      width: 55%;
+      height: 65%;
       right: -5%;
       top: 0%;
-      background: radial-gradient(circle at 85% 30%, rgba(140,190,255,0.2) 0%, transparent 70%);
+      background: radial-gradient(circle at 85% 30%, rgba(140,190,255,0.38) 0%, rgba(140,190,255,0.06) 50%, transparent 75%);
+      filter: blur(55px);
       animation: env-drift2 24s ease-in-out infinite;
+    }
+
+    .apps__blob--center {
+      width: 70%;
+      height: 50%;
+      left: 15%;
+      top: 50%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(163,140,255,0.18) 0%, rgba(140,170,255,0.10) 40%, transparent 70%);
+      filter: blur(65px);
+      animation: env-drift1 28s ease-in-out infinite reverse;
     }
 
     @keyframes env-drift1 {
@@ -4371,6 +4383,7 @@
     <div class="apps__blobs" aria-hidden="true">
       <div class="apps__blob apps__blob--left"></div>
       <div class="apps__blob apps__blob--right"></div>
+      <div class="apps__blob apps__blob--center"></div>
     </div>
     <div class="apps__dots" aria-hidden="true"></div>
     <div class="container">
