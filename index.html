@@ -3560,6 +3560,322 @@
         padding-right: 80px;
       }
     }
+
+    /* ----- App Accordion ----- */
+    .acc-trigger {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      padding: 18px 28px;
+      border-radius: 16px;
+      background: rgba(37,23,42,0.025);
+      border: 1px solid rgba(37,23,42,0.06);
+      transition: all 0.5s cubic-bezier(0.22,1,0.36,1);
+      margin-top: 40px;
+      margin-bottom: 0;
+      user-select: none;
+    }
+    .acc-trigger:hover {
+      background: rgba(37,23,42,0.045);
+      border-color: rgba(163,160,255,0.2);
+    }
+    .acc-trigger.open {
+      background: rgba(163,160,255,0.04);
+      border-color: rgba(163,160,255,0.15);
+      margin-bottom: 32px;
+    }
+    .acc-trigger__count {
+      font-family: 'Fraunces', var(--font-family-display);
+      font-size: 28px;
+      font-weight: 900;
+      color: #a3a0ff;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .acc-trigger__text { flex: 1; }
+    .acc-trigger__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #181229;
+      margin-bottom: 2px;
+    }
+    .acc-trigger__sub {
+      font-size: 12px;
+      color: rgba(37,23,42,0.38);
+      font-weight: 400;
+    }
+    .acc-trigger__arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(37,23,42,0.04);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s cubic-bezier(0.22,1,0.36,1);
+      flex-shrink: 0;
+    }
+    .acc-trigger:hover .acc-trigger__arrow {
+      background: rgba(163,160,255,0.1);
+    }
+    .acc-trigger.open .acc-trigger__arrow {
+      transform: rotate(180deg);
+      background: rgba(163,160,255,0.12);
+    }
+    .acc-trigger__arrow svg {
+      width: 14px;
+      height: 14px;
+      stroke: rgba(37,23,42,0.4);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .acc-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.8s cubic-bezier(0.22,1,0.36,1);
+    }
+    .acc-panel.open {
+      max-height: 4000px;
+    }
+    .acc-filter {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .acc-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 100px;
+      border: 1px solid rgba(37,23,42,0.06);
+      background: rgba(37,23,42,0.02);
+      cursor: pointer;
+      transition: all 0.35s ease;
+      user-select: none;
+    }
+    .acc-pill:hover, .acc-pill.active {
+      background: rgba(163,160,255,0.06);
+      border-color: rgba(163,160,255,0.18);
+    }
+    .acc-pill__dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .acc-pill span {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: rgba(37,23,42,0.4);
+      transition: color 0.3s ease;
+    }
+    .acc-pill:hover span, .acc-pill.active span { color: rgba(37,23,42,0.72); }
+    .acc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .acc-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: all 0.55s cubic-bezier(0.22,1,0.36,1);
+      transform-origin: center bottom;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .acc-panel.open .acc-card {
+      animation: accCardIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .acc-card:hover {
+      transform: translateY(-6px) scale(1.015);
+      z-index: 3;
+    }
+    @keyframes accCardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .acc-card__glass {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(24px) saturate(120%);
+      -webkit-backdrop-filter: blur(24px) saturate(120%);
+      border-radius: 18px;
+      transition: all 0.5s ease;
+    }
+    .acc-card:hover .acc-card__glass { background: rgba(255,255,255,0.72); }
+    .acc-card__edge {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.65);
+      border-bottom-color: rgba(37,23,42,0.04);
+      border-right-color: rgba(37,23,42,0.03);
+      pointer-events: none;
+      z-index: 2;
+      transition: all 0.4s ease;
+    }
+    .acc-card:hover .acc-card__edge {
+      border-color: rgba(255,255,255,0.85);
+      border-bottom-color: rgba(37,23,42,0.06);
+    }
+    .acc-card__shadow {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      box-shadow: 0 2px 8px rgba(37,23,42,0.03), 0 8px 32px rgba(37,23,42,0.04);
+      pointer-events: none;
+      transition: box-shadow 0.5s ease;
+    }
+    .acc-card:hover .acc-card__shadow {
+      box-shadow: 0 4px 12px rgba(37,23,42,0.05), 0 16px 48px rgba(37,23,42,0.07);
+    }
+    .acc-card__glow {
+      position: absolute;
+      top: -1px;
+      left: 30%; right: 30%;
+      height: 2px;
+      background: var(--acc-glow);
+      opacity: 0;
+      border-radius: 0 0 4px 4px;
+      transition: all 0.45s ease;
+      z-index: 3;
+    }
+    .acc-card:hover .acc-card__glow {
+      opacity: 0.5;
+      left: 15%; right: 15%;
+      box-shadow: 0 0 12px var(--acc-glow), 0 0 36px var(--acc-glow);
+    }
+    .acc-card__glare {
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      background: linear-gradient(130deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 70%, rgba(255,255,255,0.08) 100%);
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.5;
+    }
+    .acc-card__content {
+      position: relative;
+      z-index: 2;
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      min-height: 195px;
+    }
+    .acc-card__icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: rgba(37,23,42,0.03);
+      border: 1px solid rgba(37,23,42,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .acc-card__icon::after {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 1.5px;
+      background: var(--acc-glow);
+      opacity: 0.6;
+      transform: rotate(45deg);
+    }
+    .acc-card__cat {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--acc-glow);
+      opacity: 0.7;
+      margin-bottom: 5px;
+    }
+    .acc-card__name {
+      font-family: 'Fraunces', var(--font-family-display);
+      font-size: 16px;
+      font-weight: 700;
+      color: #181229;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .acc-card__desc {
+      font-size: 11.5px;
+      line-height: 1.55;
+      color: rgba(37,23,42,0.35);
+      flex: 1;
+      transition: color 0.4s ease;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .acc-card:hover .acc-card__desc { color: rgba(37,23,42,0.55); }
+    .acc-card__premium {
+      position: absolute;
+      top: 12px; right: 12px;
+      z-index: 4;
+      font-size: 7px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #c9a227;
+      background: rgba(245,197,67,0.08);
+      padding: 3px 9px;
+      border-radius: 100px;
+      border: 1px solid rgba(245,197,67,0.12);
+    }
+    .acc-cat-analyse       { --acc-glow: #6b8aed; }
+    .acc-cat-strategie     { --acc-glow: #a3a0ff; }
+    .acc-cat-content       { --acc-glow: #e87b6a; }
+    .acc-cat-steuerung     { --acc-glow: #4caf7d; }
+    .acc-cat-forschung     { --acc-glow: #5ec4c4; }
+    .acc-cat-argumentation { --acc-glow: #f5c543; }
+    .acc-cat-compliance    { --acc-glow: #8a6aa4; }
+    .acc-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(37,23,42,0.05);
+    }
+    .acc-footer__stat { text-align: center; }
+    .acc-footer__num {
+      font-family: 'Fraunces', var(--font-family-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: #181229;
+      line-height: 1;
+      margin-bottom: 3px;
+      letter-spacing: -0.02em;
+    }
+    .acc-footer__label {
+      font-size: 10px;
+      color: rgba(37,23,42,0.3);
+      font-weight: 500;
+      letter-spacing: 0.03em;
+    }
+    @media (max-width: 1024px) {
+      .acc-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .acc-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .acc-card__content { padding: 18px 16px; min-height: 170px; }
+      .acc-card__name { font-size: 14px; }
+      .acc-footer { gap: 24px; }
+      .acc-trigger { padding: 14px 20px; }
+    }
+    @media (max-width: 480px) {
+      .acc-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .acc-card { animation: none !important; opacity: 1; transform: none; }
+      .acc-trigger__arrow { transition: none; }
+      .acc-panel { transition: none; }
+    }
   </style>
 </head>
 <body class="page">
@@ -4100,8 +4416,354 @@
           </div>
         </div>
       </div>
+
+      <!-- App Accordion -->
+      <div class="acc-trigger" id="acc-trigger">
+        <div class="acc-trigger__count">28</div>
+        <div class="acc-trigger__text">
+          <div class="acc-trigger__title">Alle Apps ansehen</div>
+          <div class="acc-trigger__sub">Analyse · Strategie · Forschung · Content · Steuerung · Argumentation · Compliance</div>
+        </div>
+        <div class="acc-trigger__arrow">
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
+      </div>
+
+      <div class="acc-panel" id="acc-panel">
+        <div class="acc-filter" id="acc-filter">
+          <div class="acc-pill active" data-cat="all"><span>Alle 28</span></div>
+          <div class="acc-pill" data-cat="analyse"><div class="acc-pill__dot" style="background:#6b8aed"></div><span>Analyse</span></div>
+          <div class="acc-pill" data-cat="strategie"><div class="acc-pill__dot" style="background:#a3a0ff"></div><span>Strategie</span></div>
+          <div class="acc-pill" data-cat="forschung"><div class="acc-pill__dot" style="background:#5ec4c4"></div><span>Forschung</span></div>
+          <div class="acc-pill" data-cat="content"><div class="acc-pill__dot" style="background:#e87b6a"></div><span>Content</span></div>
+          <div class="acc-pill" data-cat="steuerung"><div class="acc-pill__dot" style="background:#4caf7d"></div><span>Steuerung</span></div>
+          <div class="acc-pill" data-cat="argumentation"><div class="acc-pill__dot" style="background:#f5c543"></div><span>Argumentation</span></div>
+          <div class="acc-pill" data-cat="compliance"><div class="acc-pill__dot" style="background:#8a6aa4"></div><span>Compliance</span></div>
+        </div>
+
+        <div class="acc-grid" id="acc-grid">
+          <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:0ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Analyse</div>
+              <div class="acc-card__name">Arbeitsmarktanalyse</div>
+              <div class="acc-card__desc">Ordnet Arbeitsmarktlage, Zielgruppen und Branchenreife sachlich ein – als belastbare Entscheidungsgrundlage.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:30ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Analyse</div>
+              <div class="acc-card__name">Karriereseitenanalyse</div>
+              <div class="acc-card__desc">Bewertet Klarheit, Glaubwürdigkeit und Differenzierung – ohne Lösungen vorzugeben.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:60ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Analyse</div>
+              <div class="acc-card__name">Wettbewerbsanalyse</div>
+              <div class="acc-card__desc">Untersucht die Arbeitgeberkommunikation relevanter Wettbewerber auf Muster und Formate.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:90ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Analyse</div>
+              <div class="acc-card__name">Zielgruppeninsides</div>
+              <div class="acc-card__desc">Denkweisen, Erwartungen und Entscheidungslogiken von Zielgruppen verstehen.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-analyse" data-cat="analyse" style="animation-delay:120ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Analyse</div>
+              <div class="acc-card__name">EVP-Analyse</div>
+              <div class="acc-card__desc">Erkennt in Arbeitgeberdokumenten wiederkehrende Muster, Denklogiken und kulturelle Strukturen.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:150ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">Start- und Navigations-App</div>
+              <div class="acc-card__desc">Hilft, die passende App zu finden – ordnet Anliegen ein und empfiehlt den besten Einstieg.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:180ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">Kick-Off-Workshop</div>
+              <div class="acc-card__desc">Klärt Ziel, Rollen, Zeit und methodische Leitplanken – der strategische Startpunkt.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:210ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">Kick-Off Auswertung</div>
+              <div class="acc-card__desc">Verdichtet die Ergebnisse des Kick-Offs zu klaren Prioritäten und nächsten Schritten.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:240ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">EVP-Entwicklung</div>
+              <div class="acc-card__desc">Entwickelt ein präzises Arbeitgeberversprechen – Identität, Anspruch, Haltung und zentrale Aussagen.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:270ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">Arbeitgeberclaim</div>
+              <div class="acc-card__desc">Verdichtet Haltung, Kultur und Anspruch zu einer prägnanten, emotional wirksamen Aussage.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-strategie" data-cat="strategie" style="animation-delay:300ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Strategie</div>
+              <div class="acc-card__name">Führungsabgleich</div>
+              <div class="acc-card__desc">Zeigt wo Führung das Arbeitgeberversprechen trägt und wo Abstand zum Anspruch besteht.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:330ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Forschung</div>
+              <div class="acc-card__name">Befragungsdesign</div>
+              <div class="acc-card__desc">Plant anonyme Mitarbeiterbefragungen professionell – von Ankündigung bis Auswertung.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:360ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Forschung</div>
+              <div class="acc-card__name">Mitarbeiterinterviews</div>
+              <div class="acc-card__desc">Strukturen für Vorbereitung, Gesprächsführung, Dokumentation und anonyme Auswertung.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:390ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Forschung</div>
+              <div class="acc-card__name">Interviewauswertung</div>
+              <div class="acc-card__desc">Erkennt wiederkehrende Themen, Spannungsfelder und Deutungsmuster – strukturiert für Management.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-forschung" data-cat="forschung" style="animation-delay:420ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Forschung</div>
+              <div class="acc-card__name">Hochschulkompass</div>
+              <div class="acc-card__desc">Strukturiert Hochschulmarketing – von Zielklärung über passende Hochschulen bis zur Kontaktaufnahme.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:450ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Stellenanzeigen</div>
+              <div class="acc-card__desc">Klare, zielgruppengerechte Stellenanzeigen – gut lesbar und auffindbar.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:480ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Social Posts</div>
+              <div class="acc-card__desc">Beiträge für HR- und Arbeitgeberkommunikation – von sachlich bis aufmerksamkeitsstark.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:510ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Kununu-Antworten</div>
+              <div class="acc-card__desc">Professionelle Antworten auf Bewertungen – sachlich, wertschätzend, rechtlich sauber.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:540ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Interne Kommunikation</div>
+              <div class="acc-card__desc">Prüft Kommunikationsanlässe und formuliert interne Botschaften mit Klarheit und Relevanz.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:570ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Kampagnenbriefing</div>
+              <div class="acc-card__desc">Strukturiert Ziele, Zielgruppen und Inhalte zur verständlichen Grundlage für Kampagnen.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:600ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Karriereseitenkonzept</div>
+              <div class="acc-card__desc">Übersetzt strategische Grundlagen in Informationsarchitektur und Inhaltsmodule.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:630ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Kampagnenkonzept</div>
+              <div class="acc-card__desc">Entwickelt Kampagnen vom Briefing bis zum strukturierten Designbriefing mit Headline und Hauptrichtung.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-content" data-cat="content" style="animation-delay:660ms">
+            <div class="acc-card__premium">Premium</div>
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Content</div>
+              <div class="acc-card__name">Kampagnendesigner</div>
+              <div class="acc-card__desc">Übersetzt Kampagnenideen in visuelle Mockups – Großfläche, Social-Post, Website-Header.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:690ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Steuerung</div>
+              <div class="acc-card__name">Projektmanager</div>
+              <div class="acc-card__desc">Begleitet strukturiert durch den vollständigen Employer-Branding-Prozess.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:720ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Steuerung</div>
+              <div class="acc-card__name">Roadmap</div>
+              <div class="acc-card__desc">Bündelt alle Phasen eines Jahres in einem durchgehenden Gesamtfahrplan.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:750ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Steuerung</div>
+              <div class="acc-card__name">Kennzahlenkompass</div>
+              <div class="acc-card__desc">Priorisiert relevante Kennzahlen und ordnet sie verständlich für die Geschäftsführung ein.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-steuerung" data-cat="steuerung" style="animation-delay:780ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Steuerung</div>
+              <div class="acc-card__name">Trendradar</div>
+              <div class="acc-card__desc">Ordnet neue Formate, Werkzeuge und Ansätze realistisch ein – Relevanz statt Hype.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-argumentation" data-cat="argumentation" style="animation-delay:810ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Argumentation</div>
+              <div class="acc-card__name">Businessargumente</div>
+              <div class="acc-card__desc">Macht Employer Branding wirtschaftlich nachvollziehbar – für GF, Controlling und Management.</div>
+            </div>
+          </div>
+          <div class="acc-card acc-cat-compliance" data-cat="compliance" style="animation-delay:840ms">
+            <div class="acc-card__glass"></div><div class="acc-card__edge"></div><div class="acc-card__shadow"></div><div class="acc-card__glow"></div><div class="acc-card__glare"></div>
+            <div class="acc-card__content">
+              <div class="acc-card__icon"></div>
+              <div class="acc-card__cat">Compliance</div>
+              <div class="acc-card__name">EU AI Act</div>
+              <div class="acc-card__desc">Beantwortet Fragen zur KI-Verordnung – praxisnah, auch ohne juristische Vorkenntnisse.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-footer">
+          <div class="acc-footer__stat"><div class="acc-footer__num">22</div><div class="acc-footer__label">Professional</div></div>
+          <div class="acc-footer__stat"><div class="acc-footer__num">7</div><div class="acc-footer__label">Premium</div></div>
+          <div class="acc-footer__stat"><div class="acc-footer__num">7</div><div class="acc-footer__label">Kategorien</div></div>
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <script>
+  (function() {
+    var accTrigger = document.getElementById('acc-trigger');
+    var accPanel = document.getElementById('acc-panel');
+    var accTitle = accTrigger.querySelector('.acc-trigger__title');
+
+    accTrigger.addEventListener('click', function() {
+      accTrigger.classList.toggle('open');
+      accPanel.classList.toggle('open');
+      accTitle.textContent = accTrigger.classList.contains('open') ? 'Weniger anzeigen' : 'Alle Apps ansehen';
+    });
+
+    var accPills = document.querySelectorAll('#acc-filter .acc-pill');
+    var accCards = document.querySelectorAll('#acc-grid .acc-card');
+
+    accPills.forEach(function(pill) {
+      pill.addEventListener('click', function() {
+        accPills.forEach(function(p) { p.classList.remove('active'); });
+        pill.classList.add('active');
+        var cat = pill.dataset.cat;
+        var visibleIndex = 0;
+
+        accCards.forEach(function(card) {
+          var show = cat === 'all' || card.dataset.cat === cat;
+          card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+          if (show) {
+            card.style.display = 'block';
+            var delay = visibleIndex * 25;
+            visibleIndex++;
+            setTimeout(function() {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0) scale(1)';
+            }, delay);
+          } else {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(8px) scale(0.97)';
+            setTimeout(function() { card.style.display = 'none'; }, 350);
+          }
+        });
+      });
+    });
+  })();
+  </script>
 
   <!-- Modul 10: ASANTIAL Professional -->
   <section id="professional" class="professional" aria-labelledby="professional-title">
