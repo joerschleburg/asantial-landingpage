@@ -512,7 +512,24 @@
     .gantt-tile__legend-label { font-size: 8px; color: rgba(37,23,42,0.4); }
 
     @media (max-width: 899px) {
-      .hero__gantt { display: none; }
+      .hero__gantt {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 100%;
+      }
+      .hero__mockup {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 20px 0;
+      }
+      .gantt-tile {
+        transform: none;
+        max-width: 340px;
+        margin: 0 auto;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       .gantt-tile { animation: none; }
@@ -1978,14 +1995,15 @@
 
     /* Trust Bar */
     .trust-bar {
-      display: none;
+      display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
       font-size: 12px;
       font-weight: 500;
       color: rgba(37,23,42,0.55);
-      white-space: nowrap;
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
@@ -1994,9 +2012,17 @@
       border: none;
       box-shadow: none;
       padding: 0;
+      max-width: 90%;
     }
     @media (min-width: 768px) {
-      .trust-bar { display: flex; }
+      .trust-bar {
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        gap: 10px;
+      }
+    }
+    @media (max-width: 380px) {
+      .trust-bar { font-size: 11px; gap: 6px; }
     }
     .trust-dot {
       width: 8px;
@@ -2788,7 +2814,7 @@
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background: var(--accent-purple-light);
+      background: #4caf7d;
     }
 
     /* ----- ASANTIAL Professional Banner ----- */
@@ -3529,7 +3555,29 @@
         align-items: center;
       }
       .hero__mockup {
-        display: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        min-height: auto;
+        padding: 24px 16px;
+      }
+      .hero__mockup .mockup {
+        max-width: 320px;
+      }
+      .hero__gantt {
+        position: relative;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+      .gantt-tile {
+        transform: none;
+      }
+      .gantt-tile__ui {
+        height: 300px;
       }
 
       /* Statement */
@@ -3544,26 +3592,9 @@
         padding: 40px 0 64px;
       }
 
-      /* Verlegenheits-Falle */
+      /* Verlegenheits-Falle – auf Mobile ausblenden */
       .verlegenheit {
-        margin-top: 0;
-        padding-top: calc(var(--space-section-vertical) + 400px);
-        position: relative;
-        z-index: 1;
-        background-color: var(--bg-base);
-      }
-      .verlegenheit__diagram-wrap {
-        min-height: 360px;
-      }
-      .speech-bubble--left-1,
-      .speech-bubble--left-2,
-      .speech-bubble--left-3 {
-        left: 2% !important;
-      }
-      .speech-bubble--right-1,
-      .speech-bubble--right-2,
-      .speech-bubble--right-3 {
-        right: 2% !important;
+        display: none !important;
       }
 
       /* Entscheidungen */
@@ -3823,13 +3854,14 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 100px;
       border: 1px solid rgba(37,23,42,0.06);
       background: rgba(37,23,42,0.02);
       cursor: pointer;
       transition: all 0.35s ease;
       user-select: none;
+      font-family: var(--font-family-body);
     }
     .acc-pill:hover, .acc-pill.active {
       background: rgba(163,160,255,0.06);
@@ -3837,7 +3869,7 @@
     }
     .acc-pill__dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
     .acc-pill span {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.03em;
       color: rgba(37,23,42,0.4);
@@ -5546,7 +5578,7 @@
         <div class="footer__col">
           <h4 class="footer__col-title">Produkt</h4>
           <ul class="footer__links">
-            <li><a href="#apps" class="footer__link">Module</a></li>
+            <li><a href="#apps" class="footer__link">Apps</a></li>
             <li><a href="#entscheidungen" class="footer__link">Methodik</a></li>
             <li><a href="#kundenstimmen" class="footer__link">Kundenstimmen</a></li>
           </ul>
