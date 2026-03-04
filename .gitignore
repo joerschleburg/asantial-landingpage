@@ -3,3 +3,9 @@
 *.swp
 *.swo
 *~
+node_modules/
+_frames/
+*.pdf
+package.json
+package-lock.json
+capture-video.js
