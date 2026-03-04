@@ -5175,7 +5175,42 @@
       }
     });
 
-    document.getElementById('quiz-btn-result').addEventListener('click', function() {
+    function qSendToMailchimp(data) {
+      var baseUrl = 'https://vonvorteil.us20.list-manage.com/subscribe/post-json?u=39298be37f625165c9058c0c5&id=a11c60bb94&f_id=003d5deef0';
+      var params = '&EMAIL=' + encodeURIComponent(data.email)
+        + '&FNAME=' + encodeURIComponent(data.fname)
+        + '&COMPANY=' + encodeURIComponent(data.company)
+        + '&QUIZTYPE=' + encodeURIComponent(data.quiztype)
+        + '&QUIZSCORE=' + encodeURIComponent(data.quizscore)
+        + '&b_39298be37f625165c9058c0c5_a11c60bb94=';
+      var callbackName = 'mcCallback_' + Date.now();
+      window[callbackName] = function() { delete window[callbackName]; };
+      var script = document.createElement('script');
+      script.src = baseUrl + params + '&c=' + callbackName;
+      document.body.appendChild(script);
+      setTimeout(function() { if (script.parentNode) script.parentNode.removeChild(script); }, 5000);
+    }
+
+    var qResultBtn = document.getElementById('quiz-btn-result');
+    qResultBtn.addEventListener('click', function() {
+      var emailInput = document.getElementById('quiz-input-email');
+      var email = emailInput.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        emailInput.style.borderColor = '#e74c3c';
+        emailInput.setAttribute('placeholder', 'Bitte gültige E-Mail eingeben');
+        emailInput.focus();
+        return;
+      }
+      emailInput.style.borderColor = '';
+      var persona = qGetPersona();
+      var totalScore = qScores.reduce(function(a, b) { return a + b; }, 0);
+      qSendToMailchimp({
+        email: email,
+        fname: (document.getElementById('quiz-input-name').value || '').trim(),
+        company: (document.getElementById('quiz-input-company').value || '').trim(),
+        quiztype: persona.type,
+        quizscore: totalScore
+      });
       qShowResult();
     });
 
