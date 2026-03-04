@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /_frames/
+Disallow: /node_modules/
+
+Sitemap: https://asantial.de/sitemap.xml
