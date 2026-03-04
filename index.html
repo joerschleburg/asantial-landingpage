@@ -2024,6 +2024,27 @@
     @media (max-width: 380px) {
       .trust-bar { font-size: 11px; gap: 6px; }
     }
+
+    /* Trust Bar mobil: zwischen Nav und Hero */
+    .trust-bar--mobile {
+      display: none;
+    }
+    @media (max-width: 767px) {
+      .nav .trust-bar {
+        display: none !important;
+      }
+      .trust-bar--mobile {
+        display: flex;
+        position: static;
+        transform: none;
+        left: auto;
+        max-width: none;
+        padding: 12px 20px;
+        background: var(--bg-soft, #f7f1f0);
+        border-bottom: 1px solid rgba(37,23,42,0.06);
+        justify-content: center;
+      }
+    }
     .trust-dot {
       width: 8px;
       height: 8px;
@@ -3563,7 +3584,7 @@
         padding: 24px 16px;
       }
       .hero__mockup .mockup {
-        max-width: 320px;
+        display: none !important; /* mobil nur Projektmanager (Gantt) */
       }
       .hero__gantt {
         position: relative;
@@ -3606,8 +3627,17 @@
       }
 
       /* Vergleichstabelle */
+      .compare-table-scroll {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
       .compare-table {
         font-size: 12px;
+        min-width: 680px;
       }
 
       /* Highlight Cards */
@@ -4131,6 +4161,18 @@
     </nav>
   </div>
 
+  <!-- Trust Bar (nur mobil: zwischen Nav und Hero) -->
+  <div class="trust-bar trust-bar--mobile" aria-hidden="false">
+    <span class="trust-dot"></span>
+    <span>DSGVO-konform</span>
+    <div class="trust-divider"></div>
+    <span class="trust-dot"></span>
+    <span>KI-gestützt</span>
+    <div class="trust-divider"></div>
+    <span class="trust-dot"></span>
+    <span>15 Jahre Employer Branding Expertise</span>
+  </div>
+
   <!-- Modul 1: Hero -->
   <section id="hero" class="hero" aria-label="Einstieg">
     <div class="hero__aura hero-entrance-aura" aria-hidden="true"></div>
@@ -4478,7 +4520,7 @@
     <div class="container">
       <div class="compare__label reveal">Warum ASANTIAL</div>
       <h2 id="compare-title" class="compare__title reveal reveal--headline">Drei Wege. Ein klarer Unterschied.</h2>
-      <div class="reveal">
+      <div class="compare-table-scroll reveal">
         <table class="compare-table">
           <thead>
             <tr>
