@@ -2654,21 +2654,20 @@
     }
 
     @media (max-width: 767px) {
-      .compare-table thead .th-classic,
-      .compare-table tbody .td-classic {
-        display: none;
+      .compare-table .th-criteria {
+        width: 28%;
       }
 
-      .compare-table .th-criteria {
-        width: 35%;
+      .compare-table .th-classic {
+        width: 24%;
       }
 
       .compare-table .th-llm {
-        width: 32%;
+        width: 24%;
       }
 
       .compare-table .th-asantial {
-        width: 33%;
+        width: 24%;
       }
 
       .compare-table thead tr th,
@@ -2681,6 +2680,7 @@
       }
 
       .compare-table .td-criteria,
+      .compare-table .td-classic,
       .compare-table .td-llm,
       .compare-table .td-asantial {
         font-size: 12px;
@@ -3643,7 +3643,7 @@
       }
       .compare-table {
         font-size: 12px;
-        min-width: 680px;
+        min-width: 780px;
       }
 
       /* Highlight Cards */
