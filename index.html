@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ASANTIAL – Das Betriebssystem für Employer Branding</title>
   <meta name="description" content="ASANTIAL ist das SaaS-Betriebssystem für Employer Branding im Mittelstand. Strukturierte Entscheidungsarchitektur für HR-Verantwortliche – von der Arbeitsmarktanalyse bis zur Maßnahmensteuerung." />
+  <meta name="keywords" content="Employer Branding, HR-Software, Mittelstand, EVP, Arbeitgebermarke, Recruiting, Employer Branding Software, Arbeitsmarktanalyse, HR-Verantwortliche, SaaS" />
   <meta name="robots" content="index, follow" />
   <meta name="google-site-verification" content="zUB7k9usV3iFSX9CsatehxhOE7OXOLYTtDAVT1BztYA" />
   <link rel="canonical" href="https://asantial.de/" />
@@ -31,12 +32,13 @@
   <link rel="stylesheet" href="design-tokens.css" />
   <link rel="stylesheet" href="animations.css" />
 
-  <!-- Structured Data -->
+  <!-- Structured Data (Schema.org) – für Suchmaschinen und LLM-Crawler -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
+        "@id": "https://asantial.de/#organization",
         "@type": "Organization",
         "name": "ASANTIAL",
         "legalName": "VonVorteil e.K.",
@@ -61,16 +63,37 @@
         }
       },
       {
+        "@id": "https://asantial.de/#software",
         "@type": "SoftwareApplication",
         "name": "ASANTIAL",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
         "description": "SaaS-Betriebssystem für Employer Branding im Mittelstand. Strukturierte Entscheidungsarchitektur für HR-Verantwortliche – von der Arbeitsmarktanalyse bis zur Maßnahmensteuerung.",
+        "publisher": { "@id": "https://asantial.de/#organization" },
         "offers": {
           "@type": "Offer",
           "priceCurrency": "EUR",
           "availability": "https://schema.org/OnlineOnly"
         }
+      },
+      {
+        "@id": "https://asantial.de/#website",
+        "@type": "WebSite",
+        "name": "ASANTIAL",
+        "url": "https://asantial.de",
+        "description": "ASANTIAL ist das Betriebssystem für Employer Branding im Mittelstand: strukturierte Entscheidungsarchitektur für HR-Verantwortliche, von der Arbeitsmarktanalyse bis zur Maßnahmensteuerung – ohne Agenturabhängigkeit.",
+        "inLanguage": "de-DE",
+        "publisher": { "@id": "https://asantial.de/#organization" }
+      },
+      {
+        "@id": "https://asantial.de/#webpage",
+        "@type": "WebPage",
+        "name": "ASANTIAL – Das Betriebssystem für Employer Branding",
+        "description": "ASANTIAL ist ein SaaS-Betriebssystem für Employer Branding im Mittelstand. HR-Verantwortliche erhalten eine strukturierte Entscheidungsarchitektur von der Arbeitsmarktanalyse bis zur Maßnahmensteuerung – ohne Agenturabhängigkeit.",
+        "url": "https://asantial.de/",
+        "isPartOf": { "@id": "https://asantial.de/#website" },
+        "about": { "@id": "https://asantial.de/#software" },
+        "primaryImage": "https://asantial.de/Asantial-Logo-transparent.png"
       },
       {
         "@type": "FAQPage",
@@ -5145,7 +5168,7 @@
       <div class="testimonials__grid reveal-stagger-container" data-stagger-delay="120">
         <div class="testimonial-card reveal reveal--stagger">
           <p class="testimonial-card__quote">Die Bibliothek ist beeindruckend vielseitig.</p>
-          <p class="testimonial-card__body">So viele Apps, so abwechslungsreich, so durchdacht. ASANTIAL ist ein Spezialistenwerkzeug in einem großen Werkzeugkasten.</p>
+          <p class="testimonial-card__body">So viele Apps, so abwechslungsreich, so durchdacht. ASANTIAL ist ein großer Werkzeugkasten für Profis.</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar">RU</div>
             <div class="testimonial-card__meta">
