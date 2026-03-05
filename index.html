@@ -3408,6 +3408,51 @@
       .legal-modal { padding: 32px 20px; }
     }
 
+    /* Kontaktformular im Modal */
+    .legal-modal .contact-form { margin-top: 8px; }
+    .legal-modal .contact-form__row { margin-bottom: 18px; }
+    .legal-modal .contact-form label {
+      display: block;
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-body-s);
+      font-weight: 600;
+      color: var(--color-ink-deep);
+      margin-bottom: 6px;
+    }
+    .legal-modal .contact-form input,
+    .legal-modal .contact-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-body-m);
+      padding: 12px 14px;
+      border: 1px solid rgba(37,23,42,0.18);
+      border-radius: 10px;
+      background: var(--bg-base);
+      color: var(--color-ink-deep);
+      transition: border-color 0.2s ease;
+    }
+    .legal-modal .contact-form input:focus,
+    .legal-modal .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent-purple-light, #a3a0ff);
+    }
+    .legal-modal .contact-form textarea { min-height: 120px; resize: vertical; }
+    .legal-modal .contact-form__submit {
+      margin-top: 8px;
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-body-m);
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-ink-deep, #25172a);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .legal-modal .contact-form__submit:hover { background: var(--accent-purple-light, #6b68c6); }
+
     /* ----- FAQ ----- */
     .faq {
       padding: var(--space-section-vertical) 0;
@@ -5099,6 +5144,17 @@
       </div>
       <div class="testimonials__grid reveal-stagger-container" data-stagger-delay="120">
         <div class="testimonial-card reveal reveal--stagger">
+          <p class="testimonial-card__quote">Die Bibliothek ist beeindruckend vielseitig.</p>
+          <p class="testimonial-card__body">ASANTIAL ist ein Spezialistenwerkzeug in einem großen Werkzeugkasten.</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">RU</div>
+            <div class="testimonial-card__meta">
+              <span class="testimonial-card__name">Robert Ullrich</span>
+              <span class="testimonial-card__role">Personalleiter · Siteco GmbH · Elektroindustrie</span>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal--stagger">
           <p class="testimonial-card__quote">Endlich Struktur statt Bauchgefühl.</p>
           <p class="testimonial-card__body">Wir hatten dutzende Maßnahmen, aber keinen Plan. ASANTIAL hat uns geholfen, aus Einzelaktionen eine nachvollziehbare Logik zu machen – die auch die Geschäftsführung versteht.</p>
           <div class="testimonial-card__author">
@@ -5642,8 +5698,7 @@
         <div class="footer__col">
           <h4 class="footer__col-title">Unternehmen</h4>
           <ul class="footer__links">
-            <li><a href="#" class="footer__link">Über ASANTIAL</a></li>
-            <li><a href="#" class="footer__link">Kontakt</a></li>
+            <li><a href="#" class="footer__link" onclick="event.preventDefault();document.getElementById('kontakt-modal').classList.add('is-open')">Kontakt</a></li>
           </ul>
         </div>
         <div class="footer__col">
@@ -5660,11 +5715,40 @@
         <div class="footer__legal">
           <a href="#" class="footer__legal-link" onclick="event.preventDefault();document.getElementById('impressum-modal').classList.add('is-open')">Impressum</a>
           <a href="#" class="footer__legal-link" onclick="event.preventDefault();document.getElementById('datenschutz-modal').classList.add('is-open')">Datenschutz</a>
-          <a href="#" class="footer__legal-link">AGB</a>
         </div>
       </div>
     </div>
   </footer>
+
+  <!-- Kontakt Modal -->
+  <div class="legal-modal-overlay" id="kontakt-modal" onclick="if(event.target===this)this.classList.remove('is-open')">
+    <div class="legal-modal">
+      <button class="legal-modal__close" aria-label="Schließen" onclick="document.getElementById('kontakt-modal').classList.remove('is-open')">
+        <svg viewBox="0 0 16 16"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
+      </button>
+      <h2>Kontakt</h2>
+      <p>Schreiben Sie uns – wir melden uns zeitnah bei Ihnen.</p>
+      <form class="contact-form" id="kontakt-form" action="mailto:schleburg@vonvorteil.de" method="post" enctype="text/plain">
+        <div class="contact-form__row">
+          <label for="kontakt-name">Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="kontakt-name" name="name" required placeholder="Ihr Name">
+        </div>
+        <div class="contact-form__row">
+          <label for="kontakt-email">E-Mail <span aria-hidden="true">*</span></label>
+          <input type="email" id="kontakt-email" name="email" required placeholder="ihre@email.de">
+        </div>
+        <div class="contact-form__row">
+          <label for="kontakt-company">Unternehmen (optional)</label>
+          <input type="text" id="kontakt-company" name="company" placeholder="Firma">
+        </div>
+        <div class="contact-form__row">
+          <label for="kontakt-message">Nachricht <span aria-hidden="true">*</span></label>
+          <textarea id="kontakt-message" name="message" required placeholder="Ihre Nachricht"></textarea>
+        </div>
+        <button type="submit" class="contact-form__submit">Nachricht senden</button>
+      </form>
+    </div>
+  </div>
 
   <!-- Impressum Modal -->
   <div class="legal-modal-overlay" id="impressum-modal" onclick="if(event.target===this)this.classList.remove('is-open')">
