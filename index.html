@@ -3478,6 +3478,9 @@
     .contact-form-danke { margin-top: 8px; }
     .contact-form-danke p { margin-bottom: 12px; }
     .contact-form-danke .contact-form__submit { margin-top: 16px; }
+    .contact-form__row--human { margin-bottom: 18px; }
+    .contact-form__human-label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: var(--font-family-body); }
+    .contact-form__human-label input[type="checkbox"] { width: auto; }
 
     /* ----- FAQ ----- */
     .faq {
@@ -5742,7 +5745,7 @@
         <svg viewBox="0 0 16 16"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
       </button>
       <h2>Kontakt</h2>
-      <p>Schreiben Sie uns – wir melden uns zeitnah bei Ihnen.</p>
+      <p id="kontakt-intro">Schreiben Sie uns – wir melden uns zeitnah bei Ihnen.</p>
       <div id="kontakt-form-wrapper">
       <form class="contact-form" id="kontakt-form" action="https://hook.eu2.make.com/9it9df9qh5u26t8lwqg189jo9jqqqy3d" method="POST">
         <div class="contact-form__row">
@@ -5760,6 +5763,12 @@
         <div class="contact-form__row">
           <label for="kontakt-message">Nachricht <span aria-hidden="true">*</span></label>
           <textarea id="kontakt-message" name="message" required placeholder="Ihre Nachricht"></textarea>
+        </div>
+        <div class="contact-form__row contact-form__row--human">
+          <label class="contact-form__human-label">
+            <input type="checkbox" id="kontakt-human" name="human" required>
+            <span>Ich bin ein Mensch</span>
+          </label>
         </div>
         <button type="submit" class="contact-form__submit">Nachricht senden</button>
       </form>
@@ -5868,6 +5877,7 @@
     var form = document.getElementById('kontakt-form');
     var danke = document.getElementById('kontakt-danke');
     var modal = document.getElementById('kontakt-modal');
+    var introEl = document.getElementById('kontakt-intro');
     var webhookUrl = form.action;
 
     form.addEventListener('submit', function(e) {
@@ -5892,6 +5902,7 @@
         .then(function() {
           form.hidden = true;
           danke.hidden = false;
+          introEl.hidden = true;
         })
         .catch(function() {
           submitBtn.disabled = false;
@@ -5904,6 +5915,7 @@
       form.hidden = false;
       form.reset();
       danke.hidden = true;
+      if (introEl) introEl.hidden = false;
       form.querySelector('button[type="submit"]').disabled = false;
       form.querySelector('button[type="submit"]').textContent = 'Nachricht senden';
     }
