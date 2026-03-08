@@ -3478,9 +3478,7 @@
     .contact-form-danke { margin-top: 8px; }
     .contact-form-danke p { margin-bottom: 12px; }
     .contact-form-danke .contact-form__submit { margin-top: 16px; }
-    .contact-form__row--human { margin-bottom: 18px; }
-    .contact-form__human-label { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-family: var(--font-family-body); }
-    .contact-form__human-label input[type="checkbox"] { width: auto; }
+    .contact-form__row--honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; margin: 0; padding: 0; clip: rect(0,0,0,0); }
 
     /* ----- FAQ ----- */
     .faq {
@@ -5764,11 +5762,9 @@
           <label for="kontakt-message">Nachricht <span aria-hidden="true">*</span></label>
           <textarea id="kontakt-message" name="message" required placeholder="Ihre Nachricht"></textarea>
         </div>
-        <div class="contact-form__row contact-form__row--human">
-          <label class="contact-form__human-label">
-            <input type="checkbox" id="kontakt-human" name="human" required>
-            <span>Ich bin ein Mensch</span>
-          </label>
+        <div class="contact-form__row contact-form__row--honeypot" aria-hidden="true">
+          <label for="kontakt-website-hp">Website</label>
+          <input type="text" id="kontakt-website-hp" name="website" autocomplete="off" tabindex="-1">
         </div>
         <button type="submit" class="contact-form__submit">Nachricht senden</button>
       </form>
@@ -5886,6 +5882,16 @@
       var originalText = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Wird gesendet…';
+
+      var honeypot = (form.querySelector('input[name="website"]') || {}).value || '';
+      if (honeypot.trim() !== '') {
+        form.hidden = true;
+        danke.hidden = false;
+        if (introEl) introEl.hidden = true;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
 
       var fd = new FormData(form);
       var body = JSON.stringify({
