@@ -3475,6 +3475,9 @@
       transition: background 0.2s ease;
     }
     .legal-modal .contact-form__submit:hover { background: var(--accent-purple-light, #6b68c6); }
+    .contact-form-danke { margin-top: 8px; }
+    .contact-form-danke p { margin-bottom: 12px; }
+    .contact-form-danke .contact-form__submit { margin-top: 16px; }
 
     /* ----- FAQ ----- */
     .faq {
@@ -5740,7 +5743,8 @@
       </button>
       <h2>Kontakt</h2>
       <p>Schreiben Sie uns – wir melden uns zeitnah bei Ihnen.</p>
-      <form class="contact-form" id="kontakt-form" action="https://hook.eu1.make.com/YOUR_MAKE_WEBHOOK_ID" method="POST">
+      <div id="kontakt-form-wrapper">
+      <form class="contact-form" id="kontakt-form" action="https://hook.eu2.make.com/9it9df9qh5u26t8lwqg189jo9jqqqy3d" method="POST">
         <div class="contact-form__row">
           <label for="kontakt-name">Name <span aria-hidden="true">*</span></label>
           <input type="text" id="kontakt-name" name="name" required placeholder="Ihr Name">
@@ -5759,6 +5763,12 @@
         </div>
         <button type="submit" class="contact-form__submit">Nachricht senden</button>
       </form>
+      <div id="kontakt-danke" class="contact-form-danke" hidden>
+        <p><strong>Vielen Dank für Ihre Nachricht.</strong></p>
+        <p>Wir melden uns zeitnah bei Ihnen.</p>
+        <button type="button" class="contact-form__submit" onclick="document.getElementById('kontakt-modal').classList.remove('is-open')">Schließen</button>
+      </div>
+      </div>
     </div>
   </div>
 
@@ -5854,5 +5864,59 @@
   </div>
 
   <script src="interactions.js" defer></script>
+  <script>
+  (function() {
+    var form = document.getElementById('kontakt-form');
+    var danke = document.getElementById('kontakt-danke');
+    var modal = document.getElementById('kontakt-modal');
+    var webhookUrl = form.action;
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var submitBtn = form.querySelector('button[type="submit"]');
+      var originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet…';
+
+      var fd = new FormData(form);
+      var body = JSON.stringify({
+        name: fd.get('name') || '',
+        email: fd.get('email') || '',
+        company: fd.get('company') || '',
+        message: fd.get('message') || ''
+      });
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: body
+      })
+        .then(function() {
+          form.hidden = true;
+          danke.hidden = false;
+        })
+        .catch(function() {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalText;
+          alert('Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es später erneut.');
+        });
+    });
+
+    function resetKontaktModal() {
+      form.hidden = false;
+      form.reset();
+      danke.hidden = true;
+      form.querySelector('button[type="submit"]').disabled = false;
+      form.querySelector('button[type="submit"]').textContent = 'Nachricht senden';
+    }
+
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal && modal.classList.contains('is-open')) {
+        resetKontaktModal();
+      }
+    });
+    document.querySelector('#kontakt-modal .legal-modal__close').addEventListener('click', resetKontaktModal);
+    danke.querySelector('button').addEventListener('click', resetKontaktModal);
+  })();
+  </script>
 </body>
 </html>
