@@ -917,6 +917,42 @@
     color: #1e5c34;
   }
 
+  /* Bestätigung auf gleicher Seite (Deutsch) */
+  .form-wrap--success {
+    text-align: center;
+  }
+  .subscription-success-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 20px;
+  }
+  .subscription-success-icon {
+    margin-bottom: 16px;
+  }
+  .subscription-success-text {
+    font-size: 0.95rem;
+    color: rgba(37, 23, 42, 0.75);
+    line-height: 1.6;
+    margin: 0 0 24px;
+  }
+  .subscription-success-btn {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  .subscription-success-legal {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(37, 23, 42, 0.5);
+  }
+  .subscription-success-legal a {
+    color: rgba(37, 23, 42, 0.65);
+    text-decoration: underline;
+  }
+
   /* ─── FAQ ─── */
   .faq-section {
     padding: 100px 0;
@@ -1166,7 +1202,7 @@
   }
 </style>
 </head>
-<body>
+<body id="top">
 
 <!-- NAV -->
 <nav>
@@ -1362,6 +1398,16 @@
       <h2 class="cta-title">45 Minuten. Kostenlos.<br>Ohne Verpflichtung.</h2>
       <p class="cta-sub">1. April 2026 · 10:00 Uhr · Zoom</p>
 
+      <div class="form-wrap form-wrap--success" id="subscription-success-wrap" aria-hidden="true" style="display: none;">
+        <p class="subscription-success-title">Deine Anmeldung ist bestätigt.</p>
+        <div class="subscription-success-icon" aria-hidden="true">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(60, 120, 80, 0.2)"/><path d="M20 32l8 8 16-16" stroke="#1e5c34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <p class="subscription-success-text">Danke für deine Anmeldung! Du erhältst den Einwahllink und alle Infos per E-Mail.</p>
+        <a href="#top" class="form-submit subscription-success-btn" id="subscription-success-btn">Weiter zur Website</a>
+        <p class="subscription-success-legal"><a href="https://us20.list-manage.com/profile/?u=39298be37f625165c9058c0c5&amp;id=a11c60bb94" target="_blank" rel="noopener">Einstellungen verwalten</a></p>
+      </div>
+
       <div class="form-wrap" id="mc_embed_shell">
         <div id="mc_embed_signup">
           <form action="https://vonvorteil.us20.list-manage.com/subscribe/post?u=39298be37f625165c9058c0c5&amp;id=a11c60bb94&amp;f_id=003c5deef0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_self" novalidate="">
@@ -1526,6 +1572,72 @@
     if (window.scrollY > 600) stickyBar.classList.add('visible');
     else stickyBar.classList.remove('visible');
   });
+
+  // MAILCHIMP: Bestätigung auf gleicher Seite (Deutsch)
+  const formWrap = document.getElementById('mc_embed_shell');
+  const successWrap = document.getElementById('subscription-success-wrap');
+  const formLegal = document.querySelector('.cta-section .form-legal');
+  const mcForm = document.getElementById('mc-embedded-subscribe-form');
+
+  function showSubscriptionSuccess() {
+    if (formWrap) formWrap.style.display = 'none';
+    if (formLegal) formLegal.style.display = 'none';
+    if (successWrap) {
+      successWrap.style.display = 'block';
+      successWrap.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function showSubscriptionError(msg) {
+    const errEl = document.getElementById('mce-error-response');
+    if (errEl) {
+      errEl.textContent = msg || 'Anmeldung fehlgeschlagen. Bitte E-Mail prüfen und erneut versuchen.';
+      errEl.style.display = 'block';
+    }
+  }
+
+  // Redirect von Mailchimp: ?subscribed=1
+  if (typeof URLSearchParams !== 'undefined' && window.location.search) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('subscribed') === '1') {
+      showSubscriptionSuccess();
+      history.replaceState(null, '', window.location.pathname + window.location.hash || '#anmeldung');
+    }
+  }
+
+  if (mcForm) {
+    mcForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const errEl = document.getElementById('mce-error-response');
+      if (errEl) { errEl.style.display = 'none'; errEl.textContent = ''; }
+      const submitBtn = document.getElementById('mc-embedded-subscribe');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.value = 'Wird angemeldet …'; }
+
+      const formData = new FormData(mcForm);
+      const data = {};
+      formData.forEach((v, k) => { data[k] = v; });
+      data.c = 'mailchimpSubscribeCallback';
+
+      const base = 'https://vonvorteil.us20.list-manage.com/subscribe/post-json?u=39298be37f625165c9058c0c5&id=a11c60bb94&f_id=003c5deef0';
+      const qs = Object.keys(data).map(k => encodeURIComponent(k) + '=' + encodeURIComponent(data[k])).join('&');
+      const script = document.createElement('script');
+      script.src = base + '&' + qs;
+      script.type = 'text/javascript';
+
+      window.mailchimpSubscribeCallback = function(res) {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.value = 'Jetzt kostenlos anmelden →'; }
+        if (res.result === 'success') {
+          showSubscriptionSuccess();
+        } else {
+          showSubscriptionError(res.msg || res.message);
+        }
+        script.remove();
+        delete window.mailchimpSubscribeCallback;
+      };
+
+      document.body.appendChild(script);
+    });
+  }
 </script>
 </body>
 </html>
