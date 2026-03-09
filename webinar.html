@@ -752,8 +752,10 @@
     width: auto;
     max-width: 140px;
     object-fit: contain;
-    opacity: 0.9;
+    opacity: 0.95;
     transition: opacity 0.25s ease;
+    /* Einfärben in helles Lila (#a3a0ff), transparenter Hintergrund bleibt erhalten */
+    filter: brightness(0) saturate(100%) invert(79%) sepia(28%) saturate(1847%) hue-rotate(210deg) brightness(102%) contrast(101%);
   }
 
   .media-logo:hover {
