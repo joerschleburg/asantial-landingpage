@@ -660,17 +660,6 @@
     font-weight: 300;
   }
 
-  .speaker-portrait-accent {
-    position: absolute;
-    bottom: -16px;
-    right: -16px;
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--purple-mid);
-    border-radius: 3px;
-    opacity: 0.4;
-  }
-
   .speaker-kicker {
     font-size: 0.7rem;
     letter-spacing: 0.2em;
@@ -743,8 +732,9 @@
   .media-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
+    align-items: center;
+    gap: 16px 24px;
+    margin-top: 12px;
   }
 
   .media-badge {
@@ -754,6 +744,20 @@
     border: 1px solid rgba(212,196,238,0.2);
     padding: 5px 12px;
     border-radius: 2px;
+  }
+
+  .media-logo {
+    display: block;
+    height: 32px;
+    width: auto;
+    max-width: 140px;
+    object-fit: contain;
+    opacity: 0.9;
+    transition: opacity 0.25s ease;
+  }
+
+  .media-logo:hover {
+    opacity: 1;
   }
 
   /* ─── CTA SECTION ─── */
@@ -1291,7 +1295,6 @@
     <div class="speaker-inner">
       <div class="speaker-portrait">
         <img src="joerg-schleburg.png" class="speaker-portrait-img" alt="Jörg Schleburg" width="400" height="533">
-        <div class="speaker-portrait-accent"></div>
       </div>
       <div>
         <span class="speaker-kicker">Dein Gastgeber</span>
@@ -1313,15 +1316,15 @@
 
         <p style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(247,245,240,0.35); margin-bottom: 12px;">Bekannt aus</p>
         <div class="media-row">
-          <span class="media-badge">ARD Morgenmagazin</span>
-          <span class="media-badge">ZDF heute</span>
-          <span class="media-badge">Deutschlandfunk</span>
-          <span class="media-badge">Handelsblatt</span>
-          <span class="media-badge">Süddeutsche Zeitung</span>
-          <span class="media-badge">FAZ</span>
-          <span class="media-badge">Bayerischer Rundfunk</span>
-          <span class="media-badge">Welt</span>
-          <span class="media-badge">SWR3</span>
+          <img src="logos/ard-morgenmagazin.png" alt="ARD Morgenmagazin" class="media-logo">
+          <img src="logos/zdf-heute.png" alt="ZDF heute" class="media-logo">
+          <img src="logos/deutschlandfunk.png" alt="Deutschlandfunk" class="media-logo">
+          <img src="logos/handelsblatt.png" alt="Handelsblatt" class="media-logo">
+          <img src="logos/sueddeutsche-zeitung.png" alt="Süddeutsche Zeitung" class="media-logo">
+          <img src="logos/faz.png" alt="FAZ" class="media-logo">
+          <img src="logos/bayerischer-rundfunk.png" alt="Bayerischer Rundfunk" class="media-logo">
+          <img src="logos/welt.png" alt="Welt" class="media-logo">
+          <img src="logos/swr3.png" alt="SWR3" class="media-logo">
         </div>
       </div>
     </div>
