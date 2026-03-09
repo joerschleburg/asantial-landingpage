@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kostenloses Webinar – ASANTIAL</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #25172A;
+    --ink-deep: #181229;
+    --ink-light: #3a2641;
+    --creme: #F7F5F0;
+    --creme-dark: #EDE9E1;
+    /* ASANTIAL Akzentpalette für Abwechslung */
+    --purple: #a3a0ff;
+    --lavender: #d4c4ee;
+    --blue-soft: #dee3f8;
+    --blue-sky: #bfd9f5;
+    --purple-mid: #8a6aa4;
+    --indigo: #2f2f91;
+    --purple-dim: rgba(163,160,255,0.15);
+    --purple-dim2: rgba(163,160,255,0.07);
+    --lavender-dim: rgba(212,196,238,0.12);
+    --blue-dim: rgba(191,217,245,0.12);
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--creme);
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, rgba(37,23,42,0.95), transparent);
+  }
+
+  .nav-logo {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .nav-logo img {
+    height: 28px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+
+  .nav-logo:hover img {
+    opacity: 1;
+  }
+
+  .nav-badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    border: 1px solid rgba(212,196,238,0.45);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(ellipse, rgba(191,217,245,0.14) 0%, rgba(163,160,255,0.08) 40%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--blue-sky);
+    margin-bottom: 36px;
+    position: relative;
+  }
+
+  .hero-tag::before, .hero-tag::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--blue-sky);
+    opacity: 0.6;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--creme);
+    max-width: 860px;
+    position: relative;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--lavender);
+  }
+
+  .hero-sub {
+    margin-top: 28px;
+    font-size: 1.05rem;
+    color: rgba(247,245,240,0.6);
+    max-width: 540px;
+    line-height: 1.7;
+    font-weight: 300;
+    position: relative;
+  }
+
+  /* ─── META STRIP ─── */
+  .meta-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 48px;
+    background: #e9e3dd;
+    border: 1px solid rgba(37,23,42,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    max-width: 680px;
+    width: 100%;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 28px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: rgba(37,23,42,0.85);
+    border-right: 1px solid rgba(37,23,42,0.1);
+    flex: 1;
+    min-width: 140px;
+    justify-content: center;
+  }
+
+  .meta-item:last-child { border-right: none; }
+
+  .meta-icon {
+    color: var(--purple-mid);
+    font-size: 1rem;
+  }
+
+  /* ─── COUNTDOWN ─── */
+  .countdown-wrap {
+    margin-top: 52px;
+    position: relative;
+  }
+
+  .countdown-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(247,245,240,0.4);
+    margin-bottom: 16px;
+  }
+
+  .countdown {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .cd-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .cd-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--creme);
+    line-height: 1;
+    min-width: 72px;
+    text-align: center;
+    background: rgba(212,196,238,0.08);
+    border: 1px solid rgba(212,196,238,0.2);
+    border-radius: 4px;
+    padding: 12px 8px 8px;
+  }
+
+  .cd-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(247,245,240,0.4);
+  }
+
+  .cd-sep {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    color: rgba(212,196,238,0.4);
+    align-self: flex-start;
+    padding-top: 16px;
+  }
+
+  /* ─── CTA BUTTON ─── */
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--purple);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 40px;
+    border-radius: 3px;
+    margin-top: 44px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.15);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .cta-btn:hover::after { transform: translateX(0); }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(163,160,255,0.4); }
+
+  .cta-arrow { font-size: 1.1rem; transition: transform 0.3s ease; }
+  .cta-btn:hover .cta-arrow { transform: translateX(4px); }
+
+  .cta-note {
+    margin-top: 14px;
+    font-size: 0.72rem;
+    color: rgba(247,245,240,0.35);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, rgba(138,106,164,0.4), transparent);
+    margin: 0 auto;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--creme);
+    margin-bottom: 24px;
+  }
+
+  /* ─── PAIN SECTION ─── */
+  .pain-section {
+    padding: 100px 0;
+  }
+
+  .pain-intro {
+    font-size: 1.05rem;
+    color: rgba(247,245,240,0.6);
+    line-height: 1.8;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 56px;
+    position: relative;
+  }
+
+  .pain-item {
+    padding: 32px 36px;
+    border-radius: 20px;
+    position: relative;
+    isolation: isolate;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+    background: #e9e3dd;
+    border: 1px solid rgba(37, 23, 42, 0.08);
+    box-shadow:
+      0 8px 24px rgba(37, 23, 42, 0.1),
+      0 2px 8px rgba(37, 23, 42, 0.06);
+  }
+
+  .pain-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 120px 120px;
+    mix-blend-mode: multiply;
+  }
+
+  .pain-item:hover {
+    background: #ede9e3;
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 32px rgba(37, 23, 42, 0.12),
+      0 4px 12px rgba(37, 23, 42, 0.08);
+  }
+
+  .pain-item .pain-num,
+  .pain-item .pain-text {
+    position: relative;
+    z-index: 2;
+  }
+
+  .pain-item--highlight {
+    background: #e1ddd6;
+  }
+
+  .pain-item--highlight:hover {
+    background: #e8e4de;
+  }
+
+  .pain-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--purple-mid);
+    opacity: 0.9;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    line-height: 1;
+  }
+
+  .pain-item--highlight .pain-num {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  .pain-text {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(37, 23, 42, 0.85);
+    font-weight: 400;
+  }
+
+  .pain-cta-row {
+    margin-top: 52px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .pain-hook {
+    font-family: 'Fraunces', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--creme);
+    font-weight: 300;
+  }
+
+  /* ─── CONTENT SECTION (Highlight Cards wie Hauptseite) ─── */
+  .content-section {
+    padding: 100px 0 140px;
+    background: linear-gradient(to bottom, transparent, rgba(191,217,245,0.05), transparent);
+    border-top: 1px solid rgba(212,196,238,0.12);
+    border-bottom: 1px solid rgba(212,196,238,0.12);
+    overflow: hidden;
+  }
+
+  .content-cards {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    margin: 48px auto 0;
+    min-height: 320px;
+    overflow: visible;
+    perspective: 1100px;
+    transform-style: preserve-3d;
+  }
+
+  .content-card {
+    position: absolute;
+    width: min(300px, 32%);
+    min-width: 260px;
+    border-radius: 24px;
+    padding: 28px 26px;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: default;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.02) 100%);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.18);
+    box-shadow:
+      0 16px 40px rgba(0,0,0,0.2),
+      0 6px 16px rgba(37,23,42,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+  }
+
+  .content-card::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 23px;
+    border: 1px solid rgba(255,255,255,0.08);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .content-card:hover {
+    box-shadow: 0 24px 56px rgba(0,0,0,0.22), 0 10px 24px rgba(37,23,42,0.18), inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .content-card__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 5;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .content-card__cat {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .content-card__title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--creme);
+    margin: 0 0 16px;
+    line-height: 1.25;
+    position: relative;
+    z-index: 5;
+  }
+
+  .content-card .content-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 5;
+  }
+
+  .content-card .content-list li {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(247,245,240,0.78);
+    font-weight: 400;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .content-card .content-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.6;
+  }
+
+  .content-card--1 {
+    left: 0;
+    top: 8%;
+    transform: perspective(1100px) rotate(-3deg) rotateY(-10deg) translateZ(30px);
+    z-index: 3;
+  }
+  .content-card--1:hover { transform: perspective(1100px) rotate(-1deg) rotateY(-4deg) translateZ(50px) translateY(-8px) scale(1.02); }
+  .content-card--1 .content-card__icon { background: rgba(163,160,255,0.25); color: var(--lavender); }
+  .content-card--1 .content-card__cat { color: var(--purple); }
+  .content-card--1 .content-list li::before { color: var(--purple); }
+
+  .content-card--2 {
+    left: 32%;
+    top: 4%;
+    transform: perspective(1100px) rotate(2deg) rotateY(4deg) translateZ(50px);
+    z-index: 4;
+  }
+  .content-card--2:hover { transform: perspective(1100px) rotate(0.5deg) rotateY(2deg) translateZ(70px) translateY(-8px) scale(1.02); }
+  .content-card--2 .content-card__icon { background: rgba(212,196,238,0.25); color: var(--lavender); }
+  .content-card--2 .content-card__cat { color: var(--lavender); }
+  .content-card--2 .content-list li::before { color: var(--lavender); }
+
+  .content-card--3 {
+    left: 62%;
+    top: 10%;
+    transform: perspective(1100px) rotate(-1.5deg) rotateY(12deg) translateZ(15px);
+    z-index: 2;
+  }
+  .content-card--3:hover { transform: perspective(1100px) rotate(0deg) rotateY(6deg) translateZ(45px) translateY(-8px) scale(1.02); }
+  .content-card--3 .content-card__icon { background: rgba(191,217,245,0.25); color: var(--blue-sky); }
+  .content-card--3 .content-card__cat { color: var(--blue-sky); }
+  .content-card--3 .content-list li::before { color: var(--blue-sky); }
+
+  @media (max-width: 900px) {
+    .content-cards {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .content-card {
+      position: static !important;
+      width: 100%;
+      min-width: 0;
+      transform: none !important;
+    }
+    .content-card:hover { transform: translateY(-4px) scale(1.01) !important; }
+  }
+
+  /* ─── SPEAKER SECTION ─── */
+  .speaker-section {
+    padding: 100px 0;
+  }
+
+  .speaker-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 64px;
+    align-items: start;
+  }
+
+  .speaker-portrait {
+    position: relative;
+  }
+
+  .speaker-portrait-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 3px;
+    filter: grayscale(20%);
+    display: block;
+    background: rgba(212,196,238,0.1);
+  }
+
+  .speaker-portrait-placeholder {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, rgba(191,217,245,0.15), rgba(37,23,42,0.5));
+    border-radius: 3px;
+    border: 1px solid rgba(191,217,245,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portrait-initials {
+    font-family: 'Fraunces', serif;
+    font-size: 3rem;
+    color: rgba(212,196,238,0.5);
+    font-weight: 300;
+  }
+
+  .speaker-portrait-accent {
+    position: absolute;
+    bottom: -16px;
+    right: -16px;
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--purple-mid);
+    border-radius: 3px;
+    opacity: 0.4;
+  }
+
+  .speaker-kicker {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple-mid);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .speaker-name {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--creme);
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .speaker-role {
+    font-size: 0.85rem;
+    color: rgba(247,245,240,0.45);
+    margin-bottom: 24px;
+  }
+
+  .speaker-quote {
+    font-family: 'Fraunces', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--creme);
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+
+  .speaker-bio {
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: rgba(247,245,240,0.65);
+    font-weight: 300;
+    margin-bottom: 36px;
+  }
+
+  .speaker-stats {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--lavender);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.72rem;
+    color: rgba(247,245,240,0.4);
+    letter-spacing: 0.06em;
+  }
+
+  .media-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .media-badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: rgba(247,245,240,0.5);
+    border: 1px solid rgba(212,196,238,0.2);
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* ─── CTA SECTION ─── */
+  .cta-section {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, transparent, rgba(163,160,255,0.05), transparent);
+    border-top: 1px solid rgba(163,160,255,0.12);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--creme);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+
+  .cta-sub {
+    font-size: 1rem;
+    color: rgba(247,245,240,0.5);
+    margin-bottom: 52px;
+    font-weight: 300;
+  }
+
+  /* ─── FORM ─── */
+  .form-wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    background: #f5f2ed;
+    border: 1px solid rgba(37, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 48px 48px 40px;
+    box-shadow: 0 8px 32px rgba(37, 23, 42, 0.08);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .form-field label {
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    color: rgba(37, 23, 42, 0.65);
+    font-weight: 500;
+  }
+
+  .form-field input,
+  .form-field select {
+    background: #ffffff;
+    border: 1px solid rgba(37, 23, 42, 0.12);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    width: 100%;
+    -webkit-appearance: none;
+    box-shadow: 0 1px 2px rgba(37, 23, 42, 0.04);
+  }
+
+  .form-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a6aa4' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .form-field select option {
+    background: #ffffff;
+    color: var(--ink);
+  }
+
+  .form-field input::placeholder { color: rgba(37, 23, 42, 0.4); }
+
+  .form-field input:focus,
+  .form-field select:focus {
+    border-color: var(--purple-mid);
+    box-shadow: 0 0 0 3px rgba(138, 106, 164, 0.15);
+  }
+
+  .form-submit {
+    width: 100%;
+    background: var(--purple);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    border: none;
+    border-radius: 10px;
+    padding: 18px 32px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(163, 160, 255, 0.35);
+  }
+
+  .form-legal {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: rgba(37, 23, 42, 0.55);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    padding: 100px 0;
+    border-top: 1px solid rgba(191,217,245,0.12);
+  }
+
+  .faq-list {
+    margin-top: 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .faq-item {
+    border: 1px solid rgba(212,196,238,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+
+  .faq-item.open {
+    border-color: rgba(212,196,238,0.35);
+  }
+
+  .faq-q {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 28px;
+    background: rgba(163,160,255,0.04);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--creme);
+    font-weight: 400;
+    transition: background 0.25s ease;
+    gap: 16px;
+  }
+
+  .faq-q:hover { background: rgba(191,217,245,0.08); }
+
+  .faq-icon {
+    color: var(--blue-sky);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    line-height: 1;
+  }
+
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 28px;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding: 0 28px 22px;
+  }
+
+  .faq-a p {
+    font-size: 0.9rem;
+    line-height: 1.75;
+    color: rgba(247,245,240,0.6);
+    font-weight: 300;
+    padding-top: 4px;
+  }
+
+  /* ─── FINAL CTA ─── */
+  .final-cta {
+    padding: 120px 0;
+    text-align: center;
+    border-top: 1px solid rgba(191,217,245,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse, rgba(191,217,245,0.12) 0%, rgba(163,160,255,0.06) 50%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .final-tag {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(247,245,240,0.5);
+    margin-bottom: 20px;
+  }
+
+  .final-claim {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 300;
+    color: var(--creme);
+    line-height: 1.15;
+    margin-bottom: 48px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .final-claim em {
+    font-style: italic;
+    color: var(--lavender);
+  }
+
+  .final-meta {
+    font-size: 0.8rem;
+    color: rgba(247,245,240,0.35);
+    letter-spacing: 0.08em;
+    margin-top: 20px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 32px 40px;
+    border-top: 1px solid rgba(212,196,238,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-logo img {
+    height: 22px;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
+    opacity: 0.6;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    color: rgba(247,245,240,0.3);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    transition: color 0.25s ease;
+  }
+
+  .footer-links a:hover { color: rgba(212,196,238,0.85); }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── STICKY CTA BAR ─── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(37,23,42,0.95);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(212,196,238,0.25);
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 99;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .sticky-bar.visible { transform: translateY(0); }
+
+  .sticky-bar-text {
+    font-size: 0.85rem;
+    color: rgba(247,245,240,0.7);
+  }
+
+  .sticky-bar-text strong {
+    color: var(--creme);
+    font-weight: 500;
+  }
+
+  .sticky-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--purple);
+    color: var(--ink);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 28px;
+    border-radius: 3px;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+  }
+
+  .sticky-cta:hover { box-shadow: 0 6px 20px rgba(163,160,255,0.45); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .content-card { width: 100%; min-width: 0; }
+    .speaker-inner { grid-template-columns: 1fr; gap: 40px; }
+    .speaker-portrait-placeholder { aspect-ratio: 4/3; }
+    .meta-item { min-width: 50%; }
+    .meta-item:nth-child(2) { border-right: none; }
+    .meta-item:nth-child(3) { border-right: none; border-top: 1px solid rgba(37,23,42,0.1); }
+    .meta-item:nth-child(4) { border-top: 1px solid rgba(37,23,42,0.1); }
+    .form-row { grid-template-columns: 1fr; }
+    .form-wrap { padding: 32px 24px; }
+    footer { flex-direction: column; align-items: flex-start; }
+    .sticky-bar { padding: 14px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://asantial.de" class="nav-logo" aria-label="ASANTIAL">
+    <img src="Asantial-Logo-transparent.png" alt="ASANTIAL" />
+  </a>
+  <span class="nav-badge">Kostenloses Webinar</span>
+</nav>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-text">
+    <strong>1. April · 10:00 Uhr</strong> · Webinar · Kostenlos · 45 Min + Q&A
+  </div>
+  <a href="#anmeldung" class="sticky-cta">Jetzt anmelden →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Kostenloses Webinar</div>
+  <h1>Warum gute HR-Arbeit oft<br><em>wirkungslos bleibt</em> –<br>obwohl du alles richtig machst</h1>
+  <p class="hero-sub">45 Minuten, die erklären, warum das Problem nicht an dir liegt. Und was du dagegen tun kannst.</p>
+
+  <div class="meta-strip">
+    <div class="meta-item"><span class="meta-icon">◷</span> 1. April 2026</div>
+    <div class="meta-item"><span class="meta-icon">◴</span> 10:00 Uhr · 45 Min + Q&A</div>
+    <div class="meta-item"><span class="meta-icon">⊹</span> Zoom · Online</div>
+    <div class="meta-item"><span class="meta-icon">◇</span> Kostenlos</div>
+  </div>
+
+  <div class="countdown-wrap">
+    <p class="countdown-label">Noch bis zum Webinar</p>
+    <div class="countdown">
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-days">00</div>
+        <div class="cd-label">Tage</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-hours">00</div>
+        <div class="cd-label">Stunden</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-mins">00</div>
+        <div class="cd-label">Minuten</div>
+      </div>
+      <div class="cd-sep">:</div>
+      <div class="cd-unit">
+        <div class="cd-num" id="cd-secs">00</div>
+        <div class="cd-label">Sekunden</div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#anmeldung" class="cta-btn">Jetzt kostenlos anmelden <span class="cta-arrow">→</span></a>
+  <p class="cta-note">Kein Spam. Nur der Einwahllink und die Aufzeichnung.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- PAIN SECTION -->
+<section class="pain-section fade-up">
+  <div class="container">
+    <span class="section-tag">Für wen ist dieses Webinar?</span>
+    <h2 class="section-title">Wenn dir eine dieser Situationen bekannt vorkommt.</h2>
+    <p class="pain-intro">Du verantwortest Employer Branding in einem Unternehmen mit 50 bis 1.500 Mitarbeitenden – nebenbei, unter echtem Druck, oft ohne klares Mandat.</p>
+
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-num">01</div>
+        <p class="pain-text">Du arbeitest viel – aber am Ende des Tages lässt sich schwer sagen, was es gebracht hat.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">02</div>
+        <p class="pain-text">Die Geschäftsführung fragt „Was bringt uns das?" – und du hast keine Antwort, die wirklich überzeugt.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">03</div>
+        <p class="pain-text">Projekte starten mit Energie und versanden nach ein paar Wochen im Tagesgeschäft.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">04</div>
+        <p class="pain-text">Du koordinierst, moderierst, erklärst – entscheidest aber selten wirklich selbst.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">05</div>
+        <p class="pain-text">Neue Impulse von oben oder aus dem Marketing werfen deine Planung regelmäßig um.</p>
+      </div>
+      <div class="pain-item pain-item--highlight">
+        <div class="pain-num" style="opacity:1; color: var(--purple-mid);">→</div>
+        <p class="pain-text" style="color: rgba(37,23,42,0.9);">Wenn du nickst: Dieses Webinar ist für dich.</p>
+      </div>
+    </div>
+
+    <div class="pain-cta-row">
+      <p class="pain-hook">Das Problem liegt nicht an dir.</p>
+      <a href="#anmeldung" class="cta-btn" style="margin-top: 0;">Anmelden →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTENT SECTION -->
+<section class="content-section fade-up">
+  <div class="container">
+    <span class="section-tag">Was dich erwartet</span>
+    <h2 class="section-title">Kein Vortrag über Theorie.<br>Kein Buzzword-Bingo.</h2>
+    <p class="pain-intro" style="margin-bottom: 0;">Jörg Schleburg nimmt dich mit durch 7 Situationen aus deinem Alltag – und zeigt, warum sie alle dieselbe Ursache haben.</p>
+
+    <div class="content-cards">
+      <div class="content-card content-card--1">
+        <div class="content-card__icon" aria-hidden="true">◈</div>
+        <div class="content-card__cat">Thema</div>
+        <h3 class="content-card__title">Kognitiv</h3>
+        <ul class="content-list">
+          <li>Warum Projektlogik Bewegung erzeugt, aber keine nachhaltige Wirkung</li>
+          <li>Was es bedeutet, Employer Branding als kontinuierlichen Prozess zu führen</li>
+          <li>Wie eine andere Arbeitslogik konkret aussieht</li>
+        </ul>
+      </div>
+      <div class="content-card content-card--2">
+        <div class="content-card__icon" aria-hidden="true">◆</div>
+        <div class="content-card__cat">Thema</div>
+        <h3 class="content-card__title">Emotional</h3>
+        <ul class="content-list">
+          <li>Du bist nicht allein mit diesem Gefühl</li>
+          <li>Es gibt einen strukturellen Ausweg – keinen Trick</li>
+          <li>Souveräner zu arbeiten ist machbar, nicht nur eine Vorstellung</li>
+        </ul>
+      </div>
+      <div class="content-card content-card--3">
+        <div class="content-card__icon" aria-hidden="true">◇</div>
+        <div class="content-card__cat">Thema</div>
+        <h3 class="content-card__title">Als nächsten Schritt</h3>
+        <ul class="content-list">
+          <li>Ein klares Bild davon, was sich in deiner Situation konkret ändern kann</li>
+          <li>Antworten auf die 5 häufigsten Fragen aus der Praxis</li>
+          <li>Einen nächsten Schritt, den du direkt gehen kannst</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPEAKER -->
+<section class="speaker-section fade-up">
+  <div class="container">
+    <div class="speaker-inner">
+      <div class="speaker-portrait">
+        <img src="joerg-schleburg.png" class="speaker-portrait-img" alt="Jörg Schleburg" width="400" height="533">
+        <div class="speaker-portrait-accent"></div>
+      </div>
+      <div>
+        <span class="speaker-kicker">Dein Gastgeber</span>
+        <h2 class="speaker-name">Jörg Schleburg</h2>
+        <p class="speaker-role">Gründer VonVorteil e.K. und ASANTIAL</p>
+        <p class="speaker-quote">Employer Branding braucht kein neues Versprechen.<br>Es braucht eine Struktur, die hält.</p>
+        <p class="speaker-bio">Seit über 15 Jahren begleitet Jörg Schleburg Unternehmen dabei, ihre Arbeitgebermarke aufzubauen – nicht mit Kampagnen, sondern mit Substanz. ASANTIAL ist das Ergebnis dieser Erfahrung: ein System, das HR-Verantwortlichen im Mittelstand die Werkzeuge gibt, die sie brauchen, um Employer Branding erklärbar, steuerbar und wirksam zu machen.</p>
+
+        <div class="speaker-stats">
+          <div class="stat-item">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Jahre EB-Erfahrung</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">100+</span>
+            <span class="stat-label">Projekte im Mittelstand</span>
+          </div>
+        </div>
+
+        <p style="font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(247,245,240,0.35); margin-bottom: 12px;">Bekannt aus</p>
+        <div class="media-row">
+          <span class="media-badge">ARD Morgenmagazin</span>
+          <span class="media-badge">ZDF heute</span>
+          <span class="media-badge">Deutschlandfunk</span>
+          <span class="media-badge">Handelsblatt</span>
+          <span class="media-badge">Süddeutsche Zeitung</span>
+          <span class="media-badge">FAZ</span>
+          <span class="media-badge">Bayerischer Rundfunk</span>
+          <span class="media-badge">Welt</span>
+          <span class="media-badge">SWR3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="cta-section" id="anmeldung">
+  <div class="container">
+    <div class="cta-inner fade-up">
+      <span class="section-tag">Jetzt kostenlos anmelden</span>
+      <h2 class="cta-title">45 Minuten. Kostenlos.<br>Ohne Verpflichtung.</h2>
+      <p class="cta-sub">1. April 2026 · 10:00 Uhr · Zoom</p>
+
+      <div class="form-wrap">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Vorname</label>
+            <input type="text" placeholder="Anna">
+          </div>
+          <div class="form-field">
+            <label>Nachname</label>
+            <input type="text" placeholder="Müller">
+          </div>
+        </div>
+        <div class="form-field">
+          <label>Geschäftliche E-Mail</label>
+          <input type="email" placeholder="anna.mueller@unternehmen.de">
+        </div>
+        <div class="form-field">
+          <label>Unternehmen</label>
+          <input type="text" placeholder="Mustermann GmbH">
+        </div>
+        <div class="form-field">
+          <label>Mitarbeiterzahl</label>
+          <select>
+            <option value="" disabled selected>Bitte wählen</option>
+            <option>50 – 100 Mitarbeitende</option>
+            <option>101 – 250 Mitarbeitende</option>
+            <option>251 – 500 Mitarbeitende</option>
+            <option>501 – 1.000 Mitarbeitende</option>
+            <option>1.001 – 1.500 Mitarbeitende</option>
+          </select>
+        </div>
+        <button class="form-submit">Jetzt kostenlos anmelden →</button>
+        <p class="form-legal">Mit der Anmeldung stimmst du zu, dass wir dir den Einwahllink und ggf. Follow-up-Informationen per E-Mail zusenden. Kein Spam.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section fade-up">
+  <div class="container">
+    <span class="section-tag">Häufige Fragen</span>
+    <h2 class="section-title">Was du wissen willst.</h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Was kostet das Webinar?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Nichts. Das Webinar ist vollständig kostenlos und ohne versteckte Verpflichtung. Du bekommst den Einwahllink per E-Mail – fertig.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Ich habe wenig Zeit. Lohnt sich das wirklich?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>45 Minuten. Kein Füllstoff, kein Aufbau zur nächsten Produktpräsentation. Wenn du mit der Situation erkennst, dass gute HR-Arbeit oft wirkungslos bleibt, dann lohnt es sich – versprochen.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Brauche ich dafür die Freigabe meiner Geschäftsführung?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Nein. Das Webinar ist für dich als HR-Verantwortliche/r gedacht – du entscheidest selbst, ob du teilnimmst. Was du danach mit dem Wissen anfängst, liegt bei dir.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Was ist der Unterschied zu anderen HR-Tools oder Agenturen?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Das Webinar ist keine Produktdemo. Es geht um die Frage, warum Employer Branding im Mittelstand strukturell scheitert – unabhängig von Tools, Agenturen oder Budgets. ASANTIAL wird erwähnt, aber das ist nicht der Punkt.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Was passiert, wenn ich am Termin verhindert bin?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Alle Angemeldeten erhalten im Anschluss die Aufzeichnung. Meld dich trotzdem an – die wichtigen 45 Minuten kommen dann zu dir.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Für welche Unternehmensgrößen ist das relevant?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a"><p>Das Webinar ist gemacht für Mittelstand: Unternehmen mit 50 bis 1.500 Mitarbeitenden, bei denen HR Employer Branding als eine von mehreren Aufgaben verantwortet – unter realen Bedingungen.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta fade-up">
+  <div class="container">
+    <p class="final-tag">Es muss nicht so bleiben, wie es gerade ist.</p>
+    <h2 class="final-claim">Employer Branding muss nicht so sein,<br>wie es <em>gerade ist</em>.</h2>
+    <a href="#anmeldung" class="cta-btn">Jetzt kostenlos anmelden →</a>
+    <p class="final-meta">1. April 2026 · 10:00 Uhr · 45 Min + Q&A · Zoom · Kostenlos</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">
+    <img src="Asantial-Logo-transparent.png" alt="ASANTIAL" />
+    <span style="font-size: 0.9rem; letter-spacing: 0.12em; color: rgba(247,245,240,0.4);">· by VonVorteil</span>
+  </span>
+  <div class="footer-links">
+    <a href="https://asantial.de">Hauptseite</a>
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+  </div>
+</footer>
+
+<script>
+  // COUNTDOWN
+  function updateCountdown() {
+    const target = new Date('2026-04-01T10:00:00');
+    const now = new Date();
+    const diff = target - now;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '00';
+      document.getElementById('cd-hours').textContent = '00';
+      document.getElementById('cd-mins').textContent = '00';
+      document.getElementById('cd-secs').textContent = '00';
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // FAQ
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // STICKY BAR
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 600) stickyBar.classList.add('visible');
+    else stickyBar.classList.remove('visible');
+  });
+</script>
+</body>
+</html>
