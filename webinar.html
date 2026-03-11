@@ -935,13 +935,24 @@
     font-size: 0.95rem;
     color: rgba(37, 23, 42, 0.75);
     line-height: 1.6;
-    margin: 0 0 24px;
+    margin: 0 0 20px;
   }
-  .subscription-success-btn {
+  .subscription-success-close {
     display: inline-block;
-    text-align: center;
+    font-size: 0.88rem;
+    color: rgba(37, 23, 42, 0.6);
     text-decoration: none;
-    box-sizing: border-box;
+    padding: 10px 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    border-bottom: 1px solid rgba(37, 23, 42, 0.25);
+    transition: color 0.2s ease, border-color 0.2s ease;
+  }
+  .subscription-success-close:hover {
+    color: var(--ink);
+    border-color: var(--ink);
   }
   .subscription-success-legal {
     margin-top: 20px;
@@ -951,6 +962,18 @@
   .subscription-success-legal a {
     color: rgba(37, 23, 42, 0.65);
     text-decoration: underline;
+  }
+
+  /* Minimaler Hinweis nach Schließen */
+  .form-wrap--closed {
+    text-align: center;
+    padding: 28px 32px;
+  }
+  .subscription-closed-text {
+    font-size: 0.95rem;
+    color: rgba(37, 23, 42, 0.75);
+    line-height: 1.6;
+    margin: 0;
   }
 
   /* ─── FAQ ─── */
@@ -1395,7 +1418,7 @@
   <div class="container">
     <div class="cta-inner fade-up">
       <span class="section-tag">Jetzt kostenlos anmelden</span>
-      <h2 class="cta-title">45 Minuten. Kostenlos.<br>Ohne Verpflichtung.</h2>
+      <h2 class="cta-title">45 Minuten + Q&A. Kostenlos.</h2>
       <p class="cta-sub">1. April 2026 · 10:00 Uhr · Zoom</p>
 
       <div class="form-wrap form-wrap--success" id="subscription-success-wrap" aria-hidden="true" style="display: none;">
@@ -1404,8 +1427,12 @@
           <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="32" cy="32" r="32" fill="rgba(60, 120, 80, 0.2)"/><path d="M20 32l8 8 16-16" stroke="#1e5c34" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <p class="subscription-success-text">Danke für deine Anmeldung! Du erhältst den Einwahllink und alle Infos per E-Mail.</p>
-        <a href="#top" class="form-submit subscription-success-btn" id="subscription-success-btn">Weiter zur Website</a>
+        <button type="button" class="subscription-success-close" id="subscription-success-close" aria-label="Hinweis schließen">Schließen</button>
         <p class="subscription-success-legal"><a href="https://us20.list-manage.com/profile/?u=39298be37f625165c9058c0c5&amp;id=a11c60bb94" target="_blank" rel="noopener">Einstellungen verwalten</a></p>
+      </div>
+
+      <div class="form-wrap form-wrap--closed" id="subscription-closed-wrap" aria-hidden="true" style="display: none;">
+        <p class="subscription-closed-text">Du bist angemeldet. Du erhältst den Einwahllink und alle Infos per E-Mail.</p>
       </div>
 
       <div class="form-wrap" id="mc_embed_shell">
@@ -1594,6 +1621,19 @@
       errEl.textContent = msg || 'Anmeldung fehlgeschlagen. Bitte E-Mail prüfen und erneut versuchen.';
       errEl.style.display = 'block';
     }
+  }
+
+  const successCloseBtn = document.getElementById('subscription-success-close');
+  const closedWrap = document.getElementById('subscription-closed-wrap');
+  if (successCloseBtn && successWrap) {
+    successCloseBtn.addEventListener('click', function() {
+      successWrap.style.display = 'none';
+      successWrap.setAttribute('aria-hidden', 'true');
+      if (closedWrap) {
+        closedWrap.style.display = 'block';
+        closedWrap.setAttribute('aria-hidden', 'false');
+      }
+    });
   }
 
   // Redirect von Mailchimp: ?subscribed=1
