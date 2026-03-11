@@ -138,7 +138,8 @@
     /* ----- Modul 1: Hero ----- */
     .hero {
       position: relative;
-      padding-top: 140px;
+      /* Weniger Abstand, da zusätzlich Top-Banner unter der fixen Nav existiert */
+      padding-top: 56px;
       padding-bottom: var(--space-section-vertical);
       overflow: hidden;
     }
@@ -199,7 +200,7 @@
       line-height: var(--font-size-display-xl-line-height);
       font-weight: var(--font-size-display-xl-weight);
       color: var(--color-ink-deep);
-      margin: 0 0 0.6em;
+      margin: 0 0 0.15em;
     }
 
     .hero__subline {
@@ -558,6 +559,137 @@
     @media (prefers-reduced-motion: reduce) {
       .gantt-tile { animation: none; }
       .gantt-tile::before { animation: none; }
+    }
+
+    /* ----- Webinar-Teaser: Top-Banner (angelehnt an webinar.html) ----- */
+    .webinar-banner {
+      margin-top: 60px; /* unter fixe Nav */
+      background: #181229;
+      color: #f7f5f0;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      text-align: center;
+      border-bottom: 1px solid rgba(212,196,238,0.2);
+      text-decoration: none;
+      transition: background 0.25s ease;
+      min-height: 52px;
+      box-sizing: border-box;
+    }
+    .webinar-banner__inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: var(--max-width-content);
+      margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .webinar-banner:hover {
+      background: #1e1635;
+    }
+    .webinar-banner__badge {
+      flex-shrink: 0;
+      align-self: center;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #d4c4ee;
+      border: 1px solid rgba(212,196,238,0.45);
+      padding: 5px 12px;
+      border-radius: 2px;
+      line-height: 1.2;
+    }
+    .webinar-banner__text-wrap {
+      flex-shrink: 1;
+      align-self: center;
+      display: inline-flex;
+      align-items: center;
+      height: 2.6em;
+      overflow: hidden;
+      vertical-align: middle;
+      min-width: 140px;
+      max-width: 420px;
+    }
+    .webinar-banner__text-cycle {
+      display: block;
+      transform: translateY(0);
+      animation: webinar-banner-cycle 12s linear infinite;
+    }
+    @keyframes webinar-banner-cycle {
+      /* 4 Zeilen: 1. Datum, 2. Jörg, 3. Titel, 4. Datum (Duplikat für nahtlosen Loop) */
+      0%, 26%         { transform: translateY(0); }         /* 1. Info: Datum sichtbar */
+      30%, 56%        { transform: translateY(-2.6em); }   /* 2. Info */
+      60%, 86%        { transform: translateY(-5.2em); }   /* 3. Info */
+      90%, 100%       { transform: translateY(-7.8em); }   /* 4. Datum (gleicher Inhalt wie 1.) */
+    }
+    .webinar-banner__text-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 2.6em;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: var(--font-family-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: rgba(247,245,240,0.9);
+      line-height: 1.35;
+    }
+    .webinar-banner__text-line strong {
+      color: #f7f5f0;
+      font-weight: 600;
+    }
+    .webinar-banner__text-line--long {
+      font-size: 0.75rem;
+      line-height: 0.92;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.12em 0.5em 0;
+      text-align: center;
+      height: 2.6em;
+    }
+    .webinar-banner__cta {
+      flex-shrink: 0;
+      align-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      font-family: var(--font-family-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #25172a;
+      background: #a3a0ff;
+      border: none;
+      border-radius: 3px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .webinar-banner__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(163,160,255,0.4);
+    }
+    @media (max-width: 767px) {
+      .webinar-banner { padding: 12px 16px; gap: 0; }
+      .webinar-banner__inner { gap: 12px; }
+      .webinar-banner__text-line { font-size: 0.8rem; }
+      .webinar-banner__text-line--long { font-size: 0.7rem; line-height: 0.88; padding: 0.1em 0.5em 0; }
+      .webinar-banner__badge { font-size: 0.65rem; padding: 4px 10px; }
+      .webinar-banner__text-wrap { min-width: 120px; max-width: 100%; }
+      .webinar-banner__cta { padding: 10px 18px; font-size: 0.75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .webinar-banner__text-cycle { animation: none; }
     }
 
     /* ----- Modul 2: Trust Bar (section) ----- */
@@ -2063,7 +2195,7 @@
         transform: none;
         left: auto;
         max-width: none;
-        margin-top: 60px; /* unter fixe Nav schieben */
+        margin-top: 0; /* Webinar-Banner liegt bereits unter Nav */
         padding: 12px 20px;
         background: var(--bg-soft, #f7f1f0);
         border-bottom: 1px solid rgba(37,23,42,0.06);
@@ -3645,7 +3777,7 @@
 
       /* Hero */
       .hero {
-        padding-top: 100px;
+        padding-top: 48px;
       }
       .hero .container {
         grid-template-columns: 1fr;
@@ -3823,7 +3955,7 @@
       }
 
       .hero {
-        padding-top: 120px;
+        padding-top: 56px;
       }
 
       .verlegenheit {
@@ -4244,6 +4376,22 @@
       <a href="https://calendly.com/schleburg/asantial-einstiegsgesprach" target="_blank" rel="noopener" class="nav-overlay__cta">Gespräch vereinbaren</a>
     </nav>
   </div>
+
+  <!-- Webinar-Teaser: auffälliges Top-Banner (angelehnt an webinar.html) -->
+  <a href="webinar.html#anmeldung" class="webinar-banner" id="webinar-teaser">
+    <span class="webinar-banner__inner">
+      <span class="webinar-banner__badge">Kostenloses Webinar</span>
+      <span class="webinar-banner__text-wrap">
+        <span class="webinar-banner__text-cycle">
+          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + Q&A</span>
+          <span class="webinar-banner__text-line">Mit&nbsp;<strong>Jörg Schleburg</strong> · Gründer ASANTIAL</span>
+          <span class="webinar-banner__text-line webinar-banner__text-line--long"><strong>„Warum gute HR-Arbeit oft wirkungslos bleibt – obwohl du alles richtig machst“</strong></span>
+          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + Q&A</span>
+        </span>
+      </span>
+      <span class="webinar-banner__cta">Jetzt anmelden →</span>
+    </span>
+  </a>
 
   <!-- Trust Bar (nur mobil: zwischen Nav und Hero) -->
   <div class="trust-bar trust-bar--mobile" aria-hidden="false">
