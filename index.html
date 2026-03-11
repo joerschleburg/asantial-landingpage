@@ -4326,6 +4326,100 @@
       .acc-trigger__arrow { transition: none; }
       .acc-panel { transition: none; }
     }
+
+    /* ----- Webinar-Teaser-Layer (erscheint nach 10s) ----- */
+    .webinar-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(24, 18, 41, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    .webinar-layer.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .webinar-layer__card {
+      position: relative;
+      max-width: 480px;
+      width: 100%;
+      background: #181229;
+      border: 1px solid rgba(212, 196, 238, 0.25);
+      border-radius: 16px;
+      padding: 32px 36px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .webinar-layer__close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      border: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f7f5f0;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background 0.2s ease;
+    }
+    .webinar-layer__close:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+    .webinar-layer__badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #d4c4ee;
+      border: 1px solid rgba(212, 196, 238, 0.45);
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .webinar-layer__title {
+      font-family: var(--font-family-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f7f5f0;
+      line-height: 1.25;
+      margin: 0 0 12px;
+    }
+    .webinar-layer__meta {
+      font-family: var(--font-family-body);
+      font-size: 0.95rem;
+      color: rgba(247, 245, 240, 0.75);
+      margin: 0 0 24px;
+    }
+    .webinar-layer__cta {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: var(--font-family-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #25172a;
+      background: #a3a0ff;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .webinar-layer__cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(163, 160, 255, 0.4);
+    }
   </style>
 </head>
 <body class="page">
@@ -6081,6 +6175,42 @@
     });
     document.querySelector('#kontakt-modal .legal-modal__close').addEventListener('click', resetKontaktModal);
     danke.querySelector('button').addEventListener('click', resetKontaktModal);
+  })();
+  </script>
+
+  <!-- Webinar-Teaser-Layer (erscheint nach 10 Sekunden) -->
+  <div class="webinar-layer" id="webinar-layer" aria-hidden="true" aria-label="Webinar-Einladung">
+    <div class="webinar-layer__card">
+      <button type="button" class="webinar-layer__close" id="webinar-layer-close" aria-label="Schließen">&times;</button>
+      <span class="webinar-layer__badge">Kostenloses Webinar</span>
+      <h2 class="webinar-layer__title">Warum gute HR-Arbeit oft wirkungslos bleibt – obwohl du alles richtig machst</h2>
+      <p class="webinar-layer__meta">1. April 2026 · 10:00 Uhr · 45 Min + Q&A · Mit Jörg Schleburg · Zoom</p>
+      <a href="webinar.html#anmeldung" class="webinar-layer__cta">Jetzt kostenlos anmelden →</a>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var layer = document.getElementById('webinar-layer');
+    var closeBtn = document.getElementById('webinar-layer-close');
+    var key = 'asantial-webinar-layer-closed';
+
+    function showLayer() {
+      if (sessionStorage.getItem(key)) return;
+      layer.classList.add('is-visible');
+      layer.setAttribute('aria-hidden', 'false');
+    }
+    function hideLayer() {
+      layer.classList.remove('is-visible');
+      layer.setAttribute('aria-hidden', 'true');
+      sessionStorage.setItem(key, '1');
+    }
+
+    setTimeout(showLayer, 10000);
+
+    closeBtn.addEventListener('click', hideLayer);
+    layer.addEventListener('click', function(e) {
+      if (e.target === layer) hideLayer();
+    });
   })();
   </script>
 </body>
