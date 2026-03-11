@@ -5972,7 +5972,8 @@
         <p class="footer__copy">&copy; 2026 ASANTIAL. Alle Rechte vorbehalten.</p>
         <div class="footer__legal">
           <a href="#" class="footer__legal-link" onclick="event.preventDefault();document.getElementById('impressum-modal').classList.add('is-open')">Impressum</a>
-          <a href="#" class="footer__legal-link" onclick="event.preventDefault();document.getElementById('datenschutz-modal').classList.add('is-open')">Datenschutz</a>
+          <a href="#" class="footer__legal-link" onclick="event.preventDefault();document.getElementById('impressum-modal').classList.add('is-open')">Impressum</a>
+          <a href="https://www.asantial.de/#datenschutz" class="footer__legal-link" id="footer-link-datenschutz" onclick="event.preventDefault();location.hash='datenschutz';document.getElementById('datenschutz-modal').classList.add('is-open')">Datenschutz</a>
         </div>
       </div>
     </div>
@@ -6037,7 +6038,7 @@
     </div>
   </div>
 
-  <!-- Datenschutz Modal -->
+  <!-- Datenschutz Modal (Deep-Link: https://www.asantial.de/#datenschutz) -->
   <div class="legal-modal-overlay" id="datenschutz-modal" onclick="if(event.target===this)this.classList.remove('is-open')">
     <div class="legal-modal">
       <button class="legal-modal__close" aria-label="Schließen" onclick="document.getElementById('datenschutz-modal').classList.remove('is-open')">
@@ -6211,6 +6212,20 @@
     layer.addEventListener('click', function(e) {
       if (e.target === layer) hideLayer();
     });
+  })();
+
+  (function() {
+    function openDatenschutzIfHash() {
+      if (window.location.hash === '#datenschutz') {
+        document.getElementById('datenschutz-modal').classList.add('is-open');
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', openDatenschutzIfHash);
+    } else {
+      openDatenschutzIfHash();
+    }
+    window.addEventListener('hashchange', openDatenschutzIfHash);
   })();
   </script>
 </body>
