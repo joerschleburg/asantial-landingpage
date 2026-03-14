@@ -1106,7 +1106,7 @@
 
   /* ─── FOOTER ─── */
   footer {
-    padding: 32px 40px;
+    padding: 32px 40px 72px; /* unten Platz für Sticky-Bar, damit Impressum/Datenschutz sichtbar bleiben */
     border-top: 1px solid rgba(212,196,238,0.15);
     display: flex;
     align-items: center;
@@ -1220,7 +1220,7 @@
     .meta-item:nth-child(4) { border-top: 1px solid rgba(37,23,42,0.1); }
     .form-row { grid-template-columns: 1fr; }
     .form-wrap { padding: 32px 24px; }
-    footer { flex-direction: column; align-items: flex-start; }
+    footer { flex-direction: column; align-items: flex-start; padding-bottom: 72px; }
     .sticky-bar { padding: 14px 20px; }
   }
 </style>
