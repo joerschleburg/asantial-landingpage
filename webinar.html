@@ -976,6 +976,55 @@
     margin: 0;
   }
 
+  /* ─── AGENDA ─── */
+  .agenda-section {
+    padding: 100px 0;
+  }
+
+  .agenda-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .agenda-item {
+    background: rgba(163,160,255,0.06);
+    border: 1px solid rgba(212,196,238,0.15);
+    border-radius: 16px;
+    padding: 22px 24px;
+    transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  }
+
+  .agenda-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212,196,238,0.35);
+    background: rgba(191,217,245,0.1);
+  }
+
+  .agenda-time {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue-sky);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .agenda-title {
+    font-family: 'Fraunces', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--creme);
+    margin-bottom: 8px;
+  }
+
+  .agenda-copy {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(247,245,240,0.72);
+  }
+
   /* ─── FAQ ─── */
   .faq-section {
     padding: 100px 0;
@@ -1211,6 +1260,7 @@
   @media (max-width: 768px) {
     nav { padding: 16px 20px; }
     .pain-grid { grid-template-columns: 1fr; }
+    .agenda-grid { grid-template-columns: 1fr; }
     .content-card { width: 100%; min-width: 0; }
     .speaker-inner { grid-template-columns: 1fr; gap: 40px; }
     .speaker-portrait-placeholder { aspect-ratio: 4/3; }
@@ -1238,7 +1288,7 @@
 <!-- STICKY BAR -->
 <div class="sticky-bar" id="stickyBar">
   <div class="sticky-bar-text">
-    <strong>1. April · 10:00 Uhr</strong> · Webinar · Kostenlos · 45 Min + Q&A
+    <strong>1. April · 10:00 Uhr</strong> · Webinar · Kostenlos · 45 Min + 15 Min Q&A
   </div>
   <a href="#anmeldung" class="sticky-cta">Jetzt anmelden →</a>
 </div>
@@ -1248,11 +1298,11 @@
   <div class="hero-glow"></div>
   <div class="hero-tag">Kostenloses Webinar</div>
   <h1>Warum gute HR-Arbeit oft<br><em>wirkungslos bleibt</em> –<br>obwohl du alles richtig machst</h1>
-  <p class="hero-sub">45 Minuten, die erklären, warum das Problem nicht an dir liegt. Und was du dagegen tun kannst.</p>
+  <p class="hero-sub">45 Minuten Input + 15 Minuten Q&A, die zeigen, warum das Problem nicht an dir liegt - und was du dagegen tun kannst.</p>
 
   <div class="meta-strip">
     <div class="meta-item"><span class="meta-icon">◷</span> 1. April 2026</div>
-    <div class="meta-item"><span class="meta-icon">◴</span> 10:00 Uhr · 45 Min + Q&A</div>
+    <div class="meta-item"><span class="meta-icon">◴</span> 10:00 Uhr · 45 Min + 15 Min Q&A</div>
     <div class="meta-item"><span class="meta-icon">⊹</span> Zoom · Online</div>
     <div class="meta-item"><span class="meta-icon">◇</span> Kostenlos</div>
   </div>
@@ -1375,6 +1425,40 @@
 
 <div class="divider"></div>
 
+<!-- AGENDA SECTION -->
+<section class="agenda-section fade-up">
+  <div class="container">
+    <span class="section-tag">Ablauf im Webinar</span>
+    <h2 class="section-title">45 Minuten Klarheit.<br>15 Minuten offene Fragen.</h2>
+    <p class="pain-intro">Keine Produktshow, sondern ein klar strukturierter Live-Workshop mit konkreten Situationen aus dem HR-Alltag im Mittelstand (50 bis 1.000 Mitarbeitende).</p>
+
+    <div class="agenda-grid">
+      <div class="agenda-item">
+        <span class="agenda-time">00:00-00:10</span>
+        <h3 class="agenda-title">Wiedererkennung</h3>
+        <p class="agenda-copy">Typischer HR-Alltag, erste Poll-Frage und der gemeinsame Nenner hinter dem täglichen Druck.</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-time">00:10-00:25</span>
+        <h3 class="agenda-title">Die 7 Situationen</h3>
+        <p class="agenda-copy">Die häufigsten Muster, in denen gute Arbeit verpufft - mit Chat-Impuls zur direkten Einordnung.</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-time">00:25-00:35</span>
+        <h3 class="agenda-title">Perspektivwechsel</h3>
+        <p class="agenda-copy">Warum das Problem nicht an deiner Leistung liegt, sondern an fehlender Arbeitslogik.</p>
+      </div>
+      <div class="agenda-item">
+        <span class="agenda-time">00:35-00:45</span>
+        <h3 class="agenda-title">Transformation und Ausweg</h3>
+        <p class="agenda-copy">Wie souveraene HR-Arbeit aussieht und warum ASANTIAL als System genau dort ansetzt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- SPEAKER -->
 <section class="speaker-section fade-up">
   <div class="container">
@@ -1418,7 +1502,7 @@
   <div class="container">
     <div class="cta-inner fade-up">
       <span class="section-tag">Jetzt kostenlos anmelden</span>
-      <h2 class="cta-title">45 Minuten + Q&A. Kostenlos.</h2>
+      <h2 class="cta-title">45 Minuten + 15 Minuten Q&A. Kostenlos.</h2>
       <p class="cta-sub">1. April 2026 · 10:00 Uhr · Zoom</p>
 
       <div class="form-wrap form-wrap--success" id="subscription-success-wrap" aria-hidden="true" style="display: none;">
@@ -1494,7 +1578,7 @@
           Ich habe wenig Zeit. Lohnt sich das wirklich?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a"><p>45 Minuten. Kein Füllstoff, kein Aufbau zur nächsten Produktpräsentation. Wenn du mit der Situation erkennst, dass gute HR-Arbeit oft wirkungslos bleibt, dann lohnt es sich – versprochen.</p></div>
+        <div class="faq-a"><p>45 Minuten Input plus 15 Minuten Q&A. Kein Füllstoff, kein Aufbau zur nächsten Produktpräsentation. Wenn du erkennst, dass gute HR-Arbeit oft wirkungslos bleibt, lohnt es sich - versprochen.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -1515,7 +1599,7 @@
           Was passiert, wenn ich am Termin verhindert bin?
           <span class="faq-icon">+</span>
         </button>
-        <div class="faq-a"><p>Alle Angemeldeten erhalten im Anschluss die Aufzeichnung. Meld dich trotzdem an – die wichtigen 45 Minuten kommen dann zu dir.</p></div>
+        <div class="faq-a"><p>Alle Angemeldeten erhalten im Anschluss die Aufzeichnung. Meld dich trotzdem an - die wichtigen 45 Minuten plus Q&A kommen dann zu dir.</p></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
@@ -1534,7 +1618,7 @@
     <p class="final-tag">Es muss nicht so bleiben, wie es gerade ist.</p>
     <h2 class="final-claim">Employer Branding muss nicht so sein,<br>wie es <em>gerade ist</em>.</h2>
     <a href="#anmeldung" class="cta-btn">Jetzt kostenlos anmelden →</a>
-    <p class="final-meta">1. April 2026 · 10:00 Uhr · 45 Min + Q&A · Zoom · Kostenlos</p>
+    <p class="final-meta">1. April 2026 · 10:00 Uhr · 45 Min + 15 Min Q&A · Zoom · Kostenlos</p>
   </div>
 </section>
 

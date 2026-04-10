@@ -4472,15 +4472,15 @@
   </div>
 
   <!-- Webinar-Teaser: auffälliges Top-Banner (angelehnt an webinar.html) -->
-  <a href="webinar.html#anmeldung" class="webinar-banner" id="webinar-teaser">
+  <a href="webinar.html#anmeldung" class="webinar-banner" id="webinar-teaser" data-webinar-enabled="false" data-webinar-start="2026-04-01T10:00:00+02:00" aria-hidden="true" hidden>
     <span class="webinar-banner__inner">
       <span class="webinar-banner__badge">Kostenloses Webinar</span>
       <span class="webinar-banner__text-wrap">
         <span class="webinar-banner__text-cycle">
-          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + Q&A</span>
+          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + 15 Min Q&A</span>
           <span class="webinar-banner__text-line">Mit&nbsp;<strong>Jörg Schleburg</strong> · Gründer ASANTIAL</span>
           <span class="webinar-banner__text-line webinar-banner__text-line--long"><strong>„Warum gute HR-Arbeit oft wirkungslos bleibt – obwohl du alles richtig machst“</strong></span>
-          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + Q&A</span>
+          <span class="webinar-banner__text-line">1. April · 10:00 Uhr · Webinar · Kostenlos · 45 Min + 15 Min Q&A</span>
         </span>
       </span>
       <span class="webinar-banner__cta">Jetzt anmelden →</span>
@@ -6147,7 +6147,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: body
       })
-        .then(function() {
+        .then(function(res) {
+          if (!res || !res.ok) throw new Error('Request failed');
           form.hidden = true;
           danke.hidden = false;
           introEl.hidden = true;
@@ -6179,12 +6180,12 @@
   </script>
 
   <!-- Webinar-Teaser-Layer (erscheint nach 10 Sekunden) -->
-  <div class="webinar-layer" id="webinar-layer" aria-hidden="true" aria-label="Webinar-Einladung">
+  <div class="webinar-layer" id="webinar-layer" aria-hidden="true" aria-label="Webinar-Einladung" data-webinar-enabled="false" data-webinar-start="2026-04-01T10:00:00+02:00" hidden>
     <div class="webinar-layer__card">
       <button type="button" class="webinar-layer__close" id="webinar-layer-close" aria-label="Schließen">&times;</button>
       <span class="webinar-layer__badge">Kostenloses Webinar</span>
       <h2 class="webinar-layer__title">Warum gute HR-Arbeit oft wirkungslos bleibt – obwohl du alles richtig machst</h2>
-      <p class="webinar-layer__meta">1. April 2026 · 10:00 Uhr · 45 Min + Q&A · Mit Jörg Schleburg · Zoom</p>
+      <p class="webinar-layer__meta">1. April 2026 · 10:00 Uhr · 45 Min + 15 Min Q&A · Mit Jörg Schleburg · Zoom</p>
       <a href="webinar.html#anmeldung" class="webinar-layer__cta">Jetzt kostenlos anmelden →</a>
     </div>
   </div>
@@ -6193,8 +6194,37 @@
     var layer = document.getElementById('webinar-layer');
     var closeBtn = document.getElementById('webinar-layer-close');
     var key = 'asantial-webinar-layer-closed';
+    var teaser = document.getElementById('webinar-teaser');
+
+    function isWebinarEnabled() {
+      var enabledRaw =
+        (layer && layer.dataset && layer.dataset.webinarEnabled) ||
+        (teaser && teaser.dataset && teaser.dataset.webinarEnabled) ||
+        'false';
+      return String(enabledRaw).toLowerCase() === 'true';
+    }
+
+    function getWebinarStart() {
+      var raw = (layer && layer.dataset && layer.dataset.webinarStart) || (teaser && teaser.dataset && teaser.dataset.webinarStart) || '';
+      var d = raw ? new Date(raw) : new Date('2026-04-01T10:00:00+02:00');
+      return d;
+    }
+
+    function isWebinarUpcoming() {
+      var start = getWebinarStart();
+      return !!start && !isNaN(start.getTime()) && start.getTime() > Date.now();
+    }
+
+    function hideTeaserIfPast() {
+      if (!teaser) return;
+      if (!isWebinarEnabled() || !isWebinarUpcoming()) {
+        teaser.style.display = 'none';
+        teaser.setAttribute('aria-hidden', 'true');
+      }
+    }
 
     function showLayer() {
+      if (!isWebinarEnabled() || !isWebinarUpcoming()) return;
       if (sessionStorage.getItem(key)) return;
       layer.classList.add('is-visible');
       layer.setAttribute('aria-hidden', 'false');
@@ -6205,6 +6235,13 @@
       sessionStorage.setItem(key, '1');
     }
 
+    if (!isWebinarEnabled()) {
+      if (teaser) { teaser.style.display = 'none'; teaser.setAttribute('aria-hidden', 'true'); }
+      if (layer) { layer.classList.remove('is-visible'); layer.setAttribute('aria-hidden', 'true'); }
+      return;
+    }
+
+    hideTeaserIfPast();
     setTimeout(showLayer, 10000);
 
     closeBtn.addEventListener('click', hideLayer);
